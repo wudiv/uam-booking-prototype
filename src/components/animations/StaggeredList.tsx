@@ -1,5 +1,5 @@
 import React from 'react';
-import { motion } from 'framer-motion';
+import { motion, type Variants } from 'framer-motion';
 
 interface StaggeredListProps {
   children: React.ReactNode;
@@ -14,7 +14,7 @@ export function StaggeredList({
   delay = 0,
   staggerDelay = 0.1 
 }: StaggeredListProps) {
-  const container = {
+  const container: Variants = {
     hidden: { opacity: 0 },
     show: {
       opacity: 1,
@@ -25,9 +25,16 @@ export function StaggeredList({
     }
   };
 
-  const item = {
+  const item: Variants = {
     hidden: { opacity: 0, y: 15 },
-    show: { opacity: 1, y: 0, transition: { duration: 0.4, ease: [0.22, 1, 0.36, 1] } }
+    show: { 
+      opacity: 1, 
+      y: 0, 
+      transition: { 
+        duration: 0.4, 
+        ease: [0.22, 1, 0.36, 1] 
+      } 
+    }
   };
 
   return (
