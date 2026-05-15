@@ -11,7 +11,10 @@ import { BookingSuccess } from './pages/BookingSuccess';
 export default function App() {
   return (
     <Router>
-      <div className="w-full min-h-screen bg-gray-100 flex items-center justify-center p-4 sm:p-0">
+      {/* 桌面端：灰色背景居中显示模拟器；手机端：无 padding 无背景直接铺满 */}
+      <div className="w-full min-h-[100dvh]
+                      max-sm:bg-background max-sm:p-0
+                      sm:bg-gray-100 sm:flex sm:items-center sm:justify-center sm:p-4">
         <MobileWrapper>
           <Routes>
             <Route path="/" element={<Home />} />
