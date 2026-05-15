@@ -1,135 +1,137 @@
-import { useNavigate, Navigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { useBookingStore } from '../store/useBookingStore';
+import { motion } from 'framer-motion';
 
 export function OrderConfirmation() {
   const navigate = useNavigate();
-  const { selectedFlight, fromPad, toPad, toAddress, passengerCount } = useBookingStore();
+  const { selectedFlight, fromPad, toPad, fromAddress, toAddress } = useBookingStore();
 
-  if (!selectedFlight) {
-    return <Navigate to="/flight-selection" replace />;
-  }
+  if (!selectedFlight) return null;
 
   return (
-    /* 弹性三段式布局 */
-    <div className="w-full h-full flex flex-col bg-background text-on-background font-body-lg">
-      {/* Header - 固定高度 */}
-      <header className="flex-shrink-0 flex items-center justify-between px-container-padding h-12 bg-surface/80 backdrop-blur-md border-b border-outline-variant/30 z-10">
+    <div className="w-full h-full flex flex-col bg-background text-on-background overflow-hidden relative">
+      {/* Header */}
+      <motion.header 
+        initial={{ y: -20, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        className="flex-shrink-0 flex items-center justify-between px-container-padding h-14 bg-surface z-10"
+      >
         <button 
           onClick={() => navigate(-1)}
-          aria-label="Go Back" 
-          className="text-on-surface-variant hover:bg-surface-container-high transition-colors opacity-80 duration-150 p-2 rounded-full"
+          className="w-10 h-10 flex items-center justify-center text-on-surface hover:bg-surface-container-high rounded-full transition-colors"
         >
-          <span className="material-symbols-outlined">arrow_back</span>
+          <span className="material-symbols-outlined text-[24px]">arrow_back</span>
         </button>
         <h1 className="text-display-sm font-bold text-on-surface">确认订单</h1>
-        <div className="w-10"></div>
-      </header>
+        <div className="w-10 h-10"></div>
+      </motion.header>
 
-      {/* Content - 自动填充，可滚动 */}
-      <main className="flex-1 overflow-y-auto px-container-padding py-4 flex flex-col gap-stack-md no-scrollbar">
-        
-        {/* Flight Route Card */}
-        <article className="bg-surface-container-lowest rounded-xl p-4 shadow-[0_12px_24px_rgba(0,0,0,0.05)] border border-outline-variant/20">
-          <div className="flex items-center justify-between mb-4">
-            <div className="flex items-center gap-2">
-              <span className="material-symbols-outlined text-primary" style={{ fontVariationSettings: "'FILL' 1" }}>airlines</span>
-              <span className="text-label-lg font-label-lg text-on-surface">{selectedFlight.name}</span>
-            </div>
-            <span className="bg-secondary-container text-on-secondary-container px-2 py-1 rounded-md text-label-sm">直飞</span>
-          </div>
+      {/* Main Content */}
+      <main className="flex-1 overflow-y-auto no-scrollbar pb-32">
+        <div className="px-container-padding pt-6 flex flex-col gap-stack-lg">
           
-          <div className="flex items-center justify-between relative">
-            <div className="flex flex-col">
-              <span className="text-display-lg font-display-lg text-on-surface">{selectedFlight.departureTime}</span>
-              <div className="text-label-sm text-on-surface-variant mb-1">起点</div>
-              <span className="text-body-md text-on-surface-variant">{fromPad}</span>
+          {/* Flight Summary Card */}
+          <motion.div 
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
+            className="bg-surface-container-lowest rounded-xl border border-outline-variant/30 p-5 shadow-sm"
+          >
+            <div className="flex justify-between items-center mb-6">
+              <div className="flex flex-col">
+                <span className="text-display-lg font-bold text-on-surface">{selectedFlight.departureTime}</span>
+                <span className="text-label-sm text-on-surface-variant font-bold">{fromPad}</span>
+              </div>
+              <div className="flex flex-col items-center px-4 flex-1">
+                <span className="material-symbols-outlined text-primary text-[20px]" style={{ fontVariationSettings: "'FILL' 1" }}>flight</span>
+                <div className="w-full h-[1px] bg-outline-variant/50 my-1"></div>
+                <span className="text-label-sm text-outline-variant italic">{selectedFlight.duration}</span>
+              </div>
+              <div className="flex flex-col items-end">
+                <span className="text-display-lg font-bold text-on-surface">{selectedFlight.arrivalTime}</span>
+                <span className="text-label-sm text-on-surface-variant font-bold">{toPad}</span>
+              </div>
             </div>
-            
-            <div className="flex-1 px-4 flex flex-col items-center relative">
-              <div className="w-full border-t-2 border-dashed border-outline-variant absolute top-1/2 -translate-y-1/2"></div>
-              <span className="material-symbols-outlined text-primary bg-surface-container-lowest px-2 relative z-10" style={{ transform: 'rotate(90deg)' }}>flight</span>
-              <span className="text-label-sm font-label-sm text-outline mt-1 relative z-10">{selectedFlight.duration}</span>
-            </div>
-            
-            <div className="flex flex-col text-right">
-              <span className="text-display-lg font-display-lg text-on-surface">{selectedFlight.arrivalTime}</span>
-              <div className="text-label-sm text-on-surface-variant mb-1">终点</div>
-              <span className="text-body-md text-on-surface-variant">{toPad}</span>
-            </div>
-          </div>
-          
-          <div className="mt-4 pt-4 border-t border-outline-variant/20 flex gap-stack-md text-body-md font-body-md text-on-surface-variant">
-            <div className="flex items-center gap-1">
-              <span className="material-symbols-outlined text-[18px]">person</span>
-              <span>{passengerCount} 位乘客</span>
-            </div>
-            <div className="flex items-center gap-1">
-              <span className="material-symbols-outlined text-[18px]">luggage</span>
-              <span>1件 登机箱 (7kg)</span>
-            </div>
-          </div>
-        </article>
 
-        {/* Trust & Safety Section */}
-        <section className="flex gap-gutter w-full">
-          <div className="flex-1 bg-surface-container-low rounded-xl p-3 border border-outline-variant/10 flex flex-col items-center text-center gap-1">
-            <div className="w-8 h-8 rounded-full bg-primary-container text-on-primary-container flex items-center justify-center mb-1">
-              <span className="material-symbols-outlined text-[20px]" style={{ fontVariationSettings: "'FILL' 1" }}>shield</span>
+            <div className="flex items-center gap-2 text-on-surface-variant text-label-md">
+              <span className="material-symbols-outlined text-[18px]">airplane_ticket</span>
+              <span>{selectedFlight.name} · 经济舱</span>
             </div>
-            <h3 className="text-label-sm font-label-sm text-on-surface leading-tight">登机时间提醒</h3>
-            <p className="text-[10px] leading-[14px] text-on-surface-variant font-medium">请在起飞前 8 分钟到达起降点，并完成登机确认。</p>
-          </div>
-          <div className="flex-1 bg-surface-container-low rounded-xl p-3 border border-outline-variant/10 flex flex-col items-center text-center gap-1">
-            <div className="w-8 h-8 rounded-full bg-secondary-container text-on-secondary-container flex items-center justify-center mb-1">
-              <span className="material-symbols-outlined text-[20px]" style={{ fontVariationSettings: "'FILL' 1" }}>verified</span>
-            </div>
-            <h3 className="text-label-sm font-label-sm text-on-surface leading-tight">接驳信息</h3>
-            <p className="text-[10px] leading-[14px] text-on-surface-variant font-medium">订单包含接驳至 {toAddress || toPad} 的服务。</p>
-          </div>
-          <div className="flex-1 bg-surface-container-low rounded-xl p-3 border border-outline-variant/10 flex flex-col items-center text-center gap-1">
-            <div className="w-8 h-8 rounded-full bg-tertiary-container text-on-tertiary-container flex items-center justify-center mb-1">
-              <span className="material-symbols-outlined text-[20px]" style={{ fontVariationSettings: "'FILL' 1" }}>radar</span>
-            </div>
-            <h3 className="text-label-sm font-label-sm text-on-surface leading-tight">行李提示</h3>
-            <p className="text-[10px] leading-[14px] text-on-surface-variant font-medium">本次行程可携带 1 件不超过 7kg 的随身行李。</p>
-          </div>
-        </section>
+          </motion.div>
 
-        {/* Price Breakdown */}
-        <article className="bg-surface-container-lowest rounded-xl p-4 shadow-[0_4px_12px_rgba(0,0,0,0.02)] border border-outline-variant/20">
-          <div className="flex justify-between items-center mb-2">
-            <span className="text-body-md font-body-md text-on-surface-variant">空中快线</span>
-            <span className="text-body-md font-body-md text-on-surface">¥{Math.max(0, selectedFlight.price - 30)}</span>
-          </div>
-          <div className="flex justify-between items-center mb-3">
-            <span className="text-body-md font-body-md text-on-surface-variant">专属接驳</span>
-            <span className="text-body-md font-body-md text-on-surface">¥30</span>
-          </div>
-          <div className="flex justify-between items-center pt-3 border-t border-outline-variant/20">
-            <span className="text-label-lg font-label-lg text-on-surface">合计</span>
-            <span className="text-price-tag font-price-tag text-primary">¥{selectedFlight.price}</span>
-          </div>
-        </article>
-        
-        {/* Payment Method */}
-        <article className="bg-surface-container-lowest rounded-xl p-4 shadow-[0_4px_12px_rgba(0,0,0,0.02)] border border-outline-variant/20 flex justify-between items-center">
-          <div className="flex items-center gap-2">
-            <span className="material-symbols-outlined text-[#09B83E]" style={{ fontVariationSettings: "'FILL' 1" }}>chat</span>
-            <span className="text-label-lg font-label-lg text-on-surface">微信支付</span>
-          </div>
-          <div className="w-5 h-5 rounded-full border-2 border-primary flex items-center justify-center">
-            <div className="w-2.5 h-2.5 rounded-full bg-primary"></div>
-          </div>
-        </article>
+          {/* Transfer Info */}
+          <motion.div 
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.1 }}
+            className="flex flex-col gap-stack-md"
+          >
+            <h3 className="text-label-lg font-bold text-primary px-1">地面接驳服务</h3>
+            <div className="bg-surface-container-lowest rounded-xl border border-outline-variant/30 p-4 flex flex-col gap-4">
+              <div className="flex gap-3">
+                <span className="material-symbols-outlined text-on-surface-variant text-[20px]">trip_origin</span>
+                <div className="flex flex-col">
+                  <span className="text-label-sm text-on-surface-variant">出发接送</span>
+                  <span className="text-body-md font-bold text-on-surface">{fromAddress}</span>
+                </div>
+              </div>
+              <div className="flex gap-3">
+                <span className="material-symbols-outlined text-primary text-[20px]">location_on</span>
+                <div className="flex flex-col">
+                  <span className="text-label-sm text-on-surface-variant">到达送达</span>
+                  <span className="text-body-md font-bold text-on-surface">{toAddress}</span>
+                </div>
+              </div>
+            </div>
+          </motion.div>
+
+          {/* Price Breakdown */}
+          <motion.div 
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.2 }}
+            className="flex flex-col gap-stack-md"
+          >
+            <h3 className="text-label-lg font-bold text-primary px-1">价格明细</h3>
+            <div className="bg-surface-container-lowest rounded-xl border border-outline-variant/30 p-4 flex flex-col gap-3">
+              <div className="flex justify-between text-body-md text-on-surface-variant">
+                <span>成人票 x 1</span>
+                <span>¥{selectedFlight.price}</span>
+              </div>
+              <div className="flex justify-between text-body-md text-on-surface-variant">
+                <span>机场建设费 / 燃油费</span>
+                <span>¥0</span>
+              </div>
+              <div className="flex justify-between text-body-md text-on-surface-variant">
+                <span>地面接驳 (尊享型)</span>
+                <span className="text-primary font-bold">已包含</span>
+              </div>
+              <div className="h-px bg-outline-variant/20 my-1"></div>
+              <div className="flex justify-between items-center">
+                <span className="text-display-sm font-bold text-on-surface">总计</span>
+                <span className="text-display-md font-bold text-primary">¥{selectedFlight.price}</span>
+              </div>
+            </div>
+          </motion.div>
+        </div>
       </main>
 
-      {/* Footer - 固定底部，Stitch 匹配 */}
-      <div className="flex-shrink-0 bg-surface-container-lowest p-4 pb-safe shadow-[0_-4px_12px_rgba(0,0,0,0.05)] border-t border-outline-variant/10">
+      {/* Sticky Bottom Action */}
+      <div className="flex-shrink-0 px-container-padding py-4 pb-safe bg-surface/80 backdrop-blur-md border-t border-outline-variant/20 fixed bottom-0 left-0 w-full z-20">
+        <div className="flex items-center justify-between mb-4 px-2">
+          <div className="flex flex-col">
+            <span className="text-label-sm text-on-surface-variant">支付总额</span>
+            <span className="text-display-md font-bold text-primary">¥{selectedFlight.price}</span>
+          </div>
+          <div className="flex items-center gap-2 text-on-surface-variant">
+            <span className="text-label-sm">微信支付</span>
+            <span className="material-symbols-outlined text-[18px]">radio_button_checked</span>
+          </div>
+        </div>
         <button 
           onClick={() => navigate('/booking-success')}
-          className="w-full h-[48px] bg-primary text-on-primary rounded-pill text-label-lg font-bold flex items-center justify-center hover:bg-primary/90 transition-all active:scale-[0.98] shadow-lg shadow-primary/20"
+          className="w-full h-[48px] bg-primary text-on-primary rounded-pill text-label-lg font-bold flex items-center justify-center hover:bg-primary/90 transition-all active:scale-[0.98] shadow-xl shadow-primary/20"
         >
-          支付 ¥{selectedFlight.price}
+          立即支付
         </button>
       </div>
     </div>

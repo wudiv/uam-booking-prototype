@@ -1,99 +1,96 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-
-function StarRating({ value, onChange }: { value: number, onChange: (val: number) => void }) {
-  return (
-    <div className="flex gap-2">
-      {[1, 2, 3, 4, 5].map((star) => (
-        <button
-          key={star}
-          onClick={() => onChange(star)}
-          className={`w-10 h-10 rounded-full flex items-center justify-center transition-all ${
-            star <= value 
-              ? 'bg-primary text-on-primary scale-110 shadow-sm' 
-              : 'bg-surface-container-high text-on-surface-variant hover:bg-surface-container-highest'
-          }`}
-        >
-          <span className="material-symbols-outlined text-[24px]" style={{ fontVariationSettings: `'FILL' ${star <= value ? 1 : 0}` }}>
-            star
-          </span>
-        </button>
-      ))}
-    </div>
-  );
-}
+import { motion } from 'framer-motion';
 
 export function Questionnaire() {
   const navigate = useNavigate();
-  
-  const [trustScore, setTrustScore] = useState(0);
-  const [riskScore, setRiskScore] = useState(0);
-  const [intentScore, setIntentScore] = useState(0);
+  const [rating, setRating] = useState(0);
 
-  const isFormComplete = trustScore > 0 && riskScore > 0 && intentScore > 0;
-
-  const handleSubmit = () => {
-    if (isFormComplete) {
-      console.log('Survey results:', { trustScore, riskScore, intentScore });
-      navigate('/');
-    }
-  };
+  const questions = [
+    "预订流程是否顺畅？",
+    "价格是否在您的预期内？",
+    "您是否愿意再次使用 UAM？"
+  ];
 
   return (
-    /* 弹性三段式布局 */
-    <div className="w-full h-full flex flex-col bg-surface text-on-surface antialiased">
-      {/* Header - 固定高度 */}
-      <header className="flex-shrink-0 px-container-padding flex items-center justify-between h-14 bg-surface border-b border-outline-variant/30 z-10">
-        <div className="w-10"></div>
-        <h1 className="text-headline-md font-headline-md text-on-surface">原型测试反馈</h1>
-        <div className="w-10"></div>
-      </header>
+    <div className="w-full h-full flex flex-col bg-background text-on-background overflow-hidden relative">
+      {/* Header */}
+      <motion.header 
+        initial={{ y: -20, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        className="flex-shrink-0 flex items-center justify-between px-container-padding h-14 bg-surface z-10"
+      >
+        <button 
+          onClick={() => navigate(-1)}
+          className="w-10 h-10 flex items-center justify-center text-on-surface hover:bg-surface-container-high rounded-full transition-colors"
+        >
+          <span className="material-symbols-outlined text-[24px]">arrow_back</span>
+        </button>
+        <h1 className="text-display-sm font-bold text-on-surface">意见反馈</h1>
+        <div className="w-10 h-10"></div>
+      </motion.header>
 
-      {/* Content - 自动填充，可滚动 */}
-      <main className="flex-1 overflow-y-auto px-container-padding py-6 flex flex-col gap-stack-lg no-scrollbar">
-        
-        <div className="mb-4">
-          <h2 className="text-display-sm font-display-sm text-on-surface mb-2">感谢体验！</h2>
-          <p className="text-body-lg font-body-lg text-on-surface-variant">
-            请根据刚才的 UAM 预订流程，评价你对该服务的感受。
-          </p>
-        </div>
+      {/* Main Content */}
+      <main className="flex-1 overflow-y-auto no-scrollbar">
+        <div className="px-container-padding pt-8 flex flex-col gap-stack-lg pb-12 items-center">
+          
+          <motion.div
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="text-center"
+          >
+            <h2 className="text-display-md font-bold text-on-surface mb-2">感谢您的信任</h2>
+            <p className="text-body-md text-on-surface-variant">您的反馈将帮助我们提供更好的飞行服务</p>
+          </motion.div>
 
-        {/* Question 1 */}
-        <div className="bg-surface-container-lowest rounded-xl p-5 border border-outline-variant/30 shadow-sm flex flex-col items-center text-center">
-          <h3 className="text-label-lg font-label-lg text-on-surface mb-1">初始信任</h3>
-          <p className="text-body-md font-body-md text-on-surface-variant mb-4">你认为目前的 UAM 服务值得信赖吗？</p>
-          <StarRating value={trustScore} onChange={setTrustScore} />
-        </div>
+          {/* Rating Section */}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ delay: 0.1 }}
+            className="flex gap-3 my-4"
+          >
+            {[1, 2, 3, 4, 5].map((star) => (
+              <button
+                key={star}
+                onClick={() => setRating(star)}
+                className={`w-12 h-12 rounded-xl flex items-center justify-center transition-all ${
+                  rating >= star ? 'bg-primary text-on-primary scale-110 shadow-lg shadow-primary/20' : 'bg-surface-container text-outline-variant'
+                }`}
+              >
+                <span className="material-symbols-outlined text-[28px]" style={{ fontVariationSettings: rating >= star ? "'FILL' 1" : "'FILL' 0" }}>star</span>
+              </button>
+            ))}
+          </motion.div>
 
-        {/* Question 2 */}
-        <div className="bg-surface-container-lowest rounded-xl p-5 border border-outline-variant/30 shadow-sm flex flex-col items-center text-center">
-          <h3 className="text-label-lg font-label-lg text-on-surface mb-1">风险感知</h3>
-          <p className="text-body-md font-body-md text-on-surface-variant mb-4">你觉得乘坐该飞行器安全吗？（星级越高越安全）</p>
-          <StarRating value={riskScore} onChange={setRiskScore} />
+          {/* Questions */}
+          <div className="w-full flex flex-col gap-4 mt-6">
+            {questions.map((q, i) => (
+              <motion.div
+                key={i}
+                initial={{ opacity: 0, x: -10 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: 0.2 + i * 0.1 }}
+                className="bg-surface-container-lowest border border-outline-variant/30 p-4 rounded-xl flex flex-col gap-3 shadow-sm"
+              >
+                <p className="text-label-lg font-bold text-on-surface">{q}</p>
+                <div className="flex gap-2">
+                  <button className="flex-1 h-9 rounded-pill border border-outline-variant text-label-sm font-bold text-on-surface-variant hover:bg-surface-container-high transition-colors">不满意</button>
+                  <button className="flex-1 h-9 rounded-pill bg-primary/10 text-primary border border-primary/20 text-label-sm font-bold hover:bg-primary/20 transition-colors">满意</button>
+                </div>
+              </motion.div>
+            ))}
+          </div>
         </div>
-
-        {/* Question 3 */}
-        <div className="bg-surface-container-lowest rounded-xl p-5 border border-outline-variant/30 shadow-sm flex flex-col items-center text-center">
-          <h3 className="text-label-lg font-label-lg text-on-surface mb-1">使用意向</h3>
-          <p className="text-body-md font-body-md text-on-surface-variant mb-4">未来如果有机会，你会实际使用该服务吗？</p>
-          <StarRating value={intentScore} onChange={setIntentScore} />
-        </div>
-        
       </main>
 
-      {/* Footer - 固定高度 */}
-      <div className="flex-shrink-0 p-container-padding pb-safe bg-surface border-t border-outline-variant/20">
+      {/* Sticky Bottom Action */}
+      <div className="flex-shrink-0 px-container-padding py-4 pb-safe bg-surface/80 backdrop-blur-md border-t border-outline-variant/20 fixed bottom-0 left-0 w-full z-20">
         <button 
-          onClick={handleSubmit}
-          disabled={!isFormComplete}
-          className={`w-full h-[48px] rounded-pill text-label-lg font-bold flex items-center justify-center transition-all shadow-md ${
-            isFormComplete 
-              ? 'bg-primary text-on-primary hover:bg-primary/90 active:scale-[0.98]' 
-              : 'bg-surface-container-highest text-on-surface-variant opacity-50 cursor-not-allowed'
-          }`}
+          onClick={() => navigate('/')}
+          className="w-full h-[48px] bg-primary text-on-primary rounded-pill text-label-lg font-bold flex items-center justify-center hover:bg-primary/90 transition-all active:scale-[0.98] shadow-xl shadow-primary/20"
         >
-          提交反馈并返回首页
+          提交反馈
         </button>
       </div>
     </div>
