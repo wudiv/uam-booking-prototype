@@ -21,7 +21,7 @@ export function ShuttleInfo() {
   const timeVerify = subtractMinutes(departure, 5);
 
   return (
-    <div className="w-full h-full min-h-[max(884px,100dvh)] flex flex-col relative bg-surface text-on-surface antialiased overflow-hidden select-none">
+    <div className="w-full h-full flex flex-col relative bg-surface text-on-surface antialiased overflow-hidden select-none">
       {/* Map Base Layer */}
       <div className="absolute inset-0 z-0">
         <MapBackground mode="shuttle" />

@@ -22,11 +22,11 @@
   
   html {
     height: 100%;
-    min-height: max(884px, 100dvh);
+    min-height: 100dvh;
   }
 
   body {
-    min-height: max(884px, 100dvh);
+    min-height: 100dvh;
     width: 100%;
     margin: 0;
     padding: 0;
@@ -40,7 +40,7 @@
   }
 
   #root {
-    min-height: max(884px, 100dvh);
+    min-height: 100dvh;
     width: 100%;
     overflow: hidden;
     @apply bg-background;

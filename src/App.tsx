@@ -21,7 +21,7 @@ export default function App() {
       ">
         <div className="
           max-sm:fixed max-sm:inset-0
-          sm:relative sm:w-[430px] sm:h-[932px] sm:rounded-[40px] sm:shadow-2xl sm:border sm:border-gray-200
+          sm:relative sm:w-[430px] sm:h-[min(932px,90dvh)] sm:rounded-[40px] sm:shadow-2xl sm:border sm:border-gray-200
           bg-background overflow-hidden
         ">
           <Routes>

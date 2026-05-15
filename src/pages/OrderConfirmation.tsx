@@ -11,7 +11,7 @@ export function OrderConfirmation() {
 
   return (
     /* 弹性三段式布局 */
-    <div className="w-full h-full min-h-[max(884px,100dvh)] flex flex-col bg-background text-on-background font-body-lg">
+    <div className="w-full h-full flex flex-col bg-background text-on-background font-body-lg">
       {/* Header - 固定高度 */}
       <header className="flex-shrink-0 flex items-center justify-between px-container-padding h-12 bg-surface/80 backdrop-blur-md border-b border-outline-variant/30 z-10">
         <button 

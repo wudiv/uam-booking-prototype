@@ -7,7 +7,7 @@ export function Home() {
   const { destination, setDestination } = useBookingStore();
 
   return (
-    <div className="bg-background text-on-surface w-full h-full min-h-[max(884px,100dvh)] overflow-hidden relative font-body-lg">
+    <div className="bg-background text-on-surface w-full h-full overflow-hidden relative font-body-lg">
       {/* TopAppBar — Stitch 使用 fixed */}
       <header className="fixed top-0 left-0 w-full z-50 flex items-center justify-between px-container-padding h-12 bg-surface/80 backdrop-blur-md border-b border-outline-variant/30">
         <button className="text-on-surface-variant hover:bg-surface-container-high transition-colors opacity-80 duration-150 p-1 rounded-full flex items-center justify-center">

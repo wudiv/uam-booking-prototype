@@ -41,7 +41,7 @@ export function Questionnaire() {
 
   return (
     /* 弹性三段式布局 */
-    <div className="w-full h-full min-h-[max(884px,100dvh)] flex flex-col bg-surface text-on-surface antialiased">
+    <div className="w-full h-full flex flex-col bg-surface text-on-surface antialiased">
       {/* Header - 固定高度 */}
       <header className="flex-shrink-0 px-container-padding flex items-center justify-between h-14 bg-surface border-b border-outline-variant/30 z-10">
         <div className="w-10"></div>

@@ -20,7 +20,7 @@ export function FlightSelection() {
 
   return (
     /* 弹性三段式布局 */
-    <div className="bg-surface text-on-surface font-body-lg w-full h-full min-h-[max(884px,100dvh)] flex flex-col">
+    <div className="bg-surface text-on-surface font-body-lg w-full h-full flex flex-col">
       {/* Header - 固定高度，Stitch 使用 sticky */}
       <header className="flex-shrink-0 sticky top-0 z-40 bg-surface/90 backdrop-blur-md flex items-center justify-between px-container-padding h-14 border-b border-outline-variant/30">
         <button 

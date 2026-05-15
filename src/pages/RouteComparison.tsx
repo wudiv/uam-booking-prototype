@@ -5,7 +5,7 @@ export function RouteComparison() {
   const navigate = useNavigate();
 
   return (
-    <div className="bg-surface font-body-lg text-on-surface antialiased overflow-hidden w-full h-full min-h-[max(884px,100dvh)] relative">
+    <div className="bg-background text-on-surface w-full h-full overflow-hidden relative font-body-lg">
       {/* Background Map Layer */}
       <div className="absolute inset-0 z-0">
         <MapBackground />
