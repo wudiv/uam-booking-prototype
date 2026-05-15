@@ -1,5 +1,4 @@
 import { useNavigate } from 'react-router-dom';
-import { useBookingStore } from '../store/useBookingStore';
 import { motion } from 'framer-motion';
 
 export function ShuttleInfo() {
