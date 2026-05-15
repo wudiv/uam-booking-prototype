@@ -2,6 +2,7 @@ import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-d
 import { Home } from './pages/Home';
 import { RouteComparison } from './pages/RouteComparison';
 import { FlightSelection } from './pages/FlightSelection';
+import { SeatSelection } from './pages/SeatSelection';
 import { OrderConfirmation } from './pages/OrderConfirmation';
 import { ShuttleInfo } from './pages/ShuttleInfo';
 import { Questionnaire } from './pages/Questionnaire';
@@ -28,6 +29,7 @@ export default function App() {
             <Route path="/" element={<Home />} />
             <Route path="/route-comparison" element={<RouteComparison />} />
             <Route path="/flight-selection" element={<FlightSelection />} />
+            <Route path="/seat-selection" element={<SeatSelection />} />
             <Route path="/order-confirmation" element={<OrderConfirmation />} />
             <Route path="/shuttle-info" element={<ShuttleInfo />} />
             <Route path="/questionnaire" element={<Questionnaire />} />

@@ -3,7 +3,7 @@ import { useBookingStore } from '../store/useBookingStore';
 
 export function OrderConfirmation() {
   const navigate = useNavigate();
-  const { selectedFlight, fromPad, toPad, toAddress, passengerCount } = useBookingStore();
+  const { selectedFlight, fromPad, toPad, toAddress, passengerCount, selectedSeat } = useBookingStore();
 
   if (!selectedFlight) {
     return <Navigate to="/flight-selection" replace />;
@@ -63,10 +63,14 @@ export function OrderConfirmation() {
               <span className="material-symbols-outlined text-[18px]">person</span>
               <span>{passengerCount} 位乘客</span>
             </div>
-            <div className="flex items-center gap-1">
-              <span className="material-symbols-outlined text-[18px]">luggage</span>
-              <span>1件 登机箱 (7kg)</span>
-            </div>
+    <div className="flex items-center gap-1">
+      <span className="material-symbols-outlined text-[18px]">armchair</span>
+      <span>座位 {selectedSeat}</span>
+    </div>
+    <div className="flex items-center gap-1">
+      <span className="material-symbols-outlined text-[18px]">luggage</span>
+      <span>1件 登机箱 (7kg)</span>
+    </div>
           </div>
         </article>
 

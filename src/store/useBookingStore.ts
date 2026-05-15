@@ -45,6 +45,10 @@ interface BookingState {
   dropoffService: ShuttleService;
   setDropoffService: (service: ShuttleService) => void;
 
+  // 选座信息
+  selectedSeat: string;
+  setSelectedSeat: (seat: string) => void;
+
   // 操作
   resetBooking: () => void;
 }
@@ -81,6 +85,9 @@ export const useBookingStore = create<BookingState>((set) => ({
   
   dropoffService: { type: 'dropoff', mode: 'none' },
   setDropoffService: (service) => set({ dropoffService: service }),
+
+  selectedSeat: '2A', // 默认选座
+  setSelectedSeat: (seat) => set({ selectedSeat: seat }),
   
   resetBooking: () => set({
     toAddress: '',
@@ -90,5 +97,6 @@ export const useBookingStore = create<BookingState>((set) => ({
     dropoffService: { type: 'dropoff', mode: 'none' },
     passengerCount: 1,
     bookingDate: new Date(),
+    selectedSeat: '2A',
   }),
 }));
