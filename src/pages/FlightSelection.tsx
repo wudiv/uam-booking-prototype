@@ -10,7 +10,11 @@ const FLIGHTS = [
 
 export function FlightSelection() {
   const navigate = useNavigate();
-  const { selectedFlight, setSelectedFlight } = useBookingStore();
+  const { selectedFlight, setSelectedFlight, fromPad, toPad, bookingDate } = useBookingStore();
+
+  const tomorrow = new Date(bookingDate);
+  tomorrow.setDate(tomorrow.getDate() + 1);
+  const formatDate = (date: Date) => `${date.getMonth() + 1}月${date.getDate()}日`;
 
   useEffect(() => {
     if (!selectedFlight) {
@@ -41,7 +45,7 @@ export function FlightSelection() {
           <div className="flex items-center justify-between">
             <div className="flex flex-col items-center flex-1">
               <span className="font-label-sm text-label-sm text-on-surface-variant mb-1">起飞</span>
-              <span className="font-headline-md text-headline-md text-on-surface text-center">福田起降点</span>
+              <span className="font-headline-md text-headline-md text-on-surface text-center">{fromPad}</span>
             </div>
             <div className="px-4 flex flex-col items-center justify-center text-primary">
               <span className="material-symbols-outlined text-[28px]" style={{fontVariationSettings: "'FILL' 0"}}>flight_takeoff</span>
@@ -49,15 +53,15 @@ export function FlightSelection() {
             </div>
             <div className="flex flex-col items-center flex-1">
               <span className="font-label-sm text-label-sm text-on-surface-variant mb-1">降落</span>
-              <span className="font-headline-md text-headline-md text-on-surface text-center">宝安机场起降点</span>
+              <span className="font-headline-md text-headline-md text-on-surface text-center">{toPad}</span>
             </div>
           </div>
           <div className="mt-stack-md flex gap-2 overflow-x-auto pb-2 no-scrollbar">
             <div className="flex-shrink-0 bg-primary text-on-primary px-4 py-2 rounded-full font-label-sm text-label-sm">
-              今天 (8月14日)
+              今天 ({formatDate(bookingDate)})
             </div>
             <div className="flex-shrink-0 bg-surface-container text-on-surface-variant px-4 py-2 rounded-full font-label-sm text-label-sm border border-outline-variant/30">
-              明天 (8月15日)
+              明天 ({formatDate(tomorrow)})
             </div>
           </div>
         </div>

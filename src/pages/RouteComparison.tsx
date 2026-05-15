@@ -1,8 +1,11 @@
 import { useNavigate } from 'react-router-dom';
 import { MapBackground } from '../components/MapBackground';
+import { useBookingStore } from '../store/useBookingStore';
 
 export function RouteComparison() {
   const navigate = useNavigate();
+  const { bookingDate, passengerCount } = useBookingStore();
+  const timeString = `${bookingDate.getHours().toString().padStart(2, '0')}:${bookingDate.getMinutes().toString().padStart(2, '0')}`;
 
   return (
     <div className="bg-background text-on-surface w-full h-full overflow-hidden relative font-body-lg">
@@ -39,7 +42,7 @@ export function RouteComparison() {
             <h2 className="text-headline-lg font-headline-lg text-on-surface">选择出行方案</h2>
             <div className="flex items-center gap-2 mt-1">
               <span className="material-symbols-outlined text-[16px] text-primary">schedule</span>
-              <p className="text-body-md font-body-md text-on-surface-variant">今天 14:30 出发 · 1名乘客</p>
+              <p className="text-body-md font-body-md text-on-surface-variant">今天 {timeString} 出发 · {passengerCount}名乘客</p>
             </div>
           </div>
           

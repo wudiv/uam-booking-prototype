@@ -13,7 +13,7 @@ function subtractMinutes(timeStr: string, minsToSubtract: number) {
 
 export function ShuttleInfo() {
   const navigate = useNavigate();
-  const { selectedFlight, fromLocation, toLocation } = useBookingStore();
+  const { selectedFlight, fromAddress, fromPad } = useBookingStore();
 
   const departure = selectedFlight?.departureTime || '14:45';
   const timeStart = subtractMinutes(departure, 15);
@@ -53,7 +53,7 @@ export function ShuttleInfo() {
           <div className="flex items-center justify-between mt-2">
             <div className="flex flex-col">
               <span className="text-label-sm font-label-sm text-on-surface-variant mb-1">当前位置</span>
-              <span className="text-headline-md font-headline-md text-on-surface">{fromLocation?.name || '福田 CBD · 卓越中心'}</span>
+              <span className="text-headline-md font-headline-md text-on-surface">{fromAddress || '福田 CBD · 卓越中心'}</span>
             </div>
             <div className="flex-1 flex items-center justify-center px-4 opacity-40">
               <div className="h-[2px] border-b-2 border-dashed border-outline-variant w-full relative">
@@ -62,7 +62,7 @@ export function ShuttleInfo() {
             </div>
             <div className="flex flex-col text-right">
               <span className="text-label-sm font-label-sm text-on-surface-variant mb-1">目的地</span>
-              <span className="text-headline-md font-headline-md text-primary">{toLocation?.name || '宝安机场起降点'}</span>
+              <span className="text-headline-md font-headline-md text-primary">{fromPad || '福田起降点'}</span>
             </div>
           </div>
 
@@ -75,7 +75,7 @@ export function ShuttleInfo() {
               </div>
               <div>
                 <div className="text-label-sm font-label-sm text-on-surface-variant">接驳点</div>
-                <div className="text-body-lg font-body-lg text-on-surface font-medium">卓越中心东门</div>
+                <div className="text-body-lg font-body-lg text-on-surface font-medium">{fromAddress} 附近</div>
               </div>
             </div>
             <div className="text-right">

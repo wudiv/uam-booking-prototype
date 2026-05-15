@@ -20,48 +20,61 @@ export interface ShuttleService {
   distance?: string;
 }
 
-interface LocationInfo {
-  name: string;
-}
-
 interface BookingState {
-  // Origin & Destination
-  origin: string;
-  destination: string;
+  // 地点信息
+  fromAddress: string;
+  fromPad: string;
+  toAddress: string;
+  toPad: string;
   setDestination: (dest: string) => void;
   
-  // Location info
-  fromLocation: LocationInfo | null;
-  toLocation: LocationInfo | null;
-
-  // Selected Flight
+  // 航班信息
   selectedFlight: Flight | null;
   setSelectedFlight: (flight: Flight) => void;
   
-  // Shuttle Preferences
+  // 乘客和出行信息
+  passengerCount: number;
+  setPassengerCount: (count: number) => void;
+  
+  // 日期信息（获取当前真实日期）
+  bookingDate: Date;
+  
+  // 接驳偏好
   pickupService: ShuttleService;
   setPickupService: (service: ShuttleService) => void;
   dropoffService: ShuttleService;
   setDropoffService: (service: ShuttleService) => void;
-  
-  // Passengers
-  passengerCount: number;
-  setPassengerCount: (count: number) => void;
 
-  // Actions
+  // 操作
   resetBooking: () => void;
 }
 
 export const useBookingStore = create<BookingState>((set) => ({
-  origin: '福田 CBD · 卓越中心',
-  destination: '',
-  setDestination: (dest) => set({ destination: dest }),
+  fromAddress: '福田 CBD · 卓越中心',
+  fromPad: '福田起降点',
+  toAddress: '',
+  toPad: '',
   
-  fromLocation: { name: '福田 CBD · 卓越中心' },
-  toLocation: { name: '宝安机场起降点' },
+  setDestination: (dest) => {
+    // 简单的起降点推导逻辑
+    let pad = '大中华起降点'; // 默认
+    if (dest.includes('机场') || dest.includes('T3')) {
+      pad = '宝安机场起降点';
+    } else if (dest.includes('北站')) {
+      pad = '深圳北站起降点';
+    } else if (dest.includes('蛇口')) {
+      pad = '蛇口邮轮母港起降点';
+    }
+    set({ toAddress: dest, toPad: pad });
+  },
   
   selectedFlight: null,
   setSelectedFlight: (flight) => set({ selectedFlight: flight }),
+  
+  passengerCount: 1,
+  setPassengerCount: (count) => set({ passengerCount: count }),
+  
+  bookingDate: new Date(),
   
   pickupService: { type: 'pickup', mode: 'none' },
   setPickupService: (service) => set({ pickupService: service }),
@@ -69,14 +82,13 @@ export const useBookingStore = create<BookingState>((set) => ({
   dropoffService: { type: 'dropoff', mode: 'none' },
   setDropoffService: (service) => set({ dropoffService: service }),
   
-  passengerCount: 1,
-  setPassengerCount: (count) => set({ passengerCount: count }),
-  
   resetBooking: () => set({
-    destination: '',
+    toAddress: '',
+    toPad: '',
     selectedFlight: null,
     pickupService: { type: 'pickup', mode: 'none' },
     dropoffService: { type: 'dropoff', mode: 'none' },
     passengerCount: 1,
+    bookingDate: new Date(),
   }),
 }));

@@ -4,7 +4,7 @@ import { useBookingStore } from '../store/useBookingStore';
 
 export function Home() {
   const navigate = useNavigate();
-  const { destination, setDestination } = useBookingStore();
+  const { fromAddress, toAddress, setDestination } = useBookingStore();
 
   return (
     <div className="bg-background text-on-surface w-full h-full overflow-hidden relative font-body-lg">
@@ -59,7 +59,7 @@ export function Home() {
                     <div className="w-2.5 h-2.5 bg-primary rounded-full"></div>
                   </div>
                   <div className="flex-1 pb-3 border-b border-surface-variant">
-                    <span className="text-body-lg font-body-lg text-on-surface">福田 CBD · 卓越中心</span>
+                    <span className="text-body-lg font-body-lg text-on-surface">{fromAddress}</span>
                   </div>
                 </div>
                 
@@ -73,7 +73,7 @@ export function Home() {
                       className="w-full bg-transparent border-none p-0 text-display-lg font-display-lg text-on-surface placeholder:text-outline focus:ring-0 outline-none" 
                       placeholder="你要去哪儿？" 
                       type="text" 
-                      value={destination}
+                      value={toAddress}
                       onChange={(e) => setDestination(e.target.value)}
                     />
                   </div>
@@ -102,9 +102,9 @@ export function Home() {
             {/* Main Action Button */}
             <button 
               onClick={() => {
-                if (destination) navigate('/route-comparison');
+                if (toAddress) navigate('/route-comparison');
               }}
-              disabled={!destination}
+              disabled={!toAddress}
               className="w-full h-[48px] bg-primary text-on-primary rounded-lg flex items-center justify-center text-label-lg font-label-lg mt-2 shadow-sm hover:opacity-90 transition-opacity cursor-pointer disabled:opacity-50"
             >
               查看出行方案

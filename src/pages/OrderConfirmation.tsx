@@ -3,7 +3,7 @@ import { useBookingStore } from '../store/useBookingStore';
 
 export function OrderConfirmation() {
   const navigate = useNavigate();
-  const { selectedFlight } = useBookingStore();
+  const { selectedFlight, fromPad, toPad, toAddress, passengerCount } = useBookingStore();
 
   if (!selectedFlight) {
     return <Navigate to="/flight-selection" replace />;
@@ -41,7 +41,7 @@ export function OrderConfirmation() {
           <div className="flex items-center justify-between relative">
             <div className="flex flex-col">
               <span className="text-display-lg font-display-lg text-on-surface">{selectedFlight.departureTime}</span>
-              <span className="text-body-md font-body-md text-on-surface-variant">深圳平安金融中心</span>
+              <span className="text-body-md font-body-md text-on-surface-variant">{fromPad}</span>
             </div>
             
             <div className="flex-1 px-4 flex flex-col items-center relative">
@@ -52,14 +52,14 @@ export function OrderConfirmation() {
             
             <div className="flex flex-col text-right">
               <span className="text-display-lg font-display-lg text-on-surface">{selectedFlight.arrivalTime}</span>
-              <span className="text-body-md font-body-md text-on-surface-variant">香港国际机场 T1</span>
+              <span className="text-body-md font-body-md text-on-surface-variant">{toPad}</span>
             </div>
           </div>
           
           <div className="mt-4 pt-4 border-t border-outline-variant/20 flex gap-stack-md text-body-md font-body-md text-on-surface-variant">
             <div className="flex items-center gap-1">
               <span className="material-symbols-outlined text-[18px]">person</span>
-              <span>张三 (成人)</span>
+              <span>{passengerCount}名乘客</span>
             </div>
             <div className="flex items-center gap-1">
               <span className="material-symbols-outlined text-[18px]">luggage</span>
@@ -82,7 +82,7 @@ export function OrderConfirmation() {
               <span className="material-symbols-outlined text-[20px]" style={{ fontVariationSettings: "'FILL' 1" }}>verified</span>
             </div>
             <h3 className="text-label-sm font-label-sm text-on-surface leading-tight">接驳信息</h3>
-            <p className="text-[10px] leading-[14px] text-on-surface-variant font-medium">订单包含从机场低空前往T3的接驳服务。</p>
+            <p className="text-[10px] leading-[14px] text-on-surface-variant font-medium">订单包含接驳至 {toAddress || toPad} 的服务。</p>
           </div>
           <div className="flex-1 bg-surface-container-low rounded-lg p-3 border border-outline-variant/10 flex flex-col items-center text-center gap-1">
             <div className="w-8 h-8 rounded-full bg-tertiary-container text-on-tertiary-container flex items-center justify-center mb-1">
