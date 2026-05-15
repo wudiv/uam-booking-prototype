@@ -111,7 +111,7 @@ export function RouteComparison() {
           </div>
           
           {/* Fixed Bottom Action Area */}
-          <div className="absolute bottom-0 left-0 w-full bg-surface/95 backdrop-blur-sm border-t border-outline-variant/20 px-container-padding py-4 pb-safe z-20">
+          <div className="absolute bottom-0 left-0 w-full bg-surface/95 backdrop-blur-sm border-t border-outline-variant/20 px-container-padding py-4 z-20" style={{ paddingBottom: 'calc(16px + env(safe-area-inset-bottom, 0px))' }}>
             <button 
               onClick={() => navigate('/flight-selection')}
               className="w-full h-[48px] bg-primary hover:bg-surface-tint active:scale-[0.98] transition-all text-on-primary rounded-lg text-label-lg font-label-lg flex items-center justify-center shadow-lg shadow-primary/20"

@@ -34,21 +34,23 @@ export function Questionnaire() {
 
   const handleSubmit = () => {
     if (isFormComplete) {
-      // Here you could save to Zustand or a backend
       console.log('Survey results:', { trustScore, riskScore, intentScore });
       navigate('/');
     }
   };
 
   return (
-    <div className="w-full h-full relative bg-surface text-on-surface antialiased overflow-hidden flex flex-col">
-      <header className="absolute top-0 left-0 w-full z-10 pt-safe px-container-padding flex items-center justify-between h-14 bg-surface border-b border-outline-variant/30">
+    /* 弹性三段式布局 */
+    <div className="w-full h-full flex flex-col bg-surface text-on-surface antialiased">
+      {/* Header - 固定高度 */}
+      <header className="flex-shrink-0 px-container-padding flex items-center justify-between h-14 bg-surface border-b border-outline-variant/30 z-10">
         <div className="w-10"></div>
         <h1 className="text-headline-md font-headline-md text-on-surface">原型测试反馈</h1>
         <div className="w-10"></div>
       </header>
 
-      <main className="h-full overflow-y-auto pt-20 px-container-padding pb-[100px] flex flex-col gap-stack-lg max-w-md mx-auto w-full no-scrollbar">
+      {/* Content - 自动填充，可滚动 */}
+      <main className="flex-1 overflow-y-auto px-container-padding py-6 flex flex-col gap-stack-lg no-scrollbar">
         
         <div className="mb-4">
           <h2 className="text-display-sm font-display-sm text-on-surface mb-2">感谢体验！</h2>
@@ -80,8 +82,8 @@ export function Questionnaire() {
         
       </main>
 
-      {/* Bottom Action Button */}
-      <div className="absolute bottom-0 left-0 w-full p-container-padding bg-surface border-t border-outline-variant/20 z-40" style={{ paddingBottom: 'calc(16px + env(safe-area-inset-bottom, 0px))' }}>
+      {/* Footer - 固定高度 */}
+      <div className="flex-shrink-0 p-container-padding bg-surface border-t border-outline-variant/20" style={{ paddingBottom: 'calc(16px + env(safe-area-inset-bottom, 0px))' }}>
         <button 
           onClick={handleSubmit}
           disabled={!isFormComplete}

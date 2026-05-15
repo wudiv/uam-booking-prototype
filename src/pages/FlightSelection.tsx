@@ -19,9 +19,10 @@ export function FlightSelection() {
   }, [selectedFlight, setSelectedFlight]);
 
   return (
-    <div className="bg-surface text-on-surface font-body-lg w-full h-full flex flex-col selection:bg-primary-container selection:text-on-primary-container relative">
-      {/* Transactional Header */}
-      <header className="sticky top-0 z-40 bg-surface/90 backdrop-blur-md flex items-center justify-between px-container-padding h-[56px] border-b border-outline-variant/30 flex-shrink-0">
+    /* 弹性三段式布局 */
+    <div className="bg-surface text-on-surface font-body-lg w-full h-full flex flex-col">
+      {/* Header - 固定高度 */}
+      <header className="flex-shrink-0 bg-surface/90 backdrop-blur-md flex items-center justify-between px-container-padding h-14 border-b border-outline-variant/30 z-10">
         <button 
           onClick={() => navigate(-1)}
           aria-label="返回" 
@@ -30,11 +31,11 @@ export function FlightSelection() {
           <span className="material-symbols-outlined text-[24px]">arrow_back</span>
         </button>
         <h1 className="font-headline-md text-headline-md text-on-surface">选择 UAM 航班</h1>
-        <div className="w-10 h-10"></div> {/* Balance spacer */}
+        <div className="w-10 h-10"></div>
       </header>
 
-      {/* Main Canvas */}
-      <main className="flex-1 overflow-y-auto pb-[140px] no-scrollbar">
+      {/* Content - 自动填充，可滚动 */}
+      <main className="flex-1 overflow-y-auto no-scrollbar">
         {/* Route Summary Panel */}
         <div className="bg-surface-container-lowest px-container-padding py-stack-lg shadow-[0_4px_12px_rgba(0,0,0,0.02)] border-b border-surface-variant">
           <div className="flex items-center justify-between">
@@ -62,7 +63,7 @@ export function FlightSelection() {
         </div>
 
         {/* Flight List */}
-        <div className="px-container-padding pt-stack-md flex flex-col gap-stack-md">
+        <div className="px-container-padding pt-stack-md pb-4 flex flex-col gap-stack-md">
           {FLIGHTS.map((flight) => {
             const isSelected = selectedFlight?.id === flight.id;
             return (
@@ -129,15 +130,15 @@ export function FlightSelection() {
         </div>
       </main>
 
-      {/* Bottom Action Area */}
-      <div className="absolute bottom-0 left-0 w-full bg-surface-container-lowest shadow-[0_-8px_24px_rgba(0,0,0,0.08)] pt-4 px-container-padding rounded-t-xl z-50" style={{ paddingBottom: 'calc(16px + env(safe-area-inset-bottom, 0px))' }}>
+      {/* Footer - 固定高度 */}
+      <div className="flex-shrink-0 bg-surface-container-lowest shadow-[0_-8px_24px_rgba(0,0,0,0.08)] pt-4 px-container-padding rounded-t-xl" style={{ paddingBottom: 'calc(16px + env(safe-area-inset-bottom, 0px))' }}>
         <div className="flex justify-center items-center gap-1 mb-3 text-on-surface-variant">
           <span className="material-symbols-outlined text-[16px]">airport_shuttle</span>
           <span className="font-label-sm text-label-sm">票价包含接驳服务</span>
         </div>
         <button 
           onClick={() => navigate('/shuttle-info')}
-          className="w-full h-[48px] bg-primary text-on-primary rounded-lg font-label-lg text-label-lg flex items-center justify-center hover:bg-primary/90 transition-colors shadow-sm mb-4"
+          className="w-full h-12 bg-primary text-on-primary rounded-lg font-label-lg text-label-lg flex items-center justify-center hover:bg-primary/90 transition-colors shadow-sm mb-2"
         >
           继续
         </button>

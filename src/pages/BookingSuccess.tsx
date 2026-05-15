@@ -8,9 +8,10 @@ export function BookingSuccess() {
   if (!selectedFlight) return <Navigate to="/" replace />;
 
   return (
-    <div className="w-full h-full relative overflow-hidden bg-background text-on-background pb-safe">
-      {/* TopAppBar */}
-      <header className="fixed top-0 left-0 w-full z-50 flex items-center justify-between px-container-padding h-12 bg-surface/80 backdrop-blur-md">
+    /* 弹性三段式布局：header + scrollable content + footer */
+    <div className="w-full h-full flex flex-col bg-background text-on-background">
+      {/* Header - 固定高度 */}
+      <header className="flex-shrink-0 flex items-center justify-between px-container-padding h-12 bg-surface/80 backdrop-blur-md z-10">
         <button 
           onClick={() => navigate('/')}
           className="w-12 h-12 flex items-center justify-start text-on-surface-variant"
@@ -21,7 +22,8 @@ export function BookingSuccess() {
         <div className="w-12 h-12"></div>
       </header>
 
-      <main className="h-full overflow-y-auto pt-[72px] px-container-padding pb-[100px] flex flex-col gap-stack-lg max-w-md mx-auto no-scrollbar">
+      {/* Content - 自动填充剩余空间，可滚动 */}
+      <main className="flex-1 overflow-y-auto px-container-padding py-6 flex flex-col gap-stack-lg no-scrollbar">
         {/* Status Card (Boarding Pass Style) */}
         <div className="bg-surface-container-lowest rounded-[24px] shadow-lg overflow-hidden flex flex-col border border-outline-variant/30">
           {/* Header section */}
@@ -141,8 +143,8 @@ export function BookingSuccess() {
         </div>
       </main>
 
-      {/* Bottom Action Button (Fixed) */}
-      <div className="absolute bottom-0 left-0 w-full p-container-padding bg-surface/90 backdrop-blur-md border-t border-outline-variant/20 z-40" style={{ paddingBottom: 'calc(16px + env(safe-area-inset-bottom, 0px))' }}>
+      {/* Footer - 固定高度 */}
+      <div className="flex-shrink-0 p-container-padding bg-surface/90 backdrop-blur-md border-t border-outline-variant/20" style={{ paddingBottom: 'calc(16px + env(safe-area-inset-bottom, 0px))' }}>
         <button 
           onClick={() => navigate('/questionnaire')}
           className="w-full h-12 bg-primary text-on-primary rounded-lg text-label-lg font-label-lg flex items-center justify-center gap-2 hover:bg-primary-container transition-colors shadow-md"
