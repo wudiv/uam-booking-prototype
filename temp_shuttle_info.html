@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+
+<html lang="zh-CN"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport"/>
+<title>前往起降点</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-tertiary": "#ffffff",
+                    "surface-container-lowest": "#ffffff",
+                    "on-primary-fixed-variant": "#004e5c",
+                    "on-tertiary-fixed": "#2d1600",
+                    "primary-fixed": "#aaedff",
+                    "on-secondary-fixed": "#001f23",
+                    "secondary": "#006971",
+                    "error-container": "#ffdad6",
+                    "secondary-fixed-dim": "#5cd7e5",
+                    "inverse-on-surface": "#f3f0ef",
+                    "surface-container-low": "#f6f3f2",
+                    "secondary-fixed": "#88f3ff",
+                    "on-primary-fixed": "#001f26",
+                    "tertiary-fixed-dim": "#ffb874",
+                    "on-secondary-fixed-variant": "#004f56",
+                    "on-surface": "#1c1b1b",
+                    "surface-container-high": "#eae7e7",
+                    "primary": "#006071",
+                    "on-tertiary-fixed-variant": "#6a3b00",
+                    "on-surface-variant": "#3e484b",
+                    "surface-bright": "#fcf9f8",
+                    "surface": "#fcf9f8",
+                    "outline-variant": "#bec8cc",
+                    "background": "#fcf9f8",
+                    "surface-container-highest": "#e5e2e1",
+                    "on-background": "#1c1b1b",
+                    "on-primary": "#ffffff",
+                    "tertiary-fixed": "#ffdcbf",
+                    "inverse-primary": "#7ad3e9",
+                    "on-error-container": "#93000a",
+                    "tertiary": "#834a00",
+                    "on-secondary-container": "#006d76",
+                    "surface-variant": "#e5e2e1",
+                    "surface-dim": "#dcd9d9",
+                    "on-primary-container": "#e3f9ff",
+                    "on-secondary": "#ffffff",
+                    "inverse-surface": "#313030",
+                    "outline": "#6e797c",
+                    "secondary-container": "#79f1ff",
+                    "primary-container": "#007b8f",
+                    "on-error": "#ffffff",
+                    "surface-tint": "#006879",
+                    "tertiary-container": "#a55f00",
+                    "surface-container": "#f0eded",
+                    "error": "#ba1a1a",
+                    "on-tertiary-container": "#fff3eb",
+                    "primary-fixed-dim": "#7ad3e9"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "unit": "4px",
+                    "stack-lg": "24px",
+                    "stack-md": "16px",
+                    "container-padding": "16px",
+                    "gutter": "12px",
+                    "stack-sm": "8px",
+                    "safe-top": "env(safe-area-inset-top)",
+                    "safe-bottom": "env(safe-area-inset-bottom)"
+            },
+            "fontFamily": {
+                    "label-lg": ["Hanken Grotesk"],
+                    "label-sm": ["Hanken Grotesk"],
+                    "body-lg": ["Hanken Grotesk"],
+                    "display-lg": ["Hanken Grotesk"],
+                    "headline-lg": ["Hanken Grotesk"],
+                    "headline-md": ["Hanken Grotesk"],
+                    "body-md": ["Hanken Grotesk"],
+                    "price-tag": ["Hanken Grotesk"]
+            },
+            "fontSize": {
+                    "label-lg": ["14px", {"lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "600"}],
+                    "label-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0.02em", "fontWeight": "500"}],
+                    "body-lg": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "display-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "headline-lg": ["24px", {"lineHeight": "32px", "fontWeight": "700"}],
+                    "headline-md": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                    "body-md": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                    "price-tag": ["18px", {"lineHeight": "24px", "letterSpacing": "-0.01em", "fontWeight": "700"}]
+            }
+          }
+        }
+      }
+    </script>
+<style>
+        body { -webkit-tap-highlight-color: transparent; }
+        /* Hide scrollbar for clean UI */
+        ::-webkit-scrollbar { display: none; }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-surface text-on-surface antialiased overflow-hidden select-none">
+<!-- Map Base Layer (Level 0) -->
+<div class="absolute inset-0 z-0 bg-surface-variant bg-cover bg-center" data-alt="A highly detailed, clean modern digital map interface centered on an urban business district (Futian CBD) from a top-down perspective. The map uses a light-mode color palette with subtle teal and grey tones, reflecting a premium mobility app style. A stylized route line connects a central pick-up point to a designated vertiport zone. The lighting is bright and flat, emphasizing clarity and efficiency without clutter." data-location="Shenzhen Futian CBD Map" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuB3TrJKWYDBnUTTLnabgSYtKVJygfwAvWbB_vPYa0fyr-JWFtpDWPz2PoYnIxA4PnbTKIHHRzPdM_Vw8GBSICrpUjOnowsEi5ekVM0cEh4RRlUktGOd-J9J6LF3mWgBppzrT24couPtdpgivsRdNOnvkgUZwpvaqWH63F99OimyYAk8aUvgkdAtDsXCo9Ado1Vfz-vX-eHXtZ6lGUA_ARUL2LmsmbK_XODNfH9p9l7BgsqdL1x_VB4RwZ6ghuiUBjhYfomoDE920ls');">
+<!-- Scrim for better top readability if needed -->
+<div class="absolute top-0 w-full h-32 bg-gradient-to-b from-surface/80 to-transparent"></div>
+</div>
+<!-- Task-Focused Header (Level 1) -->
+<header class="absolute top-0 left-0 w-full z-10 pt-safe px-container-padding flex items-center justify-between h-14 backdrop-blur-sm bg-surface/30">
+<button class="w-10 h-10 flex items-center justify-center rounded-full bg-surface/80 shadow-sm text-on-surface backdrop-blur-md">
+<span class="material-symbols-outlined text-[20px]" data-icon="arrow_back_ios_new">arrow_back_ios_new</span>
+</button>
+<h1 class="text-headline-md font-headline-md text-on-surface drop-shadow-sm">前往起降点</h1>
+<div class="w-10 h-10"></div> <!-- Spacer for center alignment -->
+</header>
+<!-- Floating Map Markers (Level 1) -->
+<div class="absolute top-1/4 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10 flex flex-col items-center">
+<div class="bg-primary text-on-primary px-3 py-1.5 rounded-full text-label-sm font-label-sm shadow-md mb-2 whitespace-nowrap flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]" data-icon="airport_shuttle">airport_shuttle</span>
+            接驳车行驶中
+        </div>
+<div class="w-4 h-4 rounded-full bg-primary border-2 border-surface shadow-sm"></div>
+</div>
+<!-- Main Content Drawer (Level 2) -->
+<!-- Fixed max height to allow map visibility, flexible internal scrolling -->
+<div class="absolute bottom-0 left-0 w-full z-20 bg-surface rounded-t-[24px] shadow-[0_-12px_24px_0_rgba(0,0,0,0.08)] flex flex-col max-h-[707px]">
+<!-- Grabber -->
+<div class="w-full flex justify-center pt-3 pb-2 flex-shrink-0">
+<div class="w-8 h-1 bg-outline-variant rounded-full opacity-50"></div>
+</div>
+<div class="px-container-padding pb-safe flex-1 overflow-y-auto flex flex-col gap-stack-lg">
+<!-- Route Header -->
+<div class="flex items-center justify-between mt-2">
+<div class="flex flex-col">
+<span class="text-label-sm font-label-sm text-on-surface-variant mb-1">当前位置</span>
+<span class="text-headline-md font-headline-md text-on-surface">福田 CBD</span>
+</div>
+<div class="flex-1 flex items-center justify-center px-4 opacity-40">
+<div class="h-[2px] border-b-2 border-dashed border-outline-variant w-full relative">
+<span class="material-symbols-outlined absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-primary bg-surface px-1" data-icon="flight_takeoff">flight_takeoff</span>
+</div>
+</div>
+<div class="flex flex-col text-right">
+<span class="text-label-sm font-label-sm text-on-surface-variant mb-1">目的地</span>
+<span class="text-headline-md font-headline-md text-primary">福田低空起降点</span>
+</div>
+</div>
+<!-- Shuttle Info Card (Glassmorphism inspired, grounded) -->
+<div class="bg-surface-container-low rounded-xl p-4 flex items-center justify-between border border-outline-variant/20 shadow-sm relative overflow-hidden">
+<div class="absolute top-0 left-0 w-1 h-full bg-primary"></div>
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-primary-container/30 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined" data-icon="directions_bus">directions_bus</span>
+</div>
+<div>
+<div class="text-label-sm font-label-sm text-on-surface-variant">接驳点</div>
+<div class="text-body-lg font-body-lg text-on-surface font-medium">卓越中心东门</div>
+</div>
+</div>
+<div class="text-right">
+<div class="text-label-lg font-label-lg text-secondary">约 4 分钟</div>
+<div class="text-label-sm font-label-sm text-on-surface-variant">到达接驳点</div>
+</div>
+</div>
+<!-- Umetrip-style Timeline Module -->
+<div class="bg-surface-bright rounded-xl p-5 border border-surface-container-highest shadow-sm relative mt-2">
+<!-- Vertical Line Base -->
+<div class="absolute left-[39px] top-8 bottom-8 w-[2px] bg-surface-container-highest"></div>
+<div class="flex flex-col gap-6">
+<!-- Step 1: Active/Next Action -->
+<div class="flex items-start gap-4 relative z-10">
+<div class="w-12 text-right pt-0.5">
+<span class="text-label-lg font-label-lg text-primary">14:30</span>
+</div>
+<div class="relative flex items-center justify-center w-6 h-6 mt-0.5">
+<!-- Glow effect -->
+<div class="absolute w-6 h-6 bg-primary/20 rounded-full animate-pulse"></div>
+<div class="w-3 h-3 bg-primary rounded-full relative z-10 shadow-[0_0_0_4px_rgba(252,249,248,1)]"></div>
+</div>
+<div class="flex-1 pb-2">
+<h3 class="text-label-lg font-label-lg text-on-surface">专车接驳上车</h3>
+<p class="text-label-sm font-label-sm text-on-surface-variant mt-1">请在指定地点等候</p>
+</div>
+</div>
+<!-- Step 2: Future -->
+<div class="flex items-start gap-4 relative z-10">
+<div class="w-12 text-right pt-0.5">
+<span class="text-label-lg font-label-lg text-on-surface-variant">14:38</span>
+</div>
+<div class="relative flex items-center justify-center w-6 h-6 mt-0.5">
+<div class="w-2.5 h-2.5 rounded-full border-2 border-outline-variant bg-surface relative z-10 shadow-[0_0_0_4px_rgba(252,249,248,1)]"></div>
+</div>
+<div class="flex-1 pb-2">
+<h3 class="text-label-lg font-label-lg text-on-surface-variant">到达起降点</h3>
+</div>
+</div>
+<!-- Step 3: Future -->
+<div class="flex items-start gap-4 relative z-10">
+<div class="w-12 text-right pt-0.5">
+<span class="text-label-lg font-label-lg text-on-surface-variant">14:40</span>
+</div>
+<div class="relative flex items-center justify-center w-6 h-6 mt-0.5">
+<div class="w-2.5 h-2.5 rounded-full border-2 border-outline-variant bg-surface relative z-10 shadow-[0_0_0_4px_rgba(252,249,248,1)]"></div>
+</div>
+<div class="flex-1 pb-2">
+<h3 class="text-label-lg font-label-lg text-on-surface-variant">身份与安检核验</h3>
+</div>
+</div>
+<!-- Step 4: Final -->
+<div class="flex items-start gap-4 relative z-10">
+<div class="w-12 text-right pt-0.5">
+<span class="text-label-lg font-label-lg text-on-surface-variant">14:45</span>
+</div>
+<div class="relative flex items-center justify-center w-6 h-6 mt-0.5">
+<span class="material-symbols-outlined text-outline-variant bg-surface rounded-full text-[16px] shadow-[0_0_0_4px_rgba(252,249,248,1)]" data-icon="flight">flight</span>
+</div>
+<div class="flex-1">
+<h3 class="text-label-lg font-label-lg text-on-surface-variant">航班起飞</h3>
+</div>
+</div>
+</div>
+</div>
+<!-- Spacer for scroll padding -->
+<div class="h-6"></div>
+</div>
+<!-- Sticky Bottom Action Area -->
+<div class="px-container-padding py-4 bg-surface border-t border-outline-variant/10 flex-shrink-0 pb-safe">
+<button class="w-full h-12 bg-primary text-on-primary rounded-lg flex items-center justify-center gap-2 transition-transform active:scale-[0.98]">
+<span class="text-label-lg font-label-lg">查看订单</span>
+<span class="material-symbols-outlined text-[18px]" data-icon="receipt_long">receipt_long</span>
+</button>
+</div>
+</div>
+</body></html>
