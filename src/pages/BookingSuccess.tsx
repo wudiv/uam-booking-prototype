@@ -3,7 +3,7 @@ import { useBookingStore } from '../store/useBookingStore';
 
 export function BookingSuccess() {
   const navigate = useNavigate();
-  const { selectedFlight } = useBookingStore();
+  const { selectedFlight, selectedSeat } = useBookingStore();
 
   if (!selectedFlight) return <Navigate to="/" replace />;
 
@@ -50,7 +50,7 @@ export function BookingSuccess() {
             
             <div>
               <div className="text-label-sm font-label-sm text-on-surface-variant mb-1">座位</div>
-              <div className="text-display-lg font-display-lg text-primary">2A</div>
+              <div className="text-display-lg font-display-lg text-primary">{selectedSeat || '1A'}</div>
             </div>
             <div className="text-right">
               <div className="text-label-sm font-label-sm text-on-surface-variant mb-1">起飞时间</div>

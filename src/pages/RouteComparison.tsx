@@ -51,7 +51,7 @@ export function RouteComparison() {
           <StaggeredList className="flex-1 overflow-y-auto px-container-padding space-y-stack-md pb-[100px] no-scrollbar">
             {/* Card 1: UAM (Selected State) */}
             <button 
-              onClick={() => navigate('/order-confirmation')}
+              onClick={() => navigate('/flight-selection')}
               className="w-full text-left bg-surface-container-lowest border-2 border-primary rounded-xl p-4 shadow-m3-2 relative overflow-hidden transition-all active:scale-[0.99] flex flex-col gap-3 group"
             >
               <div className="absolute top-0 right-0 bg-primary text-on-primary text-[10px] font-bold px-2 py-1 rounded-bl-lg">最快</div>
