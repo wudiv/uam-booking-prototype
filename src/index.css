@@ -11,19 +11,20 @@
     display: none;
   }
   
-  html, body, #root {
+  html {
+    height: 100%;
+    height: 100dvh;
+  }
+
+  body {
     height: 100%;
     height: 100dvh;
     width: 100%;
     margin: 0;
     padding: 0;
-    overflow: hidden;
-  }
-
-  body {
     -ms-overflow-style: none;
     scrollbar-width: none;
-    overflow-x: hidden;
+    overflow: hidden;
     /* 防止 iOS Safari 橡皮筋滚动 */
     overscroll-behavior: none;
     /* 防止双击缩放 */
@@ -31,12 +32,18 @@
     @apply bg-background text-on-background font-body-lg;
   }
 
+  #root {
+    height: 100%;
+    height: 100dvh;
+    width: 100%;
+    overflow: hidden;
+    @apply bg-background;
+  }
+
   /* 安全区域变量 (iPhone X 以上刘海/底部横条) */
   :root {
     --safe-area-top: env(safe-area-inset-top, 0px);
     --safe-area-bottom: env(safe-area-inset-bottom, 0px);
-    --safe-area-left: env(safe-area-inset-left, 0px);
-    --safe-area-right: env(safe-area-inset-right, 0px);
   }
 }
 
