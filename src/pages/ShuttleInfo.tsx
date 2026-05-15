@@ -4,7 +4,6 @@ import { motion } from 'framer-motion';
 
 export function ShuttleInfo() {
   const navigate = useNavigate();
-  const { fromAddress, toAddress } = useBookingStore();
 
   return (
     <div className="w-full h-full flex flex-col bg-background text-on-background overflow-hidden relative">

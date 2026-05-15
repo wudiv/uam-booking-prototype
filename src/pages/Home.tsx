@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 import { useBookingStore } from '../store/useBookingStore';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { AnimatedBackground } from '../components/AnimatedBackground';
 
 export function Home() {
