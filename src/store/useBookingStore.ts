@@ -27,7 +27,6 @@ interface BookingState {
   toAddress: string;
   toPad: string;
   setDestination: (dest: string) => void;
-  setOrigin: (origin: string) => void;
   
   // 航班信息
   selectedFlight: Flight | null;
@@ -68,8 +67,6 @@ export const useBookingStore = create<BookingState>((set) => ({
     }
     set({ toAddress: dest, toPad: pad });
   },
-  
-  setOrigin: (origin) => set({ fromAddress: origin }),
   
   selectedFlight: null,
   setSelectedFlight: (flight) => set({ selectedFlight: flight }),

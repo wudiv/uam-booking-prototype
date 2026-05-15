@@ -106,6 +106,13 @@ export default {
         'label-lg': ['14px', { lineHeight: '18px', fontWeight: '500' }],
         'label-md': ['12px', { lineHeight: '16px', fontWeight: '500' }],
         'label-sm': ['11px', { lineHeight: '14px', fontWeight: '500' }],
+      },
+      boxShadow: {
+        'm3-1': '0px 1px 2px rgba(0, 0, 0, 0.3), 0px 1px 3px 1px rgba(0, 0, 0, 0.15)',
+        'm3-2': '0px 1px 2px rgba(0, 0, 0, 0.3), 0px 2px 6px 2px rgba(0, 0, 0, 0.15)',
+        'm3-3': '0px 4px 8px 3px rgba(0, 0, 0, 0.15), 0px 1px 3px rgba(0, 0, 0, 0.3)',
+        'm3-4': '0px 6px 10px 4px rgba(0, 0, 0, 0.15), 0px 2px 3px rgba(0, 0, 0, 0.3)',
+        'm3-5': '0px 8px 12px 6px rgba(0, 0, 0, 0.15), 0px 4px 4px rgba(0, 0, 0, 0.3)',
       }
     },
   },
