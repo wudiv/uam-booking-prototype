@@ -42,7 +42,7 @@ export function FlightSelection() {
         >
           <span className="material-symbols-outlined text-[24px]">arrow_back</span>
         </button>
-        <h1 className="text-display-sm font-bold text-on-surface">Select flight</h1>
+        <h1 className="text-display-sm font-bold text-on-surface">选择 UAM 航班</h1>
         <div className="w-10 h-10"></div>
       </header>
 
@@ -52,7 +52,7 @@ export function FlightSelection() {
         <div className="bg-surface-container-lowest px-container-padding py-stack-lg shadow-[0_4px_12px_rgba(0,0,0,0.02)] border-b border-surface-variant">
           <div className="flex items-center justify-between">
             <div className="flex flex-col items-center flex-1">
-              <span className="text-label-sm text-on-surface-variant mb-1 uppercase tracking-wider">From</span>
+              <span className="text-label-sm text-on-surface-variant mb-1">起点</span>
               <span className="text-display-md font-bold text-on-surface text-center">{fromPad}</span>
             </div>
             <div className="px-4 flex flex-col items-center justify-center text-primary">
@@ -60,7 +60,7 @@ export function FlightSelection() {
               <div className="w-full h-[1px] bg-outline-variant mt-2 border-t border-dashed border-outline-variant"></div>
             </div>
             <div className="flex flex-col items-center flex-1">
-              <span className="text-label-sm text-on-surface-variant mb-1 uppercase tracking-wider">To</span>
+              <span className="text-label-sm text-on-surface-variant mb-1">终点</span>
               <span className="text-display-md font-bold text-on-surface text-center">{toPad}</span>
             </div>
           </div>
@@ -150,7 +150,7 @@ export function FlightSelection() {
         </div>
         <button 
           onClick={() => navigate('/shuttle-info')}
-          className="w-full h-12 bg-primary text-on-primary rounded-pill text-body-lg font-bold flex items-center justify-center hover:bg-primary/90 transition-colors shadow-sm mb-2"
+          className="w-full h-[56px] bg-primary text-on-primary rounded-pill text-body-lg font-bold flex items-center justify-center hover:bg-primary/90 transition-all active:scale-[0.98] shadow-md mb-2"
         >
           继续
         </button>

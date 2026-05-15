@@ -13,7 +13,7 @@ export function Home() {
         <button className="text-on-surface-variant hover:bg-surface-container-high transition-colors opacity-80 duration-150 p-1 rounded-full flex items-center justify-center">
           <span className="material-symbols-outlined">menu</span>
         </button>
-        <h1 className="text-display-sm font-bold text-primary tracking-tight">Skyline UAM</h1>
+        <h1 className="text-display-sm font-bold text-primary tracking-tight">空行 UAM</h1>
         <button className="text-on-surface-variant hover:bg-surface-container-high transition-colors opacity-80 duration-150 p-1 rounded-full flex items-center justify-center">
           <span className="material-symbols-outlined">notifications</span>
         </button>
@@ -71,7 +71,7 @@ export function Home() {
                   <div className="flex-1">
                     <input 
                       className="w-full bg-transparent border-none p-0 text-display-lg font-bold text-on-surface placeholder:text-outline focus:ring-0 outline-none" 
-                      placeholder="Where to?" 
+                      placeholder="你要去哪儿？" 
                       type="text" 
                       value={toAddress}
                       onChange={(e) => setDestination(e.target.value)}
@@ -105,7 +105,7 @@ export function Home() {
                 if (toAddress) navigate('/route-comparison');
               }}
               disabled={!toAddress}
-              className="w-full h-[56px] bg-primary text-on-primary rounded-pill flex items-center justify-center text-body-lg font-bold mt-2 shadow-sm hover:opacity-90 transition-opacity cursor-pointer disabled:opacity-50"
+              className="w-full h-[56px] bg-primary text-on-primary rounded-pill flex items-center justify-center text-body-lg font-bold mt-2 shadow-md hover:shadow-primary/20 transition-all active:scale-[0.98] cursor-pointer disabled:opacity-50"
             >
               查看出行方案
             </button>

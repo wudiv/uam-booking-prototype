@@ -29,7 +29,7 @@ export function BookingSuccess() {
           {/* Header section */}
           <div className="bg-primary px-container-padding py-stack-md text-on-primary flex justify-between items-center relative overflow-hidden">
             <div className="z-10">
-              <div className="text-label-sm font-label-sm opacity-80 uppercase tracking-wider mb-1">Flight</div>
+              <div className="text-label-sm font-label-sm opacity-80 mb-1">航班</div>
               <div className="text-headline-lg font-headline-lg">{selectedFlight.name}</div>
             </div>
             <div className="z-10 text-right">
@@ -49,11 +49,11 @@ export function BookingSuccess() {
             <div className="absolute right-[-12px] bottom-[-12px] w-6 h-6 rounded-full bg-background border border-outline-variant/30"></div>
             
             <div>
-              <div className="text-label-sm font-label-sm text-on-surface-variant mb-1">Seat</div>
+              <div className="text-label-sm font-label-sm text-on-surface-variant mb-1">座位</div>
               <div className="text-display-lg font-display-lg text-primary">2A</div>
             </div>
             <div className="text-right">
-              <div className="text-label-sm font-label-sm text-on-surface-variant mb-1">Take-off</div>
+              <div className="text-label-sm font-label-sm text-on-surface-variant mb-1">起飞时间</div>
               <div className="text-display-lg font-display-lg text-on-surface">{selectedFlight.departureTime}</div>
             </div>
           </div>
@@ -147,7 +147,7 @@ export function BookingSuccess() {
       <div className="flex-shrink-0 p-container-padding pb-safe bg-surface/90 backdrop-blur-md border-t border-outline-variant/20">
         <button 
           onClick={() => navigate('/questionnaire')}
-          className="w-full h-12 bg-primary text-on-primary rounded-lg text-label-lg font-label-lg flex items-center justify-center gap-2 hover:bg-primary-container transition-colors shadow-md"
+          className="w-full h-[56px] bg-primary text-on-primary rounded-pill text-body-lg font-bold flex items-center justify-center gap-2 hover:bg-primary/90 transition-all active:scale-[0.98] shadow-md"
         >
           下一步：填写问卷
         </button>

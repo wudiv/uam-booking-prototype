@@ -24,7 +24,7 @@ export function RouteComparison() {
         >
           <span className="material-symbols-outlined text-primary dark:text-primary-fixed-dim" style={{fontVariationSettings: "'FILL' 0"}}>arrow_back</span>
         </button>
-        <h1 className="text-display-sm font-bold text-primary dark:text-primary-fixed-dim tracking-tight">Skyline UAM</h1>
+        <h1 className="text-display-sm font-bold text-primary dark:text-primary-fixed-dim tracking-tight">空行 UAM</h1>
         <button className="flex items-center justify-center opacity-80 hover:bg-surface-container-high transition-colors rounded-full w-8 h-8">
           <span className="material-symbols-outlined text-primary dark:text-primary-fixed-dim" style={{fontVariationSettings: "'FILL' 0"}}>notifications</span>
         </button>
@@ -39,10 +39,10 @@ export function RouteComparison() {
             <div className="w-10 h-1 bg-outline-variant/50 rounded-full"></div>
           </div>
           <div className="px-container-padding pt-4 pb-6 flex-shrink-0">
-            <h2 className="text-display-md font-bold text-on-surface">Choose your travel option</h2>
+            <h2 className="text-display-md font-bold text-on-surface">选择出行方案</h2>
             <div className="flex items-center gap-2 mt-1">
               <span className="material-symbols-outlined text-[16px] text-primary">schedule</span>
-              <p className="text-body-md text-on-surface-variant">Today {timeString} · {passengerCount} passengers</p>
+              <p className="text-body-md text-on-surface-variant">今天 {timeString} · {passengerCount} 名乘客</p>
             </div>
           </div>
           

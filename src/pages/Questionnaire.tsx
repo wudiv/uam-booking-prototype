@@ -87,7 +87,7 @@ export function Questionnaire() {
         <button 
           onClick={handleSubmit}
           disabled={!isFormComplete}
-          className={`w-full h-12 rounded-lg text-label-lg font-label-lg flex items-center justify-center transition-all shadow-sm ${
+          className={`w-full h-[56px] rounded-pill text-body-lg font-bold flex items-center justify-center transition-all shadow-md ${
             isFormComplete 
               ? 'bg-primary text-on-primary hover:bg-primary/90 active:scale-[0.98]' 
               : 'bg-surface-container-highest text-on-surface-variant opacity-50 cursor-not-allowed'
