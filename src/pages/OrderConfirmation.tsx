@@ -127,7 +127,7 @@ export function OrderConfirmation() {
       <div className="flex-shrink-0 bg-surface-container-lowest p-4 pb-safe shadow-[0_-4px_12px_rgba(0,0,0,0.05)] border-t border-outline-variant/10">
         <button 
           onClick={() => navigate('/booking-success')}
-          className="w-full h-[56px] bg-primary text-on-primary rounded-pill text-body-lg font-bold flex items-center justify-center hover:bg-primary/90 transition-all active:scale-[0.98] shadow-lg shadow-primary/20"
+          className="w-full h-[48px] bg-primary text-on-primary rounded-pill text-label-lg font-bold flex items-center justify-center hover:bg-primary/90 transition-all active:scale-[0.98] shadow-lg shadow-primary/20"
         >
           支付 ¥{selectedFlight.price}
         </button>

@@ -147,7 +147,7 @@ export function BookingSuccess() {
       <div className="flex-shrink-0 p-container-padding pb-safe bg-surface/90 backdrop-blur-md border-t border-outline-variant/20">
         <button 
           onClick={() => navigate('/questionnaire')}
-          className="w-full h-[56px] bg-primary text-on-primary rounded-pill text-body-lg font-bold flex items-center justify-center gap-2 hover:bg-primary/90 transition-all active:scale-[0.98] shadow-md"
+          className="w-full h-[48px] bg-primary text-on-primary rounded-pill text-label-lg font-bold flex items-center justify-center gap-2 hover:bg-primary/90 transition-all active:scale-[0.98] shadow-md"
         >
           下一步：填写问卷
         </button>

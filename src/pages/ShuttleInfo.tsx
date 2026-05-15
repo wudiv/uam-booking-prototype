@@ -155,9 +155,9 @@ export function ShuttleInfo() {
         <div className="px-container-padding py-4 pb-safe bg-surface border-t border-outline-variant/10 flex-shrink-0">
           <button 
             onClick={() => navigate('/order-confirmation')}
-            className="w-full h-[56px] bg-primary text-on-primary rounded-pill flex items-center justify-center gap-2 transition-transform active:scale-[0.98] shadow-md"
+            className="w-full h-[48px] bg-primary text-on-primary rounded-pill flex items-center justify-center gap-2 transition-transform active:scale-[0.98] shadow-md"
           >
-            <span className="text-body-lg font-bold">查看订单</span>
+            <span className="text-label-lg font-bold">查看订单</span>
             <span className="material-symbols-outlined text-[18px]">receipt_long</span>
           </button>
         </div>

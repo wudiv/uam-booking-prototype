@@ -57,22 +57,25 @@ export default {
         "primary-fixed-dim": "#7ad3e9"
       },
       borderRadius: {
-        "DEFAULT": "0.25rem",
-        "lg": "0.5rem",
-        "xl": "1rem", // Uber: Cards round to 16px
-        "pill": "999px",
-        "full": "9999px"
+        'none': '0',
+        'sm': '4px',
+        'DEFAULT': '6px',
+        'md': '8px',
+        'lg': '10px',
+        'xl': '14px',
+        'pill': '999px',
+        'full': '9999px'
       },
       spacing: {
-        "unit": "4px",
-        "stack-lg": "24px",
-        "stack-md": "16px",
-        "container-padding": "16px",
-        "gutter": "12px",
-        "stack-sm": "8px",
-        "safe": "env(safe-area-inset-bottom, 16px)",
-        "safe-top": "env(safe-area-inset-top, 0px)",
-        "safe-bottom": "env(safe-area-inset-bottom, 16px)"
+        'unit': '4px',
+        'stack-lg': '20px',
+        'stack-md': '12px',
+        'container-padding': '16px',
+        'gutter': '12px',
+        'stack-sm': '6px',
+        'safe': 'env(safe-area-inset-bottom, 16px)',
+        'safe-top': 'env(safe-area-inset-top, 0px)',
+        'safe-bottom': 'env(safe-area-inset-bottom, 16px)'
       },
       fontFamily: {
         "sans": ["Inter", "sans-serif"],
@@ -89,24 +92,20 @@ export default {
         "price-tag": ["Inter", "sans-serif"]
       },
       fontSize: {
-        // Uber Specification Tokens
-        "display-xxl": ["52px", { lineHeight: "64px", letterSpacing: "-0.02em", fontWeight: "700" }],
-        "display-xl": ["36px", { lineHeight: "44px", letterSpacing: "-0.01em", fontWeight: "700" }],
-        "display-lg": ["32px", { lineHeight: "40px", letterSpacing: "-0.01em", fontWeight: "700" }],
-        "display-md": ["24px", { lineHeight: "32px", fontWeight: "700" }],
-        "display-sm": ["20px", { lineHeight: "28px", fontWeight: "700" }],
-        "body-lg": ["18px", { lineHeight: "24px", fontWeight: "500" }],
-        "body-md": ["16px", { lineHeight: "24px", fontWeight: "400" }],
-        "body-md-strong": ["16px", { lineHeight: "20px", fontWeight: "500" }],
-        "body-sm": ["14px", { lineHeight: "20px", fontWeight: "400" }],
-        "body-sm-strong": ["14px", { lineHeight: "16px", fontWeight: "500" }],
-        
-        // 映射旧名称以减少破坏性更新
-        "label-lg": ["14px", { lineHeight: "20px", fontWeight: "600" }],
-        "label-sm": ["12px", { lineHeight: "16px", fontWeight: "500" }],
-        "headline-lg": ["24px", { lineHeight: "32px", fontWeight: "700" }],
-        "headline-md": ["20px", { lineHeight: "28px", fontWeight: "600" }],
-        "price-tag": ["18px", { lineHeight: "24px", fontWeight: "700" }]
+        'display-xxl': ['44px', { lineHeight: '48px', letterSpacing: '-0.02em', fontWeight: '700' }],
+        'display-xl': ['32px', { lineHeight: '36px', letterSpacing: '-0.02em', fontWeight: '700' }],
+        'display-lg': ['28px', { lineHeight: '32px', letterSpacing: '-0.02em', fontWeight: '700' }],
+        'display-md': ['24px', { lineHeight: '28px', letterSpacing: '-0.01em', fontWeight: '700' }],
+        'display-sm': ['18px', { lineHeight: '22px', letterSpacing: '-0.01em', fontWeight: '700' }],
+        'headline-lg': ['20px', { lineHeight: '24px', fontWeight: '600' }],
+        'headline-md': ['18px', { lineHeight: '22px', fontWeight: '600' }],
+        'headline-sm': ['16px', { lineHeight: '20px', fontWeight: '600' }],
+        'body-lg': ['16px', { lineHeight: '22px', fontWeight: '400' }],
+        'body-md': ['14px', { lineHeight: '20px', fontWeight: '400' }],
+        'body-sm': ['12px', { lineHeight: '16px', fontWeight: '400' }],
+        'label-lg': ['14px', { lineHeight: '18px', fontWeight: '500' }],
+        'label-md': ['12px', { lineHeight: '16px', fontWeight: '500' }],
+        'label-sm': ['11px', { lineHeight: '14px', fontWeight: '500' }],
       }
     },
   },

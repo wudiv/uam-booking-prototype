@@ -105,7 +105,7 @@ export function Home() {
                 if (toAddress) navigate('/route-comparison');
               }}
               disabled={!toAddress}
-              className="w-full h-[56px] bg-primary text-on-primary rounded-pill flex items-center justify-center text-body-lg font-bold mt-2 shadow-md hover:shadow-primary/20 transition-all active:scale-[0.98] cursor-pointer disabled:opacity-50"
+              className="w-full h-[48px] bg-primary text-on-primary rounded-pill flex items-center justify-center text-label-lg font-bold shadow-md hover:shadow-primary/20 transition-all active:scale-[0.98] cursor-pointer disabled:opacity-50"
             >
               查看出行方案
             </button>

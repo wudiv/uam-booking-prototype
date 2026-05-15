@@ -150,7 +150,7 @@ export function FlightSelection() {
         </div>
         <button 
           onClick={() => navigate('/shuttle-info')}
-          className="w-full h-[56px] bg-primary text-on-primary rounded-pill text-body-lg font-bold flex items-center justify-center hover:bg-primary/90 transition-all active:scale-[0.98] shadow-md mb-2"
+          className="w-full h-[48px] bg-primary text-on-primary rounded-pill text-label-lg font-bold flex items-center justify-center hover:bg-primary/90 transition-all active:scale-[0.98] shadow-md mb-2"
         >
           继续
         </button>
