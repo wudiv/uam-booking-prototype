@@ -1,12 +1,12 @@
 import { useNavigate } from 'react-router-dom';
-import { useEffect } from 'react';
+import { useMemo, useEffect } from 'react';
 import { useBookingStore } from '../store/useBookingStore';
 
-const FLIGHTS = [
-  { id: '1', name: 'UAM-X 204', departureTime: '14:45', arrivalTime: '15:03', duration: '18分钟', price: 268, seats: 2, onTimeRate: '98%', recommended: true },
-  { id: '2', name: 'UAM-X 208', departureTime: '15:10', arrivalTime: '15:28', duration: '18分钟', price: 238, seats: 4, onTimeRate: '', recommended: false },
-  { id: '3', name: 'UAM-X 216', departureTime: '15:40', arrivalTime: '15:59', duration: '19分钟', price: 218, seats: 4, onTimeRate: '', recommended: false },
-];
+function addMinutesToDate(date: Date, minutes: number) {
+  const newDate = new Date(date);
+  newDate.setMinutes(newDate.getMinutes() + minutes);
+  return `${newDate.getHours().toString().padStart(2, '0')}:${newDate.getMinutes().toString().padStart(2, '0')}`;
+}
 
 export function FlightSelection() {
   const navigate = useNavigate();
@@ -16,11 +16,19 @@ export function FlightSelection() {
   tomorrow.setDate(tomorrow.getDate() + 1);
   const formatDate = (date: Date) => `${date.getMonth() + 1}月${date.getDate()}日`;
 
+  const flights = useMemo(() => {
+    return [
+      { id: '1', name: 'UAM-X 204', departureTime: addMinutesToDate(bookingDate, 20), arrivalTime: addMinutesToDate(bookingDate, 38), duration: '18分钟', price: 268, seats: 2, onTimeRate: '98%', recommended: true },
+      { id: '2', name: 'UAM-X 208', departureTime: addMinutesToDate(bookingDate, 45), arrivalTime: addMinutesToDate(bookingDate, 63), duration: '18分钟', price: 238, seats: 4, onTimeRate: '', recommended: false },
+      { id: '3', name: 'UAM-X 216', departureTime: addMinutesToDate(bookingDate, 80), arrivalTime: addMinutesToDate(bookingDate, 99), duration: '19分钟', price: 218, seats: 4, onTimeRate: '', recommended: false },
+    ];
+  }, [bookingDate]);
+
   useEffect(() => {
     if (!selectedFlight) {
-      setSelectedFlight(FLIGHTS[0]);
+      setSelectedFlight(flights[0]);
     }
-  }, [selectedFlight, setSelectedFlight]);
+  }, [selectedFlight, setSelectedFlight, flights]);
 
   return (
     /* 弹性三段式布局 */
@@ -68,7 +76,7 @@ export function FlightSelection() {
 
         {/* Flight List */}
         <div className="px-container-padding pt-stack-md pb-4 flex flex-col gap-stack-md">
-          {FLIGHTS.map((flight) => {
+          {flights.map((flight) => {
             const isSelected = selectedFlight?.id === flight.id;
             return (
               <button 
