@@ -21,7 +21,7 @@ export function OrderConfirmation() {
         >
           <span className="material-symbols-outlined">arrow_back</span>
         </button>
-        <h1 className="text-headline-md font-headline-md text-primary tracking-tight">确认订单</h1>
+        <h1 className="text-display-sm font-bold text-primary tracking-tight">Confirm booking</h1>
         <div className="w-10"></div>
       </header>
 
@@ -35,13 +35,13 @@ export function OrderConfirmation() {
               <span className="material-symbols-outlined text-primary" style={{ fontVariationSettings: "'FILL' 1" }}>airlines</span>
               <span className="text-label-lg font-label-lg text-on-surface">{selectedFlight.name}</span>
             </div>
-            <span className="bg-secondary-container text-on-secondary-container px-2 py-1 rounded-md text-label-sm font-label-sm">直飞</span>
+            <span className="bg-secondary-container text-on-secondary-container px-2 py-1 rounded-md text-label-sm">Direct</span>
           </div>
           
           <div className="flex items-center justify-between relative">
             <div className="flex flex-col">
               <span className="text-display-lg font-display-lg text-on-surface">{selectedFlight.departureTime}</span>
-              <span className="text-body-md font-body-md text-on-surface-variant">{fromPad}</span>
+              <span className="text-body-md text-on-surface-variant">{fromPad}</span>
             </div>
             
             <div className="flex-1 px-4 flex flex-col items-center relative">
@@ -52,14 +52,14 @@ export function OrderConfirmation() {
             
             <div className="flex flex-col text-right">
               <span className="text-display-lg font-display-lg text-on-surface">{selectedFlight.arrivalTime}</span>
-              <span className="text-body-md font-body-md text-on-surface-variant">{toPad}</span>
+              <span className="text-body-md text-on-surface-variant">{toPad}</span>
             </div>
           </div>
           
           <div className="mt-4 pt-4 border-t border-outline-variant/20 flex gap-stack-md text-body-md font-body-md text-on-surface-variant">
             <div className="flex items-center gap-1">
               <span className="material-symbols-outlined text-[18px]">person</span>
-              <span>{passengerCount}名乘客</span>
+              <span>{passengerCount} passengers</span>
             </div>
             <div className="flex items-center gap-1">
               <span className="material-symbols-outlined text-[18px]">luggage</span>
@@ -70,21 +70,21 @@ export function OrderConfirmation() {
 
         {/* Trust & Safety Section */}
         <section className="flex gap-gutter w-full">
-          <div className="flex-1 bg-surface-container-low rounded-lg p-3 border border-outline-variant/10 flex flex-col items-center text-center gap-1">
+          <div className="flex-1 bg-surface-container-low rounded-xl p-3 border border-outline-variant/10 flex flex-col items-center text-center gap-1">
             <div className="w-8 h-8 rounded-full bg-primary-container text-on-primary-container flex items-center justify-center mb-1">
               <span className="material-symbols-outlined text-[20px]" style={{ fontVariationSettings: "'FILL' 1" }}>shield</span>
             </div>
             <h3 className="text-label-sm font-label-sm text-on-surface leading-tight">登机时间提醒</h3>
             <p className="text-[10px] leading-[14px] text-on-surface-variant font-medium">请在起飞前 8 分钟到达起降点，并完成登机确认。</p>
           </div>
-          <div className="flex-1 bg-surface-container-low rounded-lg p-3 border border-outline-variant/10 flex flex-col items-center text-center gap-1">
+          <div className="flex-1 bg-surface-container-low rounded-xl p-3 border border-outline-variant/10 flex flex-col items-center text-center gap-1">
             <div className="w-8 h-8 rounded-full bg-secondary-container text-on-secondary-container flex items-center justify-center mb-1">
               <span className="material-symbols-outlined text-[20px]" style={{ fontVariationSettings: "'FILL' 1" }}>verified</span>
             </div>
             <h3 className="text-label-sm font-label-sm text-on-surface leading-tight">接驳信息</h3>
             <p className="text-[10px] leading-[14px] text-on-surface-variant font-medium">订单包含接驳至 {toAddress || toPad} 的服务。</p>
           </div>
-          <div className="flex-1 bg-surface-container-low rounded-lg p-3 border border-outline-variant/10 flex flex-col items-center text-center gap-1">
+          <div className="flex-1 bg-surface-container-low rounded-xl p-3 border border-outline-variant/10 flex flex-col items-center text-center gap-1">
             <div className="w-8 h-8 rounded-full bg-tertiary-container text-on-tertiary-container flex items-center justify-center mb-1">
               <span className="material-symbols-outlined text-[20px]" style={{ fontVariationSettings: "'FILL' 1" }}>radar</span>
             </div>
@@ -125,7 +125,7 @@ export function OrderConfirmation() {
       <div className="flex-shrink-0 bg-surface-container-lowest p-4 pb-safe shadow-[0_-4px_12px_rgba(0,0,0,0.05)] border-t border-outline-variant/10">
         <button 
           onClick={() => navigate('/booking-success')}
-          className="w-full bg-primary text-on-primary h-12 rounded-lg flex items-center justify-center text-label-lg font-label-lg shadow-md hover:bg-surface-tint transition-colors"
+          className="w-full bg-primary text-on-primary h-[56px] rounded-pill flex items-center justify-center text-body-lg font-bold shadow-md hover:bg-surface-tint transition-colors"
         >
           支付 ¥{selectedFlight.price}
         </button>

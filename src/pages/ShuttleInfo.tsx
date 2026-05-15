@@ -37,12 +37,12 @@ export function ShuttleInfo() {
         >
           <span className="material-symbols-outlined text-[20px]" style={{ fontVariationSettings: "'FILL' 0" }}>arrow_back_ios_new</span>
         </button>
-        <h1 className="text-headline-md font-headline-md text-on-surface drop-shadow-sm">前往起降点</h1>
+        <h1 className="text-display-sm font-bold text-on-surface drop-shadow-sm">To the skyport</h1>
         <div className="w-10 h-10"></div> {/* Spacer for center alignment */}
       </header>
 
       {/* Main Content Drawer — 约占屏幕 65%，留 35% 给地图 */}
-      <div className="absolute bottom-0 left-0 w-full z-20 bg-surface rounded-t-[24px] shadow-[0_-12px_24px_0_rgba(0,0,0,0.08)] flex flex-col max-h-[65vh]">
+      <div className="absolute bottom-0 left-0 w-full z-20 bg-surface rounded-t-xl shadow-[0_-12px_24px_0_rgba(0,0,0,0.08)] flex flex-col max-h-[65vh]">
         {/* Grabber */}
         <div className="w-full flex justify-center pt-3 pb-2 flex-shrink-0">
           <div className="w-8 h-1 bg-outline-variant rounded-full opacity-50"></div>
@@ -53,7 +53,7 @@ export function ShuttleInfo() {
           <div className="flex items-center justify-between mt-2">
             <div className="flex flex-col">
               <span className="text-label-sm font-label-sm text-on-surface-variant mb-1">当前位置</span>
-              <span className="text-headline-md font-headline-md text-on-surface">{fromAddress || '福田 CBD · 卓越中心'}</span>
+              <span className="text-display-sm font-bold text-on-surface">{fromAddress || 'Futian CBD'}</span>
             </div>
             <div className="flex-1 flex items-center justify-center px-4 opacity-40">
               <div className="h-[2px] border-b-2 border-dashed border-outline-variant w-full relative">
@@ -62,7 +62,7 @@ export function ShuttleInfo() {
             </div>
             <div className="flex flex-col text-right">
               <span className="text-label-sm font-label-sm text-on-surface-variant mb-1">目的地</span>
-              <span className="text-headline-md font-headline-md text-primary">{fromPad || '福田起降点'}</span>
+              <span className="text-display-sm font-bold text-primary">{fromPad || 'Futian Skyport'}</span>
             </div>
           </div>
 
@@ -155,9 +155,9 @@ export function ShuttleInfo() {
         <div className="px-container-padding py-4 pb-safe bg-surface border-t border-outline-variant/10 flex-shrink-0">
           <button 
             onClick={() => navigate('/order-confirmation')}
-            className="w-full h-12 bg-primary text-on-primary rounded-lg flex items-center justify-center gap-2 transition-transform active:scale-[0.98]"
+            className="w-full h-[56px] bg-primary text-on-primary rounded-pill flex items-center justify-center gap-2 transition-transform active:scale-[0.98]"
           >
-            <span className="text-label-lg font-label-lg">查看订单</span>
+            <span className="text-body-lg font-bold">View order</span>
             <span className="material-symbols-outlined text-[18px]">receipt_long</span>
           </button>
         </div>

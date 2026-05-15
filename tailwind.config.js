@@ -59,7 +59,8 @@ export default {
       borderRadius: {
         "DEFAULT": "0.25rem",
         "lg": "0.5rem",
-        "xl": "0.75rem",
+        "xl": "1rem", // Uber: Cards round to 16px
+        "pill": "999px",
         "full": "9999px"
       },
       spacing: {
@@ -74,24 +75,38 @@ export default {
         "safe-bottom": "env(safe-area-inset-bottom, 16px)"
       },
       fontFamily: {
-        "label-lg": ["Hanken Grotesk", "sans-serif"],
-        "label-sm": ["Hanken Grotesk", "sans-serif"],
-        "body-lg": ["Hanken Grotesk", "sans-serif"],
-        "display-lg": ["Hanken Grotesk", "sans-serif"],
-        "headline-lg": ["Hanken Grotesk", "sans-serif"],
-        "headline-md": ["Hanken Grotesk", "sans-serif"],
-        "body-md": ["Hanken Grotesk", "sans-serif"],
-        "price-tag": ["Hanken Grotesk", "sans-serif"]
+        "sans": ["Inter", "sans-serif"],
+        "display": ["Inter", "sans-serif"],
+        "body": ["Inter", "sans-serif"],
+        // 保持旧名称兼容性
+        "label-lg": ["Inter", "sans-serif"],
+        "label-sm": ["Inter", "sans-serif"],
+        "body-lg": ["Inter", "sans-serif"],
+        "display-lg": ["Inter", "sans-serif"],
+        "headline-lg": ["Inter", "sans-serif"],
+        "headline-md": ["Inter", "sans-serif"],
+        "body-md": ["Inter", "sans-serif"],
+        "price-tag": ["Inter", "sans-serif"]
       },
       fontSize: {
-        "label-lg": ["14px", { lineHeight: "20px", letterSpacing: "0.01em", fontWeight: "600" }],
-        "label-sm": ["12px", { lineHeight: "16px", letterSpacing: "0.02em", fontWeight: "500" }],
-        "body-lg": ["16px", { lineHeight: "24px", fontWeight: "400" }],
-        "display-lg": ["32px", { lineHeight: "40px", letterSpacing: "-0.02em", fontWeight: "700" }],
+        // Uber Specification Tokens
+        "display-xxl": ["52px", { lineHeight: "64px", letterSpacing: "-0.02em", fontWeight: "700" }],
+        "display-xl": ["36px", { lineHeight: "44px", letterSpacing: "-0.01em", fontWeight: "700" }],
+        "display-lg": ["32px", { lineHeight: "40px", letterSpacing: "-0.01em", fontWeight: "700" }],
+        "display-md": ["24px", { lineHeight: "32px", fontWeight: "700" }],
+        "display-sm": ["20px", { lineHeight: "28px", fontWeight: "700" }],
+        "body-lg": ["18px", { lineHeight: "24px", fontWeight: "500" }],
+        "body-md": ["16px", { lineHeight: "24px", fontWeight: "400" }],
+        "body-md-strong": ["16px", { lineHeight: "20px", fontWeight: "500" }],
+        "body-sm": ["14px", { lineHeight: "20px", fontWeight: "400" }],
+        "body-sm-strong": ["14px", { lineHeight: "16px", fontWeight: "500" }],
+        
+        // 映射旧名称以减少破坏性更新
+        "label-lg": ["14px", { lineHeight: "20px", fontWeight: "600" }],
+        "label-sm": ["12px", { lineHeight: "16px", fontWeight: "500" }],
         "headline-lg": ["24px", { lineHeight: "32px", fontWeight: "700" }],
         "headline-md": ["20px", { lineHeight: "28px", fontWeight: "600" }],
-        "body-md": ["14px", { lineHeight: "20px", fontWeight: "400" }],
-        "price-tag": ["18px", { lineHeight: "24px", letterSpacing: "-0.01em", fontWeight: "700" }]
+        "price-tag": ["18px", { lineHeight: "24px", fontWeight: "700" }]
       }
     },
   },

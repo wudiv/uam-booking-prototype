@@ -13,7 +13,7 @@ export function Home() {
         <button className="text-on-surface-variant hover:bg-surface-container-high transition-colors opacity-80 duration-150 p-1 rounded-full flex items-center justify-center">
           <span className="material-symbols-outlined">menu</span>
         </button>
-        <h1 className="text-headline-md font-headline-md text-primary tracking-tight">空行 UAM</h1>
+        <h1 className="text-display-sm font-bold text-primary tracking-tight">Skyline UAM</h1>
         <button className="text-on-surface-variant hover:bg-surface-container-high transition-colors opacity-80 duration-150 p-1 rounded-full flex items-center justify-center">
           <span className="material-symbols-outlined">notifications</span>
         </button>
@@ -31,7 +31,7 @@ export function Home() {
 
       {/* Floating Bottom Sheet (Drawer Level 2) */}
       <div className="absolute bottom-[96px] left-0 w-full px-container-padding z-40 pb-stack-md">
-        <div className="bg-surface-container-lowest rounded-t-xl rounded-b-xl shadow-lg border border-outline-variant/20 flex flex-col">
+        <div className="bg-surface-container-lowest rounded-xl shadow-lg border border-outline-variant/20 flex flex-col">
           {/* Grabber */}
           <div className="w-full flex justify-center pt-3 pb-2">
             <div className="w-8 h-1 bg-outline-variant/50 rounded-full"></div>
@@ -48,7 +48,7 @@ export function Home() {
             {/* Content Area */}
           <div className="p-container-padding flex flex-col gap-stack-md">
             {/* Origin / Destination Inputs */}
-            <div className="flex relative bg-surface-container-low rounded-lg p-3">
+            <div className="flex relative bg-surface-container-low rounded-md p-3">
               {/* Timeline Connector */}
               <div className="absolute left-6 top-8 bottom-8 w-px border-l-2 border-dashed border-outline-variant"></div>
               
@@ -70,8 +70,8 @@ export function Home() {
                   </div>
                   <div className="flex-1">
                     <input 
-                      className="w-full bg-transparent border-none p-0 text-display-lg font-display-lg text-on-surface placeholder:text-outline focus:ring-0 outline-none" 
-                      placeholder="你要去哪儿？" 
+                      className="w-full bg-transparent border-none p-0 text-display-lg font-bold text-on-surface placeholder:text-outline focus:ring-0 outline-none" 
+                      placeholder="Where to?" 
                       type="text" 
                       value={toAddress}
                       onChange={(e) => setDestination(e.target.value)}
@@ -105,7 +105,7 @@ export function Home() {
                 if (toAddress) navigate('/route-comparison');
               }}
               disabled={!toAddress}
-              className="w-full h-[48px] bg-primary text-on-primary rounded-lg flex items-center justify-center text-label-lg font-label-lg mt-2 shadow-sm hover:opacity-90 transition-opacity cursor-pointer disabled:opacity-50"
+              className="w-full h-[56px] bg-primary text-on-primary rounded-pill flex items-center justify-center text-body-lg font-bold mt-2 shadow-sm hover:opacity-90 transition-opacity cursor-pointer disabled:opacity-50"
             >
               查看出行方案
             </button>

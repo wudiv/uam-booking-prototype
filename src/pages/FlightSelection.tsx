@@ -42,7 +42,7 @@ export function FlightSelection() {
         >
           <span className="material-symbols-outlined text-[24px]">arrow_back</span>
         </button>
-        <h1 className="font-headline-md text-headline-md text-on-surface">选择 UAM 航班</h1>
+        <h1 className="text-display-sm font-bold text-on-surface">Select flight</h1>
         <div className="w-10 h-10"></div>
       </header>
 
@@ -52,23 +52,23 @@ export function FlightSelection() {
         <div className="bg-surface-container-lowest px-container-padding py-stack-lg shadow-[0_4px_12px_rgba(0,0,0,0.02)] border-b border-surface-variant">
           <div className="flex items-center justify-between">
             <div className="flex flex-col items-center flex-1">
-              <span className="font-label-sm text-label-sm text-on-surface-variant mb-1">起飞</span>
-              <span className="font-headline-md text-headline-md text-on-surface text-center">{fromPad}</span>
+              <span className="text-label-sm text-on-surface-variant mb-1 uppercase tracking-wider">From</span>
+              <span className="text-display-md font-bold text-on-surface text-center">{fromPad}</span>
             </div>
             <div className="px-4 flex flex-col items-center justify-center text-primary">
               <span className="material-symbols-outlined text-[28px]" style={{fontVariationSettings: "'FILL' 0"}}>flight_takeoff</span>
               <div className="w-full h-[1px] bg-outline-variant mt-2 border-t border-dashed border-outline-variant"></div>
             </div>
             <div className="flex flex-col items-center flex-1">
-              <span className="font-label-sm text-label-sm text-on-surface-variant mb-1">降落</span>
-              <span className="font-headline-md text-headline-md text-on-surface text-center">{toPad}</span>
+              <span className="text-label-sm text-on-surface-variant mb-1 uppercase tracking-wider">To</span>
+              <span className="text-display-md font-bold text-on-surface text-center">{toPad}</span>
             </div>
           </div>
           <div className="mt-stack-md flex gap-2 overflow-x-auto pb-2 no-scrollbar">
-            <div className="flex-shrink-0 bg-primary text-on-primary px-4 py-2 rounded-full font-label-sm text-label-sm">
+            <div className="flex-shrink-0 bg-primary text-on-primary px-4 py-2 rounded-pill text-label-sm">
               今天 ({formatDate(bookingDate)})
             </div>
-            <div className="flex-shrink-0 bg-surface-container text-on-surface-variant px-4 py-2 rounded-full font-label-sm text-label-sm border border-outline-variant/30">
+            <div className="flex-shrink-0 bg-surface-container text-on-surface-variant px-4 py-2 rounded-pill text-label-sm border border-outline-variant/30">
               明天 ({formatDate(tomorrow)})
             </div>
           </div>
@@ -150,7 +150,7 @@ export function FlightSelection() {
         </div>
         <button 
           onClick={() => navigate('/shuttle-info')}
-          className="w-full h-12 bg-primary text-on-primary rounded-lg font-label-lg text-label-lg flex items-center justify-center hover:bg-primary/90 transition-colors shadow-sm mb-2"
+          className="w-full h-12 bg-primary text-on-primary rounded-pill text-body-lg font-bold flex items-center justify-center hover:bg-primary/90 transition-colors shadow-sm mb-2"
         >
           继续
         </button>

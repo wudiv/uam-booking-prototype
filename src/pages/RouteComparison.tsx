@@ -24,7 +24,7 @@ export function RouteComparison() {
         >
           <span className="material-symbols-outlined text-primary dark:text-primary-fixed-dim" style={{fontVariationSettings: "'FILL' 0"}}>arrow_back</span>
         </button>
-        <h1 className="text-headline-md font-headline-md text-primary dark:text-primary-fixed-dim tracking-tight">空行 UAM</h1>
+        <h1 className="text-display-sm font-bold text-primary dark:text-primary-fixed-dim tracking-tight">Skyline UAM</h1>
         <button className="flex items-center justify-center opacity-80 hover:bg-surface-container-high transition-colors rounded-full w-8 h-8">
           <span className="material-symbols-outlined text-primary dark:text-primary-fixed-dim" style={{fontVariationSettings: "'FILL' 0"}}>notifications</span>
         </button>
@@ -39,10 +39,10 @@ export function RouteComparison() {
             <div className="w-10 h-1 bg-outline-variant/50 rounded-full"></div>
           </div>
           <div className="px-container-padding pt-4 pb-6 flex-shrink-0">
-            <h2 className="text-headline-lg font-headline-lg text-on-surface">选择出行方案</h2>
+            <h2 className="text-display-md font-bold text-on-surface">Choose your travel option</h2>
             <div className="flex items-center gap-2 mt-1">
               <span className="material-symbols-outlined text-[16px] text-primary">schedule</span>
-              <p className="text-body-md font-body-md text-on-surface-variant">今天 {timeString} 出发 · {passengerCount}名乘客</p>
+              <p className="text-body-md text-on-surface-variant">Today {timeString} · {passengerCount} passengers</p>
             </div>
           </div>
           
@@ -117,7 +117,7 @@ export function RouteComparison() {
           <div className="absolute bottom-0 left-0 w-full bg-surface/95 backdrop-blur-sm border-t border-outline-variant/20 px-container-padding py-4 pb-safe z-20">
             <button 
               onClick={() => navigate('/flight-selection')}
-              className="w-full h-[48px] bg-primary hover:bg-surface-tint active:scale-[0.98] transition-all text-on-primary rounded-lg text-label-lg font-label-lg flex items-center justify-center shadow-lg shadow-primary/20"
+              className="w-full h-[56px] bg-primary hover:bg-surface-tint active:scale-[0.98] transition-all text-on-primary rounded-pill text-body-lg font-bold flex items-center justify-center shadow-lg shadow-primary/20"
             >
               选择 UAM 空中快线
             </button>
