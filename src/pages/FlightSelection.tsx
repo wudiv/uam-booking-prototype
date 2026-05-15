@@ -4,9 +4,9 @@ import { useBookingStore } from '../store/useBookingStore';
 
 const FLIGHTS = [
   { id: '1', name: 'UAM-X 204', departureTime: '14:45', arrivalTime: '15:03', duration: '18分钟', price: 268, seats: 2, onTimeRate: '98%', recommended: true },
-  { id: '2', name: 'UAM-X 208', departureTime: '15:10', arrivalTime: '15:28', duration: '18分钟', price: 238, seats: 4 },
-  { id: '3', name: 'UAM-X 216', departureTime: '15:40', arrivalTime: '15:59', duration: '19分钟', price: 218, seats: 4 },
-] as const;
+  { id: '2', name: 'UAM-X 208', departureTime: '15:10', arrivalTime: '15:28', duration: '18分钟', price: 238, seats: 4, onTimeRate: '', recommended: false },
+  { id: '3', name: 'UAM-X 216', departureTime: '15:40', arrivalTime: '15:59', duration: '19分钟', price: 218, seats: 4, onTimeRate: '', recommended: false },
+];
 
 export function FlightSelection() {
   const navigate = useNavigate();

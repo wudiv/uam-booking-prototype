@@ -20,12 +20,20 @@ export interface ShuttleService {
   distance?: string;
 }
 
+interface LocationInfo {
+  name: string;
+}
+
 interface BookingState {
   // Origin & Destination
   origin: string;
   destination: string;
   setDestination: (dest: string) => void;
   
+  // Location info
+  fromLocation: LocationInfo | null;
+  toLocation: LocationInfo | null;
+
   // Selected Flight
   selectedFlight: Flight | null;
   setSelectedFlight: (flight: Flight) => void;
@@ -48,6 +56,9 @@ export const useBookingStore = create<BookingState>((set) => ({
   origin: '福田 CBD · 卓越中心',
   destination: '',
   setDestination: (dest) => set({ destination: dest }),
+  
+  fromLocation: { name: '福田 CBD · 卓越中心' },
+  toLocation: { name: '宝安机场起降点' },
   
   selectedFlight: null,
   setSelectedFlight: (flight) => set({ selectedFlight: flight }),

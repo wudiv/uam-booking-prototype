@@ -27,7 +27,7 @@ export function MapBackground({ mode = 'home' }: MapBackgroundProps) {
   const mapInstanceRef = useRef<any>(null);
 
   useEffect(() => {
-    let checkInterval: NodeJS.Timeout;
+    let checkInterval: ReturnType<typeof setInterval>;
 
     const initMap = () => {
       if (window.AMap && window.AMap.Map && mapContainerRef.current) {
