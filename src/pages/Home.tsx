@@ -7,9 +7,9 @@ export function Home() {
   const { destination, setDestination } = useBookingStore();
 
   return (
-    <div className="bg-background text-on-surface w-full h-full overflow-hidden relative font-body-lg">
-      {/* TopAppBar */}
-      <header className="absolute top-0 left-0 w-full z-50 flex items-center justify-between px-container-padding h-12 bg-surface/80 backdrop-blur-md border-b border-outline-variant/30">
+    <div className="bg-background text-on-surface w-full h-full min-h-[max(884px,100dvh)] overflow-hidden relative font-body-lg">
+      {/* TopAppBar — Stitch 使用 fixed */}
+      <header className="fixed top-0 left-0 w-full z-50 flex items-center justify-between px-container-padding h-12 bg-surface/80 backdrop-blur-md border-b border-outline-variant/30">
         <button className="text-on-surface-variant hover:bg-surface-container-high transition-colors opacity-80 duration-150 p-1 rounded-full flex items-center justify-center">
           <span className="material-symbols-outlined">menu</span>
         </button>
@@ -113,8 +113,8 @@ export function Home() {
         </div>
       </div>
 
-      {/* BottomNavBar */}
-      <nav className="absolute bottom-0 left-0 w-full z-50 flex justify-around items-center pt-2 px-4 bg-surface rounded-t-xl shadow-[0_-4px_12px_0_rgba(0,0,0,0.05)]" style={{ paddingBottom: 'calc(8px + env(safe-area-inset-bottom, 0px))' }}>
+      {/* BottomNavBar — Stitch 使用 fixed + pb-safe */}
+      <nav className="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center pt-2 pb-safe px-4 bg-surface rounded-t-xl shadow-[0_-4px_12px_0_rgba(0,0,0,0.05)]">
         <button className="flex flex-col items-center justify-center text-primary font-bold scale-95 duration-200 w-16 pb-1">
           <div className="px-4 py-1 rounded-full bg-primary-container/20 mb-1">
             <span className="material-symbols-outlined" style={{fontVariationSettings: "'FILL' 1"}}>home</span>

@@ -48,7 +48,8 @@ export function MapBackground({ mode = 'home' }: MapBackgroundProps) {
             // 三个点的中心
             centerLng = (COORDS.userLocation[0] + COORDS.station[0] + COORDS.shuttle[0]) / 3;
             centerLat = (COORDS.userLocation[1] + COORDS.station[1] + COORDS.shuttle[1]) / 3;
-            // 不额外偏移，三个点的中心 lat≈22.536 在 zoom 16 下刚好在底部抽屉上方
+            // 底部抽屉占用 65vh，将中心稍向南偏 → 标记点出现在抽屉上方
+            centerLat -= 0.005;
             zoom = 16;
           }
 

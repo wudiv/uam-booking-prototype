@@ -9,7 +9,7 @@ export function BookingSuccess() {
 
   return (
     /* 弹性三段式布局：header + scrollable content + footer */
-    <div className="w-full h-full flex flex-col bg-background text-on-background">
+    <div className="w-full h-full min-h-[max(884px,100dvh)] flex flex-col bg-background text-on-background">
       {/* Header - 固定高度 */}
       <header className="flex-shrink-0 flex items-center justify-between px-container-padding h-12 bg-surface/80 backdrop-blur-md z-10">
         <button 
@@ -144,7 +144,7 @@ export function BookingSuccess() {
       </main>
 
       {/* Footer - 固定高度 */}
-      <div className="flex-shrink-0 p-container-padding bg-surface/90 backdrop-blur-md border-t border-outline-variant/20" style={{ paddingBottom: 'calc(16px + env(safe-area-inset-bottom, 0px))' }}>
+      <div className="flex-shrink-0 p-container-padding pb-safe bg-surface/90 backdrop-blur-md border-t border-outline-variant/20">
         <button 
           onClick={() => navigate('/questionnaire')}
           className="w-full h-12 bg-primary text-on-primary rounded-lg text-label-lg font-label-lg flex items-center justify-center gap-2 hover:bg-primary-container transition-colors shadow-md"

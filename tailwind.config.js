@@ -68,7 +68,10 @@ export default {
         "stack-md": "16px",
         "container-padding": "16px",
         "gutter": "12px",
-        "stack-sm": "8px"
+        "stack-sm": "8px",
+        "safe": "env(safe-area-inset-bottom, 16px)",
+        "safe-top": "env(safe-area-inset-top, 0px)",
+        "safe-bottom": "env(safe-area-inset-bottom, 16px)"
       },
       fontFamily: {
         "label-lg": ["Hanken Grotesk", "sans-serif"],

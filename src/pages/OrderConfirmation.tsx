@@ -11,7 +11,7 @@ export function OrderConfirmation() {
 
   return (
     /* 弹性三段式布局 */
-    <div className="w-full h-full flex flex-col bg-background text-on-background font-body-lg">
+    <div className="w-full h-full min-h-[max(884px,100dvh)] flex flex-col bg-background text-on-background font-body-lg">
       {/* Header - 固定高度 */}
       <header className="flex-shrink-0 flex items-center justify-between px-container-padding h-12 bg-surface/80 backdrop-blur-md border-b border-outline-variant/30 z-10">
         <button 
@@ -121,8 +121,8 @@ export function OrderConfirmation() {
         </article>
       </main>
 
-      {/* Footer - 固定高度 */}
-      <div className="flex-shrink-0 bg-surface-container-lowest p-4 shadow-[0_-4px_12px_rgba(0,0,0,0.05)] border-t border-outline-variant/10" style={{ paddingBottom: 'calc(16px + env(safe-area-inset-bottom, 0px))' }}>
+      {/* Footer - 固定底部，Stitch 匹配 */}
+      <div className="flex-shrink-0 bg-surface-container-lowest p-4 pb-safe shadow-[0_-4px_12px_rgba(0,0,0,0.05)] border-t border-outline-variant/10">
         <button 
           onClick={() => navigate('/booking-success')}
           className="w-full bg-primary text-on-primary h-12 rounded-lg flex items-center justify-center text-label-lg font-label-lg shadow-md hover:bg-surface-tint transition-colors"

@@ -6,35 +6,41 @@
 @tailwind utilities;
 
 @layer base {
+  /* Material Symbols 基础设置 (Stitch 原稿) */
+  .material-symbols-outlined {
+    font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+  }
+
   /* 隐藏滚动条但保留滚动功能 */
   ::-webkit-scrollbar {
     display: none;
   }
+  * {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
   
   html {
     height: 100%;
-    height: 100dvh;
+    min-height: max(884px, 100dvh);
   }
 
   body {
-    height: 100%;
-    height: 100dvh;
+    min-height: max(884px, 100dvh);
     width: 100%;
     margin: 0;
     padding: 0;
-    -ms-overflow-style: none;
-    scrollbar-width: none;
     overflow: hidden;
     /* 防止 iOS Safari 橡皮筋滚动 */
     overscroll-behavior: none;
     /* 防止双击缩放 */
     touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
     @apply bg-background text-on-background font-body-lg;
   }
 
   #root {
-    height: 100%;
-    height: 100dvh;
+    min-height: max(884px, 100dvh);
     width: 100%;
     overflow: hidden;
     @apply bg-background;

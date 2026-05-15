@@ -21,7 +21,7 @@ export function ShuttleInfo() {
   const timeVerify = subtractMinutes(departure, 5);
 
   return (
-    <div className="w-full h-full flex flex-col relative bg-surface text-on-surface antialiased overflow-hidden select-none">
+    <div className="w-full h-full min-h-[max(884px,100dvh)] flex flex-col relative bg-surface text-on-surface antialiased overflow-hidden select-none">
       {/* Map Base Layer */}
       <div className="absolute inset-0 z-0">
         <MapBackground mode="shuttle" />
@@ -41,8 +41,8 @@ export function ShuttleInfo() {
         <div className="w-10 h-10"></div> {/* Spacer for center alignment */}
       </header>
 
-      {/* Main Content Drawer */}
-      <div className="absolute bottom-0 left-0 w-full z-20 bg-surface rounded-t-[24px] shadow-[0_-12px_24px_0_rgba(0,0,0,0.08)] flex flex-col max-h-[76dvh]">
+      {/* Main Content Drawer — 约占屏幕 65%，留 35% 给地图 */}
+      <div className="absolute bottom-0 left-0 w-full z-20 bg-surface rounded-t-[24px] shadow-[0_-12px_24px_0_rgba(0,0,0,0.08)] flex flex-col max-h-[65vh]">
         {/* Grabber */}
         <div className="w-full flex justify-center pt-3 pb-2 flex-shrink-0">
           <div className="w-8 h-1 bg-outline-variant rounded-full opacity-50"></div>
@@ -152,7 +152,7 @@ export function ShuttleInfo() {
         </div>
 
         {/* Sticky Bottom Action Area */}
-        <div className="px-container-padding py-4 bg-surface border-t border-outline-variant/10 flex-shrink-0" style={{ paddingBottom: 'calc(16px + env(safe-area-inset-bottom, 0px))' }}>
+        <div className="px-container-padding py-4 pb-safe bg-surface border-t border-outline-variant/10 flex-shrink-0">
           <button 
             onClick={() => navigate('/order-confirmation')}
             className="w-full h-12 bg-primary text-on-primary rounded-lg flex items-center justify-center gap-2 transition-transform active:scale-[0.98]"

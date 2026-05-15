@@ -1,5 +1,4 @@
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
-import { MobileWrapper } from './components/MobileWrapper';
 import { Home } from './pages/Home';
 import { RouteComparison } from './pages/RouteComparison';
 import { FlightSelection } from './pages/FlightSelection';
@@ -11,11 +10,20 @@ import { BookingSuccess } from './pages/BookingSuccess';
 export default function App() {
   return (
     <Router>
-      {/* 桌面端：灰色背景居中显示模拟器；手机端：无 padding 无背景直接铺满 */}
-      <div className="w-full min-h-[100dvh]
-                      max-sm:bg-background max-sm:p-0
-                      sm:bg-gray-100 sm:flex sm:items-center sm:justify-center sm:p-4">
-        <MobileWrapper>
+      {/* 
+        移动端：全屏铺满 (匹配 Stitch 原稿)
+        桌面端：灰色背景居中显示 430x932 模拟器
+      */}
+      <div className="
+        max-sm:fixed max-sm:inset-0
+        sm:min-h-screen sm:bg-gray-100 sm:flex sm:items-center sm:justify-center sm:p-4
+        bg-background overflow-hidden
+      ">
+        <div className="
+          max-sm:fixed max-sm:inset-0
+          sm:relative sm:w-[430px] sm:h-[932px] sm:rounded-[40px] sm:shadow-2xl sm:border sm:border-gray-200
+          bg-background overflow-hidden
+        ">
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/route-comparison" element={<RouteComparison />} />
@@ -24,10 +32,9 @@ export default function App() {
             <Route path="/shuttle-info" element={<ShuttleInfo />} />
             <Route path="/questionnaire" element={<Questionnaire />} />
             <Route path="/booking-success" element={<BookingSuccess />} />
-            {/* Fallback route */}
             <Route path="*" element={<Navigate to="/" replace />} />
           </Routes>
-        </MobileWrapper>
+        </div>
       </div>
     </Router>
   );

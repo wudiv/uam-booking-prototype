@@ -20,9 +20,9 @@ export function FlightSelection() {
 
   return (
     /* 弹性三段式布局 */
-    <div className="bg-surface text-on-surface font-body-lg w-full h-full flex flex-col">
-      {/* Header - 固定高度 */}
-      <header className="flex-shrink-0 bg-surface/90 backdrop-blur-md flex items-center justify-between px-container-padding h-14 border-b border-outline-variant/30 z-10">
+    <div className="bg-surface text-on-surface font-body-lg w-full h-full min-h-[max(884px,100dvh)] flex flex-col">
+      {/* Header - 固定高度，Stitch 使用 sticky */}
+      <header className="flex-shrink-0 sticky top-0 z-40 bg-surface/90 backdrop-blur-md flex items-center justify-between px-container-padding h-14 border-b border-outline-variant/30">
         <button 
           onClick={() => navigate(-1)}
           aria-label="返回" 
@@ -130,8 +130,8 @@ export function FlightSelection() {
         </div>
       </main>
 
-      {/* Footer - 固定高度 */}
-      <div className="flex-shrink-0 bg-surface-container-lowest shadow-[0_-8px_24px_rgba(0,0,0,0.08)] pt-4 px-container-padding rounded-t-xl" style={{ paddingBottom: 'calc(16px + env(safe-area-inset-bottom, 0px))' }}>
+      {/* Footer - 固定底部，Stitch 匹配 */}
+      <div className="flex-shrink-0 bg-surface-container-lowest shadow-[0_-8px_24px_rgba(0,0,0,0.08)] pt-4 px-container-padding pb-safe rounded-t-xl">
         <div className="flex justify-center items-center gap-1 mb-3 text-on-surface-variant">
           <span className="material-symbols-outlined text-[16px]">airport_shuttle</span>
           <span className="font-label-sm text-label-sm">票价包含接驳服务</span>
