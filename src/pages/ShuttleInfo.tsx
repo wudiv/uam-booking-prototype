@@ -42,7 +42,7 @@ export function ShuttleInfo() {
       </header>
 
       {/* Main Content Drawer */}
-      <div className="absolute bottom-0 left-0 w-full z-20 bg-surface rounded-t-[24px] shadow-[0_-12px_24px_0_rgba(0,0,0,0.08)] flex flex-col max-h-[55dvh]">
+      <div className="absolute bottom-0 left-0 w-full z-20 bg-surface rounded-t-[24px] shadow-[0_-12px_24px_0_rgba(0,0,0,0.08)] flex flex-col max-h-[76dvh]">
         {/* Grabber */}
         <div className="w-full flex justify-center pt-3 pb-2 flex-shrink-0">
           <div className="w-8 h-1 bg-outline-variant rounded-full opacity-50"></div>
@@ -152,7 +152,7 @@ export function ShuttleInfo() {
         </div>
 
         {/* Sticky Bottom Action Area */}
-        <div className="px-container-padding py-4 bg-surface border-t border-outline-variant/10 flex-shrink-0 pb-safe">
+        <div className="px-container-padding py-4 bg-surface border-t border-outline-variant/10 flex-shrink-0" style={{ paddingBottom: 'calc(16px + env(safe-area-inset-bottom, 0px))' }}>
           <button 
             onClick={() => navigate('/order-confirmation')}
             className="w-full h-12 bg-primary text-on-primary rounded-lg flex items-center justify-center gap-2 transition-transform active:scale-[0.98]"

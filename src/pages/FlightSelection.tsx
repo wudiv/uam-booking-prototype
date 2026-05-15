@@ -130,7 +130,7 @@ export function FlightSelection() {
       </main>
 
       {/* Bottom Action Area */}
-      <div className="absolute bottom-0 left-0 w-full bg-surface-container-lowest shadow-[0_-8px_24px_rgba(0,0,0,0.08)] pb-safe pt-4 px-container-padding rounded-t-xl z-50">
+      <div className="absolute bottom-0 left-0 w-full bg-surface-container-lowest shadow-[0_-8px_24px_rgba(0,0,0,0.08)] pt-4 px-container-padding rounded-t-xl z-50" style={{ paddingBottom: 'calc(16px + env(safe-area-inset-bottom, 0px))' }}>
         <div className="flex justify-center items-center gap-1 mb-3 text-on-surface-variant">
           <span className="material-symbols-outlined text-[16px]">airport_shuttle</span>
           <span className="font-label-sm text-label-sm">票价包含接驳服务</span>

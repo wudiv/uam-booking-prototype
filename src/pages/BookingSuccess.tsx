@@ -10,7 +10,7 @@ export function BookingSuccess() {
   return (
     <div className="w-full h-full relative overflow-hidden bg-background text-on-background pb-safe">
       {/* TopAppBar */}
-      <header className="absolute top-0 left-0 w-full z-50 flex items-center justify-between px-container-padding h-12 bg-surface/80 backdrop-blur-md">
+      <header className="fixed top-0 left-0 w-full z-50 flex items-center justify-between px-container-padding h-12 bg-surface/80 backdrop-blur-md">
         <button 
           onClick={() => navigate('/')}
           className="w-12 h-12 flex items-center justify-start text-on-surface-variant"
@@ -142,7 +142,7 @@ export function BookingSuccess() {
       </main>
 
       {/* Bottom Action Button (Fixed) */}
-      <div className="absolute bottom-0 left-0 w-full p-container-padding bg-surface/90 backdrop-blur-md border-t border-outline-variant/20 z-40 pb-[calc(16px+env(safe-area-inset-bottom))]">
+      <div className="absolute bottom-0 left-0 w-full p-container-padding bg-surface/90 backdrop-blur-md border-t border-outline-variant/20 z-40" style={{ paddingBottom: 'calc(16px + env(safe-area-inset-bottom, 0px))' }}>
         <button 
           onClick={() => navigate('/questionnaire')}
           className="w-full h-12 bg-primary text-on-primary rounded-lg text-label-lg font-label-lg flex items-center justify-center gap-2 hover:bg-primary-container transition-colors shadow-md"

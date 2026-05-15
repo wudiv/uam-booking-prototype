@@ -81,7 +81,7 @@ export function Questionnaire() {
       </main>
 
       {/* Bottom Action Button */}
-      <div className="absolute bottom-0 left-0 w-full p-container-padding bg-surface border-t border-outline-variant/20 z-40 pb-[calc(16px+env(safe-area-inset-bottom))]">
+      <div className="absolute bottom-0 left-0 w-full p-container-padding bg-surface border-t border-outline-variant/20 z-40" style={{ paddingBottom: 'calc(16px + env(safe-area-inset-bottom, 0px))' }}>
         <button 
           onClick={handleSubmit}
           disabled={!isFormComplete}

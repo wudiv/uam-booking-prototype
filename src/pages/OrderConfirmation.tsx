@@ -133,7 +133,7 @@ export function OrderConfirmation() {
       </main>
 
       {/* Fixed Bottom Payment Bar */}
-      <div className="absolute bottom-0 left-0 w-full bg-surface-container-lowest p-4 pb-8 shadow-[0_-4px_12px_rgba(0,0,0,0.05)] border-t border-outline-variant/10 z-50">
+      <div className="absolute bottom-0 left-0 w-full bg-surface-container-lowest p-4 shadow-[0_-4px_12px_rgba(0,0,0,0.05)] border-t border-outline-variant/10 z-50" style={{ paddingBottom: 'calc(16px + env(safe-area-inset-bottom, 0px))' }}>
         <button 
           onClick={() => navigate('/booking-success')}
           className="w-full bg-primary text-on-primary h-12 rounded-lg flex items-center justify-center text-label-lg font-label-lg shadow-md hover:bg-surface-tint transition-colors"
