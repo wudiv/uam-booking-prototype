@@ -30,7 +30,7 @@ export function Home() {
       </main>
 
       {/* Floating Bottom Sheet (Drawer Level 2) */}
-      <div className="absolute bottom-[72px] left-0 w-full px-container-padding z-40 pb-stack-md">
+      <div className="absolute bottom-[96px] left-0 w-full px-container-padding z-40 pb-stack-md">
         <div className="bg-surface-container-lowest rounded-t-xl rounded-b-xl shadow-lg border border-outline-variant/20 flex flex-col">
           {/* Grabber */}
           <div className="w-full flex justify-center pt-3 pb-2">
