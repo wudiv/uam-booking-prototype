@@ -42,7 +42,7 @@ export function ShuttleInfo() {
       </header>
 
       {/* Main Content Drawer */}
-      <div className="absolute bottom-0 left-0 w-full z-20 bg-surface rounded-t-[24px] shadow-[0_-12px_24px_0_rgba(0,0,0,0.08)] flex flex-col max-h-[480px]">
+      <div className="absolute bottom-0 left-0 w-full z-20 bg-surface rounded-t-[24px] shadow-[0_-12px_24px_0_rgba(0,0,0,0.08)] flex flex-col max-h-[55dvh]">
         {/* Grabber */}
         <div className="w-full flex justify-center pt-3 pb-2 flex-shrink-0">
           <div className="w-8 h-1 bg-outline-variant rounded-full opacity-50"></div>
