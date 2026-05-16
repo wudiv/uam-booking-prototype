@@ -55,7 +55,7 @@ export function MapBackground({ mode = 'home' }: MapBackgroundProps) {
             centerLat -= 0.07; // 向南大幅偏移，确保避开 45% 底部抽屉
             zoom = 10;
           } else {
-            // 接驳模式：当前位置 → 接驳车 → 起降点 (仅在 300px 容器中，无需避让抽屉)
+            // 接驳模式：当前位置 → 接驳车 → 起降点
             centerLng = (COORDS.userLocation[0] + futianPos[0] + COORDS.shuttle[0]) / 3;
             centerLat = (COORDS.userLocation[1] + futianPos[1] + COORDS.shuttle[1]) / 3;
             zoom = 16;
