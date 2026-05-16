@@ -1,7 +1,17 @@
 import { useNavigate } from 'react-router-dom';
+import { 
+  ArrowLeft, 
+  Bell, 
+  Clock, 
+  PlaneTakeoff, 
+  Car, 
+  Train,
+  ChevronRight
+} from 'lucide-react';
 import { MapBackground } from '../components/MapBackground';
 import { useBookingStore } from '../store/useBookingStore';
 import { StaggeredList } from '../components/animations/StaggeredList';
+import { RouteCard } from '../components/RouteCard';
 
 export function RouteComparison() {
   const navigate = useNavigate();
@@ -9,118 +19,90 @@ export function RouteComparison() {
   const timeString = `${bookingDate.getHours().toString().padStart(2, '0')}:${bookingDate.getMinutes().toString().padStart(2, '0')}`;
 
   return (
-    <div className="bg-background text-on-surface w-full h-full overflow-hidden relative font-body-lg">
+    <div className="bg-background text-on-surface w-full h-full overflow-hidden relative font-body">
       {/* Background Map Layer */}
       <div className="absolute inset-0 z-0">
-        <MapBackground />
-        {/* Map Overlay Gradients for Readability */}
-        <div className="absolute inset-0 bg-gradient-to-b from-surface/40 via-transparent to-surface/20 pointer-events-none"></div>
+        <MapBackground mode="comparison" />
+        <div className="absolute inset-0 bg-black/5 pointer-events-none"></div>
       </div>
       
-      {/* TopAppBar */}
-      <header className="bg-surface/80 dark:bg-surface-dim/80 backdrop-blur-md border-b border-outline-variant/30 absolute top-0 left-0 w-full z-50 flex items-center justify-between px-container-padding h-12">
-        <button 
-          onClick={() => navigate(-1)}
-          className="flex items-center justify-center opacity-80 hover:bg-surface-container-high transition-colors rounded-full w-8 h-8"
-        >
-          <span className="material-symbols-outlined text-primary dark:text-primary-fixed-dim" style={{fontVariationSettings: "'FILL' 0"}}>arrow_back</span>
-        </button>
-        <h1 className="text-display-sm font-bold text-primary dark:text-primary-fixed-dim tracking-tight">空行 UAM</h1>
-        <button className="flex items-center justify-center opacity-80 hover:bg-surface-container-high transition-colors rounded-full w-8 h-8">
-          <span className="material-symbols-outlined text-primary dark:text-primary-fixed-dim" style={{fontVariationSettings: "'FILL' 0"}}>notifications</span>
-        </button>
+      {/* TopAppBar - Minimalist */}
+      <header className="bg-white/95 backdrop-blur-md border-b border-outline/5 absolute top-0 left-0 w-full z-50 flex flex-col">
+        <div className="flex items-center justify-between px-gutter h-14">
+          <button 
+            onClick={() => navigate(-1)}
+            aria-label="返回上一页"
+            className="p-2 -ml-2 text-primary hover:bg-surface-variant transition-colors rounded-full"
+          >
+            <ArrowLeft size={24} strokeWidth={1.5} />
+          </button>
+          <h1 className="text-display-sm font-bold tracking-tight">方案对比</h1>
+          <button 
+            aria-label="打开通知"
+            className="p-2 -mr-2 text-primary hover:bg-surface-variant transition-colors rounded-full"
+          >
+            <Bell size={22} strokeWidth={1.5} />
+          </button>
+        </div>
       </header>
 
-      {/* Main Content as a Floating Bottom Sheet / Card overlay */}
-      <main className="absolute inset-x-0 bottom-0 top-[64px] z-10 flex flex-col items-center">
-        {/* Container for max width on larger screens */}
-        <div className="w-full max-w-lg h-full bg-surface shadow-[0_-12px_24px_rgba(0,0,0,0.05)] rounded-t-[24px] flex flex-col relative">
-          {/* Grabber for visual affordance */}
-          <div className="w-full flex justify-center pt-3 pb-1">
-            <div className="w-10 h-1 bg-outline-variant/50 rounded-full"></div>
+      {/* Main Content as a Shorter Bottom Sheet */}
+      <main className="absolute inset-x-0 bottom-0 top-[55%] z-10 flex flex-col items-center">
+        <div className="w-full h-full bg-white shadow-uber-3 rounded-t-3xl flex flex-col relative overflow-hidden border-t border-outline/10">
+          {/* Drag Handle */}
+          <div className="w-full flex justify-center pt-3 pb-1 shrink-0">
+            <div className="w-10 h-1 bg-surface-variant rounded-full"></div>
           </div>
-          <div className="px-container-padding pt-4 pb-6 flex-shrink-0">
-            <h2 className="text-display-md font-bold text-on-surface">选择出行方案</h2>
-            <div className="flex items-center gap-2 mt-1">
-              <span className="material-symbols-outlined text-[16px] text-primary">schedule</span>
-              <p className="text-body-md text-on-surface-variant">今天 {timeString} · {passengerCount} 名乘客</p>
+          
+          <div className="px-gutter pt-4 pb-6 shrink-0">
+            <h2 className="text-display-md font-bold">选择出行方案</h2>
+            <div className="flex items-center gap-2 mt-2 text-on-surface-variant">
+              <Clock size={16} strokeWidth={2} />
+              <p className="text-label-md font-medium">今天 {timeString} · {passengerCount} 名乘客</p>
             </div>
           </div>
           
-          {/* Scrollable Cards Area */}
-          <StaggeredList className="flex-1 overflow-y-auto px-container-padding space-y-stack-md pb-[100px] no-scrollbar">
-            {/* Card 1: UAM (Selected State) */}
-            <button 
+          {/* Scrollable List */}
+          <StaggeredList className="flex-1 overflow-y-auto px-gutter space-y-stack-md pb-32 no-scrollbar" staggerDelay={0.08}>
+            <RouteCard
+              icon={PlaneTakeoff}
+              title="UAM 空中快线"
+              badge="最快方案"
+              duration="18分钟"
+              price={268}
+              isHighlight
+              savingsLabel="节省 46m"
               onClick={() => navigate('/flight-selection')}
-              className="w-full text-left bg-surface-container-lowest border-2 border-primary rounded-xl p-4 shadow-m3-2 relative overflow-hidden transition-all active:scale-[0.99] flex flex-col gap-3 group"
-            >
-              <div className="absolute top-0 right-0 bg-primary text-on-primary text-[10px] font-bold px-2 py-1 rounded-bl-lg">最快</div>
-              <div className="flex items-start justify-between w-full">
-                <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-full bg-primary-container/20 flex items-center justify-center flex-shrink-0">
-                    <span className="material-symbols-outlined text-primary" style={{fontVariationSettings: "'FILL' 1"}}>flight_takeoff</span>
-                  </div>
-                  <div>
-                    <h3 className="text-label-lg font-label-lg text-on-surface">UAM空中快线</h3>
-                    <div className="text-body-md font-body-md text-primary mt-0.5">18分钟</div>
-                  </div>
-                </div>
-                <div className="text-right">
-                  <div className="text-price-tag font-price-tag text-on-surface">¥268</div>
-                </div>
-              </div>
-            </button>
+            />
             
-            {/* Card 2: Ride-hailing */}
-            <button className="w-full text-left bg-surface-container-lowest border border-outline-variant/60 rounded-xl p-4 shadow-m3-1 relative transition-all hover:bg-surface-container-low active:scale-[0.99] flex flex-col gap-3">
-              <div className="flex items-start justify-between w-full">
-                <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-full bg-surface-container-highest flex items-center justify-center flex-shrink-0">
-                    <span className="material-symbols-outlined text-on-surface-variant">directions_car</span>
-                  </div>
-                  <div>
-                    <div className="flex items-center gap-2">
-                      <h3 className="text-label-lg font-label-lg text-on-surface">网约车直达</h3>
-                      <span className="bg-surface-container-high text-on-surface-variant text-[10px] px-1.5 py-0.5 rounded">地面交通</span>
-                    </div>
-                    <div className="text-body-md font-body-md text-on-surface-variant mt-0.5">52分钟</div>
-                  </div>
-                </div>
-                <div className="text-right">
-                  <div className="text-price-tag font-price-tag text-on-surface">¥96</div>
-                </div>
-              </div>
-            </button>
+            <RouteCard
+              icon={Car}
+              title="网约车直达"
+              category="地面"
+              duration="52分钟"
+              price={96}
+              onClick={() => {}}
+            />
             
-            {/* Card 3: Subway */}
-            <button className="w-full text-left bg-surface-container-lowest border border-outline-variant/60 rounded-xl p-4 shadow-m3-1 relative transition-all hover:bg-surface-container-low active:scale-[0.99] flex flex-col gap-3">
-              <div className="flex items-start justify-between w-full">
-                <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-full bg-surface-container-highest flex items-center justify-center flex-shrink-0">
-                    <span className="material-symbols-outlined text-on-surface-variant">subway</span>
-                  </div>
-                  <div>
-                    <div className="flex items-center gap-2">
-                      <h3 className="text-label-lg font-label-lg text-on-surface">地铁+机场快线</h3>
-                      <span className="bg-[#EDF2F4] text-on-surface-variant text-[10px] px-1.5 py-0.5 rounded">经济</span>
-                    </div>
-                    <div className="text-body-md font-body-md text-on-surface-variant mt-0.5">64分钟</div>
-                  </div>
-                </div>
-                <div className="text-right">
-                  <div className="text-price-tag font-price-tag text-on-surface">¥37</div>
-                </div>
-              </div>
-            </button>
+            <RouteCard
+              icon={Train}
+              title="地铁+机场快线"
+              category="经济"
+              duration="64分钟"
+              price={37}
+              onClick={() => {}}
+            />
           </StaggeredList>
           
-          {/* Fixed Bottom Action Area */}
-          <div className="absolute bottom-0 left-0 w-full bg-surface/95 backdrop-blur-sm border-t border-outline-variant/20 px-container-padding py-4 pb-safe z-20">
+          {/* Footer CTA */}
+          <div className="absolute bottom-0 left-0 w-full bg-white/95 backdrop-blur-sm border-t border-outline/10 px-gutter py-5 pb-safe z-20">
             <button 
               onClick={() => navigate('/flight-selection')}
-              className="w-full h-[48px] bg-primary hover:bg-surface-tint active:scale-[0.98] transition-all text-on-primary rounded-pill text-label-lg font-bold flex items-center justify-center shadow-lg shadow-primary/20"
+              aria-label="选择 UAM 空中快线，进入订票流程"
+              className="w-full h-14 bg-primary text-on-primary rounded-pill text-label-lg font-bold flex items-center justify-center gap-2 shadow-uber-3 active:scale-[0.98] transition-transform"
             >
-              选择 UAM 空中快线
+              <span>进入 UAM 订票流程</span>
+              <ChevronRight size={20} strokeWidth={2.5} />
             </button>
           </div>
         </div>

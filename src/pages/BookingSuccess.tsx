@@ -1,5 +1,16 @@
 import { useNavigate, Navigate } from 'react-router-dom';
+import { 
+  X, 
+  CheckCircle2, 
+  Plane, 
+  MapPin, 
+  Badge, 
+  Ticket, 
+  ChevronRight,
+  Info
+} from 'lucide-react';
 import { useBookingStore } from '../store/useBookingStore';
+import { StaggeredList } from '../components/animations/StaggeredList';
 
 export function BookingSuccess() {
   const navigate = useNavigate();
@@ -8,150 +19,119 @@ export function BookingSuccess() {
   if (!selectedFlight) return <Navigate to="/" replace />;
 
   return (
-    /* 弹性三段式布局：header + scrollable content + footer */
-    <div className="w-full h-full flex flex-col bg-background text-on-background">
-      {/* Header - 固定高度 */}
-      <header className="flex-shrink-0 flex items-center justify-between px-container-padding h-12 bg-surface/80 backdrop-blur-md z-10">
+    <div className="w-full h-full flex flex-col bg-background text-on-surface font-body">
+      {/* Minimalist Header */}
+      <header className="flex-shrink-0 flex items-center justify-between px-gutter h-14 bg-white/90 backdrop-blur-md sticky top-0 z-10 border-b border-outline/5">
         <button 
           onClick={() => navigate('/')}
-          className="w-12 h-12 flex items-center justify-start text-on-surface-variant"
+          className="p-2 -ml-2 text-primary hover:bg-surface-variant rounded-full transition-colors"
         >
-          <span className="material-symbols-outlined" style={{ fontVariationSettings: "'FILL' 0" }}>close</span>
+          <X size={24} strokeWidth={1.5} />
         </button>
-        <h1 className="text-headline-md font-headline-md text-primary tracking-tight">预订成功</h1>
-        <div className="w-12 h-12"></div>
+        <div className="flex items-center gap-2">
+          <CheckCircle2 size={18} className="text-primary" />
+          <h1 className="text-display-sm font-bold">预订已确认</h1>
+        </div>
+        <div className="w-10"></div>
       </header>
 
-      {/* Content - 自动填充剩余空间，可滚动 */}
-      <main className="flex-1 overflow-y-auto px-container-padding py-6 flex flex-col gap-stack-lg no-scrollbar">
-        {/* Status Card (Boarding Pass Style) */}
-        <div className="bg-surface-container-lowest rounded-[24px] shadow-lg overflow-hidden flex flex-col border border-outline-variant/30">
-          {/* Header section */}
-          <div className="bg-primary px-container-padding py-stack-md text-on-primary flex justify-between items-center relative overflow-hidden">
-            <div className="z-10">
-              <div className="text-label-sm font-label-sm opacity-80 mb-1">航班</div>
-              <div className="text-headline-lg font-headline-lg">{selectedFlight.name}</div>
-            </div>
-            <div className="z-10 text-right">
-              <span className="inline-flex items-center gap-1 bg-on-primary/20 px-3 py-1 rounded-full text-label-sm font-label-sm mb-2">
-                <span className="material-symbols-outlined text-[14px]">check_circle</span>
-                已出票
-              </span>
-            </div>
-            {/* Decorative pattern */}
-            <span className="material-symbols-outlined absolute -right-6 -bottom-8 text-[120px] opacity-10" style={{ fontVariationSettings: "'FILL' 1" }}>flight</span>
-          </div>
-
-          {/* Details Section */}
-          <div className="p-container-padding grid grid-cols-2 gap-stack-md border-b border-dashed border-outline-variant/50 relative">
-            {/* Cutouts */}
-            <div className="absolute left-[-12px] bottom-[-12px] w-6 h-6 rounded-full bg-background border border-outline-variant/30"></div>
-            <div className="absolute right-[-12px] bottom-[-12px] w-6 h-6 rounded-full bg-background border border-outline-variant/30"></div>
-            
-            <div>
-              <div className="text-label-sm font-label-sm text-on-surface-variant mb-1">座位</div>
-              <div className="text-display-lg font-display-lg text-primary">{selectedSeat || '1A'}</div>
-            </div>
-            <div className="text-right">
-              <div className="text-label-sm font-label-sm text-on-surface-variant mb-1">起飞时间</div>
-              <div className="text-display-lg font-display-lg text-on-surface">{selectedFlight.departureTime}</div>
-            </div>
-          </div>
-
-          {/* QR Code Section */}
-          <div className="p-container-padding flex flex-col items-center justify-center pt-stack-lg relative">
-            <div className="w-48 h-48 bg-surface-container-low rounded-xl flex items-center justify-center shadow-inner mb-stack-sm relative border border-outline-variant/20 p-2">
-              <img 
-                alt="QR Code" 
-                className="w-full h-full object-cover rounded-lg opacity-80 mix-blend-multiply" 
-                src="https://lh3.googleusercontent.com/aida-public/AB6AXuCqwCSM3U2ij1Z4-493D0SfvG-QH2j6XR2SMert7UEBCCkV0eIr0OKSctghNVjUNe4sb7LNHTHEZHFIZL3rw8iZoMlv4Xt5Lb3_teVE5AGe1mEh8o50QYFkzij5Y8QsnrNICBo4SQ4rxpYoW-IAjqFaoqgce9lBUm2B2EK_5m3yO2T4WT16ceio4zp5KJC8qfxkI2FzsUWpDVvJ0c4zcIy8hpKQo49xih7fPnS4NUdy5lyb_IN803RQynu-0peJgIl2WMPAV56wBpc"
+      {/* Main Content */}
+      <main className="flex-1 overflow-y-auto px-gutter py-8 flex flex-col gap-stack-lg no-scrollbar">
+        <StaggeredList className="space-y-stack-lg" staggerDelay={0.1}>
+          {/* Uber-style Boarding Pass Card */}
+          <div className="bg-white rounded-2xl shadow-uber-2 overflow-hidden flex flex-col border border-outline/10">
+            {/* Pass Header */}
+            <div className="bg-primary px-6 py-6 text-on-primary relative overflow-hidden">
+              <div className="relative z-10">
+                <div className="text-[10px] font-bold opacity-60 uppercase tracking-widest mb-1">您的航班</div>
+                <div className="text-display-md font-bold">{selectedFlight.name}</div>
+              </div>
+              <Plane 
+                size={120} 
+                className="absolute -right-8 -bottom-8 opacity-10 rotate-45" 
+                strokeWidth={1}
               />
-              <div className="absolute inset-0 border-2 border-primary rounded-xl opacity-50 m-2"></div>
             </div>
-            <div className="text-label-sm font-label-sm text-on-surface-variant text-center max-w-[80%]">
-              <span className="material-symbols-outlined text-[16px] align-middle mr-1 text-primary">info</span>
-              请在起飞前 8 分钟到达起降点以完成核验
+
+            {/* Pass Body with Cutout Effect */}
+            <div className="p-6 grid grid-cols-2 gap-y-8 relative bg-white">
+              {/* Decorative Cutouts */}
+              <div className="absolute -left-3 top-1/2 -translate-y-1/2 w-6 h-6 rounded-full bg-background border border-outline/10"></div>
+              <div className="absolute -right-3 top-1/2 -translate-y-1/2 w-6 h-6 rounded-full bg-background border border-outline/10"></div>
+              
+              <div className="col-span-2 border-b border-dashed border-outline/20 mb-2"></div>
+
+              <div>
+                <div className="text-[10px] font-bold text-on-surface-variant uppercase tracking-widest mb-1">选定座位</div>
+                <div className="text-display-lg font-bold">{selectedSeat || '1A'}</div>
+              </div>
+              <div className="text-right">
+                <div className="text-[10px] font-bold text-on-surface-variant uppercase tracking-widest mb-1">登机时间</div>
+                <div className="text-display-lg font-bold">{selectedFlight.departureTime}</div>
+              </div>
+
+              <div className="col-span-2 flex flex-col items-center py-4">
+                <div className="w-44 h-44 bg-surface-variant rounded-xl p-2 border border-outline/10 shadow-inner">
+                  <img 
+                    alt="QR Code" 
+                    className="w-full h-full object-contain grayscale mix-blend-multiply" 
+                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuCqwCSM3U2ij1Z4-493D0SfvG-QH2j6XR2SMert7UEBCCkV0eIr0OKSctghNVjUNe4sb7LNHTHEZHFIZL3rw8iZoMlv4Xt5Lb3_teVE5AGe1mEh8o50QYFkzij5Y8QsnrNICBo4SQ4rxpYoW-IAjqFaoqgce9lBUm2B2EK_5m3yO2T4WT16ceio4zp5KJC8qfxkI2FzsUWpDVvJ0c4zcIy8hpKQo49xih7fPnS4NUdy5lyb_IN803RQynu-0peJgIl2WMPAV56wBpc"
+                  />
+                </div>
+                <div className="mt-4 flex items-center gap-2 text-on-surface-variant">
+                  <Info size={14} className="text-primary" />
+                  <span className="text-[11px] font-bold">请在起飞前 8 分钟到达起降点</span>
+                </div>
+              </div>
             </div>
           </div>
-        </div>
 
-        {/* Dispatch Timeline */}
-        <div className="bg-surface-container-lowest rounded-[24px] shadow-lg p-container-padding border border-outline-variant/30">
-          <h2 className="text-headline-md font-headline-md text-on-surface mb-stack-lg">行程追踪</h2>
-          <div className="relative pl-6 border-l-2 border-outline-variant/30 pb-4">
-            
-            {/* Step 1: Active */}
-            <div className="relative mb-stack-lg">
-              <div className="absolute -left-[35px] w-4 h-4 rounded-full bg-primary ring-4 ring-primary-container/20 flex items-center justify-center">
-                <div className="w-2 h-2 rounded-full bg-on-primary"></div>
-              </div>
-              <div className="flex items-start justify-between">
-                <div>
-                  <h3 className="text-label-lg font-label-lg text-primary">接驳车到达</h3>
-                  <p className="text-body-md font-body-md text-on-surface-variant">预计 4 分钟后到达您的当前位置</p>
+          {/* Journey Tracking Section */}
+          <section className="bg-white rounded-2xl p-6 shadow-uber-1 border border-outline/10">
+            <h2 className="text-label-lg font-bold mb-8 flex items-center gap-2">
+              <MapPin size={18} className="text-primary" />
+              行程追踪
+            </h2>
+            <div className="relative pl-8 space-y-10">
+              <div className="absolute left-[7px] top-1 bottom-1 w-[2px] bg-surface-variant"></div>
+              
+              {/* Steps */}
+              {[
+                { label: '接驳车到达', desc: '预计 4 分钟后到达', icon: <MapPin size={14} />, active: true },
+                { label: '到达起降点', desc: '完成初步核验', icon: <CheckCircle2 size={14} /> },
+                { label: '实名核验', desc: '进行安检与身份确认', icon: <Badge size={14} /> },
+                { label: '登机', desc: '准备进入 UAM 垂直起降器', icon: <Ticket size={14} /> },
+                { label: '航班起飞', desc: `预计 ${selectedFlight.departureTime} 起飞`, icon: <Plane size={14} /> }
+              ].map((step, idx) => (
+                <div key={idx} className={`relative ${!step.active ? 'opacity-30' : ''}`}>
+                  <div className={`absolute -left-[31px] top-1 w-4 h-4 rounded-full flex items-center justify-center ring-4 ring-white
+                    ${step.active ? 'bg-primary shadow-uber-1' : 'bg-surface-variant'}
+                  `}>
+                    {step.active && <div className="w-1.5 h-1.5 bg-white rounded-full"></div>}
+                  </div>
+                  <div className="flex justify-between items-start">
+                    <div>
+                      <h3 className="text-label-md font-bold">{step.label}</h3>
+                      <p className="text-[11px] font-medium">{step.desc}</p>
+                    </div>
+                  </div>
                 </div>
-                <span className="material-symbols-outlined text-primary">directions_car</span>
-              </div>
+              ))}
             </div>
-
-            {/* Step 2 */}
-            <div className="relative mb-stack-lg opacity-60">
-              <div className="absolute -left-[35px] w-4 h-4 rounded-full bg-surface-container-highest border-2 border-outline flex items-center justify-center"></div>
-              <div className="flex items-start justify-between">
-                <div>
-                  <h3 className="text-label-lg font-label-lg text-on-surface">到达起降点</h3>
-                </div>
-                <span className="material-symbols-outlined text-on-surface-variant">location_on</span>
-              </div>
-            </div>
-
-            {/* Step 3 */}
-            <div className="relative mb-stack-lg opacity-60">
-              <div className="absolute -left-[35px] w-4 h-4 rounded-full bg-surface-container-highest border-2 border-outline flex items-center justify-center"></div>
-              <div className="flex items-start justify-between">
-                <div>
-                  <h3 className="text-label-lg font-label-lg text-on-surface">实名核验</h3>
-                </div>
-                <span className="material-symbols-outlined text-on-surface-variant">badge</span>
-              </div>
-            </div>
-
-            {/* Step 4 */}
-            <div className="relative mb-stack-lg opacity-60">
-              <div className="absolute -left-[35px] w-4 h-4 rounded-full bg-surface-container-highest border-2 border-outline flex items-center justify-center"></div>
-              <div className="flex items-start justify-between">
-                <div>
-                  <h3 className="text-label-lg font-label-lg text-on-surface">登机</h3>
-                </div>
-                <span className="material-symbols-outlined text-on-surface-variant">airplane_ticket</span>
-              </div>
-            </div>
-
-            {/* Step 5 */}
-            <div className="relative opacity-60">
-              <div className="absolute -left-[35px] w-4 h-4 rounded-full bg-surface-container-highest border-2 border-outline flex items-center justify-center"></div>
-              <div className="flex items-start justify-between">
-                <div>
-                  <h3 className="text-label-lg font-label-lg text-on-surface">起飞</h3>
-                  <p className="text-body-md font-body-md text-on-surface-variant">预计 {selectedFlight.departureTime}</p>
-                </div>
-                <span className="material-symbols-outlined text-on-surface-variant">flight_takeoff</span>
-              </div>
-            </div>
-
-          </div>
-        </div>
+          </section>
+        </StaggeredList>
       </main>
 
-      {/* Footer - 固定高度 */}
-      <div className="flex-shrink-0 p-container-padding pb-safe bg-surface/90 backdrop-blur-md border-t border-outline-variant/20">
+      {/* Footer CTA */}
+      <footer className="flex-shrink-0 p-gutter pb-safe bg-white/90 backdrop-blur-md border-t border-outline/5 z-10">
         <button 
           onClick={() => navigate('/questionnaire')}
-          className="w-full h-[48px] bg-primary text-on-primary rounded-pill text-label-lg font-bold flex items-center justify-center gap-2 hover:bg-primary/90 transition-all active:scale-[0.98] shadow-md"
+          className="w-full h-14 bg-primary text-on-primary rounded-pill text-label-lg font-bold flex items-center justify-center gap-2 active:scale-[0.98] transition-transform shadow-uber-3"
         >
           下一步：填写问卷
+          <ChevronRight size={20} strokeWidth={2.5} />
         </button>
-      </div>
+      </footer>
     </div>
   );
 }

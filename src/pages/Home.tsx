@@ -1,148 +1,146 @@
 import { useNavigate } from 'react-router-dom';
 import { MapBackground } from '../components/MapBackground';
 import { useBookingStore } from '../store/useBookingStore';
-import ShinyText from '../components/animations/ShinyText';
+import BlurText from '../components/animations/BlurText';
+import { 
+  Menu, 
+  Bell, 
+  Home as HomeIcon, 
+  Plane, 
+  Users, 
+  User, 
+  Clock, 
+  Circle, 
+  Square 
+} from 'lucide-react';
 
 export function Home() {
   const navigate = useNavigate();
   const { fromAddress, toAddress, setDestination } = useBookingStore();
 
   return (
-    <div className="bg-background text-on-surface w-full h-full overflow-hidden relative font-body-lg">
-      {/* TopAppBar — Stitch 使用 fixed */}
-      <header className="fixed top-0 left-0 w-full z-50 flex items-center justify-between px-container-padding h-12 bg-surface/80 backdrop-blur-md border-b border-outline-variant/30">
-        <button className="text-on-surface-variant hover:bg-surface-container-high transition-colors opacity-80 duration-150 p-1 rounded-full flex items-center justify-center">
-          <span className="material-symbols-outlined">menu</span>
+    <div className="bg-background text-on-surface w-full h-full overflow-hidden relative font-body">
+      {/* TopAppBar - Uber Minimalist */}
+      <header className="fixed top-0 left-0 w-full z-50 flex items-center justify-between px-container-padding h-14 bg-white/90 backdrop-blur-md">
+        <button aria-label="打开菜单" className="text-primary p-2 rounded-full active:bg-surface-variant transition-colors">
+          <Menu size={24} strokeWidth={1.5} />
         </button>
-        <ShinyText 
+        <BlurText 
           text="空行 UAM" 
-          className="text-display-sm font-bold text-primary tracking-tight"
-          speed={3}
+          className="text-display-sm font-bold tracking-tight"
         />
-        <button className="text-on-surface-variant hover:bg-surface-container-high transition-colors opacity-80 duration-150 p-1 rounded-full flex items-center justify-center">
-          <span className="material-symbols-outlined">notifications</span>
+        <button aria-label="打开通知" className="text-primary p-2 rounded-full active:bg-surface-variant transition-colors">
+          <Bell size={24} strokeWidth={1.5} />
         </button>
       </header>
 
-      {/* Map Canvas (Ground Layer Level 0) */}
+      {/* Map Canvas Layer */}
       <main className="absolute inset-0 w-full h-full z-0">
         <MapBackground />
         
-        {/* Map Overlay Gradients for Readability */}
-        <div className="absolute inset-0 bg-gradient-to-b from-surface/40 via-transparent to-surface/20 pointer-events-none"></div>
-        
-
+        {/* Subtle Overlay for UI contrast */}
+        <div className="absolute inset-0 bg-gradient-to-b from-white/20 via-transparent to-white/10 pointer-events-none"></div>
       </main>
 
-      {/* Floating Bottom Sheet (Drawer Level 2) */}
-      <div className="absolute bottom-[96px] left-0 w-full px-container-padding z-40 pb-stack-md">
-        <div className="bg-surface-container-lowest rounded-xl shadow-lg border border-outline-variant/20 flex flex-col">
-          {/* Grabber */}
-          <div className="w-full flex justify-center pt-3 pb-2">
-            <div className="w-8 h-1 bg-outline-variant/50 rounded-full"></div>
+      {/* Floating Search Sheet - Uber Level 2 */}
+      <div className="absolute bottom-[100px] left-0 w-full px-gutter z-40">
+        <div className="bg-white rounded-xl shadow-uber-2 border border-outline/10 overflow-hidden">
+          {/* Categories Selector */}
+          <div className="flex items-center px-4 border-b border-outline/10" role="tablist" aria-label="服务类别">
+            <button role="tab" aria-selected="false" className="px-5 py-4 text-label-md font-bold text-on-surface-variant whitespace-nowrap">打车</button>
+            <button role="tab" aria-selected="false" className="px-5 py-4 text-label-md font-bold text-on-surface-variant whitespace-nowrap">外卖</button>
+            <button role="tab" aria-selected="true" className="px-5 py-4 text-label-md font-bold text-primary border-b-3 border-primary whitespace-nowrap">空行 UAM</button>
+            <button role="tab" aria-selected="false" className="px-5 py-4 text-label-md font-bold text-on-surface-variant whitespace-nowrap">两轮车</button>
           </div>
           
-          {/* Transport Categories */}
-          <div className="flex items-center px-4 overflow-x-auto no-scrollbar border-b border-surface-variant">
-            <button className="px-4 py-3 text-label-lg font-label-lg text-on-surface-variant whitespace-nowrap">网约车</button>
-            <button className="px-4 py-3 text-label-lg font-label-lg text-on-surface-variant whitespace-nowrap">地铁</button>
-            <button className="px-4 py-3 text-label-lg font-label-lg text-on-surface-variant whitespace-nowrap">预约</button>
-            <button className="px-4 py-3 text-label-lg font-label-lg text-primary border-b-2 border-primary whitespace-nowrap">UAM</button>
-          </div>
-          
-            {/* Content Area */}
-          <div className="p-container-padding flex flex-col gap-stack-md">
-            {/* Origin / Destination Inputs */}
-            <div className="flex relative bg-surface-container-low rounded-md p-3">
-              {/* Timeline Connector */}
-              <div className="absolute left-6 top-8 bottom-8 w-px border-l-2 border-dashed border-outline-variant"></div>
+          <div className="p-stack-md flex flex-col gap-stack-md">
+            {/* Location Inputs */}
+            <div className="flex relative bg-surface-variant rounded-lg p-4">
+              {/* Connector Line */}
+              <div className="absolute left-[31px] top-10 bottom-10 w-0.5 bg-primary/20"></div>
               
-              <div className="flex flex-col gap-4 w-full">
-                {/* Origin */}
-                <div className="flex items-center gap-3">
-                  <div className="w-6 h-6 flex-shrink-0 flex items-center justify-center">
-                    <div className="w-2.5 h-2.5 bg-primary rounded-full"></div>
+              <div className="flex flex-col gap-5 w-full">
+                {/* Start Location */}
+                <div className="flex items-center gap-4">
+                  <div className="flex-shrink-0 flex items-center justify-center">
+                    <Circle size={10} fill="black" strokeWidth={0} />
                   </div>
-                  <div className="flex-1 pb-3 border-b border-surface-variant">
-                    <span className="text-body-lg font-body-lg text-on-surface">{fromAddress}</span>
+                  <div className="flex-1 pb-3 border-b border-outline/30">
+                    <span className="text-body-md font-medium text-on-surface">{fromAddress}</span>
                   </div>
                 </div>
                 
                 {/* Destination */}
-                <div className="flex items-center gap-3">
-                  <div className="w-6 h-6 flex-shrink-0 flex items-center justify-center">
-                    <div className="w-2.5 h-2.5 rounded-full border-2 border-primary"></div>
+                <div className="flex items-center gap-4">
+                  <div className="flex-shrink-0 flex items-center justify-center">
+                    <Square size={10} strokeWidth={2.5} className="text-primary" />
                   </div>
                   <div className="flex-1">
+                    <label htmlFor="destination" className="sr-only">目的地</label>
                     <input 
-                      className="w-full bg-transparent border-none p-0 text-display-lg font-bold text-on-surface placeholder:text-outline focus:ring-0 outline-none" 
+                      id="destination"
+                      className="w-full bg-transparent border-none p-0 text-display-md font-bold text-on-surface placeholder:text-on-surface-variant focus:ring-0 outline-none" 
                       placeholder="你要去哪儿？" 
                       type="text" 
                       value={toAddress}
                       onChange={(e) => setDestination(e.target.value)}
+                      aria-label="输入目的地"
                     />
                   </div>
                 </div>
               </div>
             </div>
             
-            {/* Frequent Locations Chips */}
-            <div className="flex gap-3 overflow-x-auto no-scrollbar">
-              <button 
-                onClick={() => setDestination('宝安机场 T3')}
-                className="flex items-center gap-1.5 px-3 py-1.5 bg-surface-container rounded-full text-label-sm font-label-sm text-on-surface-variant hover:bg-surface-variant transition-colors border border-outline-variant/30 flex-shrink-0"
-              >
-                <span className="material-symbols-outlined text-[16px]">schedule</span>
-                宝安机场 T3
-              </button>
-              <button 
-                onClick={() => setDestination('深圳北站')}
-                className="flex items-center gap-1.5 px-3 py-1.5 bg-surface-container rounded-full text-label-sm font-label-sm text-on-surface-variant hover:bg-surface-variant transition-colors border border-outline-variant/30 flex-shrink-0"
-              >
-                <span className="material-symbols-outlined text-[16px]">schedule</span>
-                深圳北站
-              </button>
+            {/* Quick Suggestions */}
+            <div className="flex gap-2 overflow-x-auto no-scrollbar pb-1">
+              {[
+                { label: '宝安机场 T3', id: 'airport' },
+                { label: '深圳北站', id: 'station' }
+              ].map((item) => (
+                <button 
+                  key={item.id}
+                  onClick={() => setDestination(item.label)}
+                  aria-label={`选择 ${item.label} 作为目的地`}
+                  className="flex items-center gap-2 px-4 py-2 bg-surface-variant rounded-pill text-label-sm font-bold text-on-surface hover:bg-outline/20 transition-colors flex-shrink-0"
+                >
+                  <Clock size={14} strokeWidth={2} />
+                  {item.label}
+                </button>
+              ))}
             </div>
             
-            {/* Main Action Button */}
+            {/* Main CTA */}
             <button 
               onClick={() => {
                 if (toAddress) navigate('/route-comparison');
               }}
               disabled={!toAddress}
-              className="w-full h-[48px] bg-primary text-on-primary rounded-pill flex items-center justify-center text-label-lg font-bold shadow-md hover:shadow-primary/20 transition-all active:scale-[0.98] cursor-pointer disabled:opacity-50"
+              aria-label={`查看前往 ${toAddress} 的出行方案`}
+              className="w-full h-14 bg-primary text-on-primary rounded-pill flex items-center justify-center text-label-lg font-bold shadow-uber-3 active:scale-[0.98] transition-transform disabled:bg-outline/50 disabled:cursor-not-allowed"
             >
-              查看出行方案
+              查看方案
             </button>
           </div>
         </div>
       </div>
 
-      {/* BottomNavBar — Stitch 使用 fixed + pb-safe */}
-      <nav className="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center pt-2 pb-safe px-4 bg-surface rounded-t-xl shadow-[0_-4px_12px_0_rgba(0,0,0,0.05)]">
-        <button className="flex flex-col items-center justify-center text-primary font-bold scale-95 duration-200 w-16 pb-1">
-          <div className="px-4 py-1 rounded-full bg-primary-container/20 mb-1">
-            <span className="material-symbols-outlined" style={{fontVariationSettings: "'FILL' 1"}}>home</span>
-          </div>
-          <span className="text-label-sm font-label-sm">首页</span>
+      {/* Bottom Navigation - Uber Style */}
+      <nav className="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center pt-3 pb-safe px-4 bg-white border-t border-outline/10" aria-label="底部导航">
+        <button aria-label="首页" className="flex flex-col items-center gap-1 w-16">
+          <HomeIcon size={24} strokeWidth={2} className="text-primary" />
+          <span className="text-[10px] font-bold text-primary">首页</span>
         </button>
-        <button className="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-container-low transition-all duration-200 w-16 pb-1">
-          <div className="px-4 py-1 mb-1">
-            <span className="material-symbols-outlined">flight_takeoff</span>
-          </div>
-          <span className="text-label-sm font-label-sm">行程</span>
+        <button aria-label="行程列表" className="flex flex-col items-center gap-1 w-16 text-on-surface-variant opacity-60">
+          <Plane size={24} strokeWidth={1.5} />
+          <span className="text-[10px] font-bold">行程</span>
         </button>
-        <button className="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-container-low transition-all duration-200 w-16 pb-1">
-          <div className="px-4 py-1 mb-1">
-            <span className="material-symbols-outlined">hub</span>
-          </div>
-          <span className="text-label-sm font-label-sm">社区</span>
+        <button aria-label="发现新内容" className="flex flex-col items-center gap-1 w-16 text-on-surface-variant opacity-60">
+          <Users size={24} strokeWidth={1.5} />
+          <span className="text-[10px] font-bold">发现</span>
         </button>
-        <button className="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-container-low transition-all duration-200 w-16 pb-1">
-          <div className="px-4 py-1 mb-1">
-            <span className="material-symbols-outlined">person</span>
-          </div>
-          <span className="text-label-sm font-label-sm">我的</span>
+        <button aria-label="个人资料" className="flex flex-col items-center gap-1 w-16 text-on-surface-variant opacity-60">
+          <User size={24} strokeWidth={1.5} />
+          <span className="text-[10px] font-bold">我的</span>
         </button>
       </nav>
     </div>

@@ -1,22 +1,25 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { Star, Send } from 'lucide-react';
 
 function StarRating({ value, onChange }: { value: number, onChange: (val: number) => void }) {
   return (
-    <div className="flex gap-2">
+    <div className="flex gap-3">
       {[1, 2, 3, 4, 5].map((star) => (
         <button
           key={star}
           onClick={() => onChange(star)}
-          className={`w-10 h-10 rounded-full flex items-center justify-center transition-all ${
+          className={`w-12 h-12 rounded-full flex items-center justify-center transition-all ${
             star <= value 
-              ? 'bg-primary text-on-primary scale-110 shadow-sm' 
-              : 'bg-surface-container-high text-on-surface-variant hover:bg-surface-container-highest'
+              ? 'bg-black text-white shadow-uber-1 scale-105' 
+              : 'bg-surface-variant text-on-surface-variant hover:bg-outline/10'
           }`}
         >
-          <span className="material-symbols-outlined text-[24px]" style={{ fontVariationSettings: `'FILL' ${star <= value ? 1 : 0}` }}>
-            star
-          </span>
+          <Star 
+            size={24} 
+            strokeWidth={2} 
+            fill={star <= value ? "currentColor" : "none"} 
+          />
         </button>
       ))}
     </div>
@@ -40,62 +43,64 @@ export function Questionnaire() {
   };
 
   return (
-    /* 弹性三段式布局 */
-    <div className="w-full h-full flex flex-col bg-surface text-on-surface antialiased">
-      {/* Header - 固定高度 */}
-      <header className="flex-shrink-0 px-container-padding flex items-center justify-between h-14 bg-surface border-b border-outline-variant/30 z-10">
+    <div className="w-full h-full flex flex-col bg-white text-on-surface font-body">
+      {/* Header */}
+      <header className="shrink-0 flex items-center justify-between px-gutter h-14 border-b border-outline/5">
         <div className="w-10"></div>
-        <h1 className="text-headline-md font-headline-md text-on-surface">原型测试反馈</h1>
+        <h1 className="text-display-sm font-bold">原型测试反馈</h1>
         <div className="w-10"></div>
       </header>
 
-      {/* Content - 自动填充，可滚动 */}
-      <main className="flex-1 overflow-y-auto px-container-padding py-6 flex flex-col gap-stack-lg no-scrollbar">
+      {/* Content */}
+      <main className="flex-1 overflow-y-auto px-gutter py-8 flex flex-col gap-8 no-scrollbar">
         
-        <div className="mb-4">
-          <h2 className="text-display-sm font-display-sm text-on-surface mb-2">感谢体验！</h2>
-          <p className="text-body-lg font-body-lg text-on-surface-variant">
+        <div>
+          <h2 className="text-display-md font-bold leading-tight">感谢体验！</h2>
+          <p className="text-label-md font-medium text-on-surface-variant mt-2">
             请根据刚才的 UAM 预订流程，评价你对该服务的感受。
           </p>
         </div>
 
-        {/* Question 1 */}
-        <div className="bg-surface-container-lowest rounded-xl p-5 border border-outline-variant/30 shadow-sm flex flex-col items-center text-center">
-          <h3 className="text-label-lg font-label-lg text-on-surface mb-1">初始信任</h3>
-          <p className="text-body-md font-body-md text-on-surface-variant mb-4">你认为目前的 UAM 服务值得信赖吗？</p>
-          <StarRating value={trustScore} onChange={setTrustScore} />
-        </div>
+        {/* Questions */}
+        <div className="space-y-6">
+          {/* Question 1 */}
+          <div className="bg-white border border-outline/10 rounded-2xl p-6 shadow-uber-1 flex flex-col items-center text-center">
+            <h3 className="text-label-lg font-bold">初始信任</h3>
+            <p className="text-label-sm font-medium text-on-surface-variant mt-1 mb-6">你认为目前的 UAM 服务值得信赖吗？</p>
+            <StarRating value={trustScore} onChange={setTrustScore} />
+          </div>
 
-        {/* Question 2 */}
-        <div className="bg-surface-container-lowest rounded-xl p-5 border border-outline-variant/30 shadow-sm flex flex-col items-center text-center">
-          <h3 className="text-label-lg font-label-lg text-on-surface mb-1">风险感知</h3>
-          <p className="text-body-md font-body-md text-on-surface-variant mb-4">你觉得乘坐该飞行器安全吗？（星级越高越安全）</p>
-          <StarRating value={riskScore} onChange={setRiskScore} />
-        </div>
+          {/* Question 2 */}
+          <div className="bg-white border border-outline/10 rounded-2xl p-6 shadow-uber-1 flex flex-col items-center text-center">
+            <h3 className="text-label-lg font-bold">风险感知</h3>
+            <p className="text-label-sm font-medium text-on-surface-variant mt-1 mb-6">你觉得乘坐该飞行器安全吗？（星级越高越安全）</p>
+            <StarRating value={riskScore} onChange={setRiskScore} />
+          </div>
 
-        {/* Question 3 */}
-        <div className="bg-surface-container-lowest rounded-xl p-5 border border-outline-variant/30 shadow-sm flex flex-col items-center text-center">
-          <h3 className="text-label-lg font-label-lg text-on-surface mb-1">使用意向</h3>
-          <p className="text-body-md font-body-md text-on-surface-variant mb-4">未来如果有机会，你会实际使用该服务吗？</p>
-          <StarRating value={intentScore} onChange={setIntentScore} />
+          {/* Question 3 */}
+          <div className="bg-white border border-outline/10 rounded-2xl p-6 shadow-uber-1 flex flex-col items-center text-center">
+            <h3 className="text-label-lg font-bold">使用意向</h3>
+            <p className="text-label-sm font-medium text-on-surface-variant mt-1 mb-6">未来如果有机会，你会实际使用该服务吗？</p>
+            <StarRating value={intentScore} onChange={setIntentScore} />
+          </div>
         </div>
-        
       </main>
 
-      {/* Footer - 固定高度 */}
-      <div className="flex-shrink-0 p-container-padding pb-safe bg-surface border-t border-outline-variant/20">
+      {/* Footer */}
+      <footer className="shrink-0 p-gutter pb-safe bg-white border-t border-outline/10">
         <button 
           onClick={handleSubmit}
           disabled={!isFormComplete}
-          className={`w-full h-[48px] rounded-pill text-label-lg font-bold flex items-center justify-center transition-all shadow-md ${
+          className={`w-full h-14 rounded-pill text-label-lg font-bold flex items-center justify-center gap-2 transition-all shadow-uber-3 ${
             isFormComplete 
-              ? 'bg-primary text-on-primary hover:bg-primary/90 active:scale-[0.98]' 
-              : 'bg-surface-container-highest text-on-surface-variant opacity-50 cursor-not-allowed'
+              ? 'bg-primary text-on-primary active:scale-[0.98]' 
+              : 'bg-surface-variant text-on-surface-variant opacity-40 cursor-not-allowed'
           }`}
         >
-          提交反馈并返回首页
+          <span>提交反馈并返回首页</span>
+          {isFormComplete && <Send size={20} />}
         </button>
-      </div>
+      </footer>
     </div>
   );
 }
