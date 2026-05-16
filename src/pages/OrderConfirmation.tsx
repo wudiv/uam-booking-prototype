@@ -88,6 +88,7 @@ export function OrderConfirmation() {
         <div className="flex items-center justify-between px-gutter h-14">
           <button 
             onClick={() => navigate(-1)}
+            aria-label="返回上一页"
             className="p-2 -ml-2 hover:bg-surface-variant transition-colors rounded-full"
           >
             <ArrowLeft size={24} strokeWidth={1.5} />
@@ -147,7 +148,7 @@ export function OrderConfirmation() {
         <section className="flex flex-col gap-3">
           <h2 className="text-label-sm font-bold text-on-surface-variant uppercase tracking-widest px-1">安全与服务信息</h2>
           <div className="space-y-3">
-            {cuesData.map((cue, idx) => (
+            {cuesData.map((cue) => (
               <div 
                 key={cue.id} 
                 className="bg-surface-variant rounded-xl p-4 flex items-start gap-4 border border-outline/5 min-h-[80px]"

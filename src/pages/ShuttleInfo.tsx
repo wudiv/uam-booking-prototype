@@ -33,6 +33,7 @@ export function ShuttleInfo() {
       <header className="shrink-0 flex items-center justify-between px-gutter h-14 border-b border-outline/5 z-20">
         <button 
           onClick={() => navigate(-1)}
+          aria-label="返回上一页"
           className="p-2 -ml-2 hover:bg-surface-variant transition-colors rounded-full"
         >
           <ArrowLeft size={24} strokeWidth={1.5} />

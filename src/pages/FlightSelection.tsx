@@ -46,6 +46,7 @@ export function FlightSelection() {
       <header className="flex-shrink-0 sticky top-0 z-40 bg-white/90 backdrop-blur-md flex items-center px-gutter h-14 border-b border-outline/10">
         <button 
           onClick={() => navigate(-1)}
+          aria-label="返回上一页"
           className="p-2 -ml-2 text-primary hover:bg-surface-variant rounded-full transition-colors"
         >
           <ArrowLeft size={24} strokeWidth={1.5} />

@@ -97,7 +97,7 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
           isLoading && 'opacity-70',
           className
         )}
-        aria-busy={isLoading}
+        aria-busy={isLoading ? true : undefined}
         {...props}
       >
         {isLoading ? (

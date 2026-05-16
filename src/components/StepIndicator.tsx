@@ -13,13 +13,8 @@ export function StepIndicator({ currentStep }: StepIndicatorProps) {
   ];
 
   return (
-    <div 
-      className="w-full px-12 py-3 flex items-center justify-between bg-white/50 backdrop-blur-sm relative border-b border-outline/5 shrink-0"
-      role="progressbar"
-      aria-valuenow={currentStep}
-      aria-valuemin={0}
-      aria-valuemax={steps.length - 1}
-      aria-label={`订票步骤 ${currentStep + 1} / ${steps.length}`}
+    <div className="w-full px-12 py-3 flex items-center justify-between bg-white/50 backdrop-blur-sm relative border-b border-outline/5 shrink-0"
+      role="navigation" aria-label="订票步骤"
     >
       {steps.map((step, index) => {
         const isCompleted = index < currentStep;
@@ -33,8 +28,6 @@ export function StepIndicator({ currentStep }: StepIndicatorProps) {
                   w-2 h-2 rounded-full transition-all duration-500
                   ${isCurrent ? 'bg-primary scale-150 shadow-[0_0_8px_rgba(0,0,0,0.3)]' : isCompleted ? 'bg-black' : 'bg-outline/30'}
                 `}
-                role="status"
-                aria-label={`${step.label}${isCurrent ? '（当前步骤）' : isCompleted ? '（已完成）' : '（未完成）'}`}
               />
               <span className={`
                 text-[9px] mt-1.5 font-bold uppercase tracking-tighter transition-colors duration-500
