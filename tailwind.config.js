@@ -8,32 +8,39 @@ export default {
   theme: {
     extend: {
       colors: {
-        // Uber "Black and White Duet" Palette
-        "primary": "#000000",
-        "on-primary": "#ffffff",
-        "background": "#ffffff",
-        "on-background": "#000000",
-        "surface": "#ffffff",
-        "on-surface": "#000000",
-        "surface-variant": "#f6f6f6",
-        "on-surface-variant": "#5e5e5e",
-        "outline": "#e2e2e2",
-        "outline-variant": "#eeeeee",
+        // 低空科技配色 - 清爽、现代、不刺眼，适合长时间阅读
+        "primary": "#0F5B66",          // 主色：低空蓝绿
+        "primary-dark": "#123E46",     // 主色深色变体
+        "primary-soft": "#E8F4F6",     // 主色浅色背景
+        "on-primary": "#ffffff",       // 主色上的文字
+        "accent": "#4A90A4",           // 航线/地图强调
+        "background": "#F6F8FA",       // 页面背景
+        "on-background": "#1F2933",    // 页面文字
+        "surface": "#FFFFFF",          // 卡片/底板
+        "on-surface": "#1F2933",       // 卡片文字
+        "surface-variant": "#F6F8FA",  // 次要背景
+        "on-surface-variant": "#667085", // 次要文字
+        "outline": "#D7DEE8",          // 边框
+        "outline-variant": "#E8EDF2",  // 淡边框
         
-        // Semantic overrides (minimalist)
-        "secondary": "#333333",
+        // Semantic overrides
+        "secondary": "#123E46",
         "on-secondary": "#ffffff",
-        "secondary-container": "#f6f6f6",
-        "on-secondary-container": "#000000",
+        "secondary-container": "#E8F4F6",
+        "on-secondary-container": "#0F5B66",
         
-        // M3 Legacy Mapping (Redirected to Uber Palette)
-        "surface-container-low": "#f6f6f6",
-        "surface-container": "#eeeeee",
-        "surface-container-high": "#e2e2e2",
-        "surface-container-highest": "#d1d1d1",
-        "surface-container-lowest": "#ffffff",
-        "inverse-surface": "#000000",
-        "inverse-on-surface": "#ffffff",
+        // 状态色
+        "success": "#2E7D59",          // 成功/出票
+        "warning": "#B76F26",          // 提醒/规则
+        
+        // M3 Legacy Mapping (Redirected to New Palette)
+        "surface-container-low": "#F6F8FA",
+        "surface-container": "#FFFFFF",
+        "surface-container-high": "#E8EDF2",
+        "surface-container-highest": "#D7DEE8",
+        "surface-container-lowest": "#FFFFFF",
+        "inverse-surface": "#1F2933",
+        "inverse-on-surface": "#F6F8FA",
       },
       borderRadius: {
         'none': '0',
