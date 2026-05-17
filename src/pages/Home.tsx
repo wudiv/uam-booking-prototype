@@ -1,5 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 import { MapBackground } from '../components/MapBackground';
+import { Button } from '../components/Button';
 import { useBookingStore } from '../store/useBookingStore';
 import BlurText from '../components/animations/BlurText';
 import { 
@@ -21,7 +22,7 @@ export function Home() {
   return (
     <div className="bg-background text-on-surface w-full h-full overflow-hidden relative font-body">
       {/* TopAppBar - Uber Minimalist */}
-      <header className="fixed top-0 left-0 w-full z-50 flex items-center justify-between px-container-padding h-14 bg-white/90 backdrop-blur-md">
+      <header className="fixed top-0 left-0 w-full z-50 flex items-center justify-between px-4 h-14 bg-white/90 backdrop-blur-md">
         <button aria-label="打开菜单" className="text-primary p-2 rounded-full active:bg-surface-variant transition-colors">
           <Menu size={24} strokeWidth={1.5} />
         </button>
@@ -43,17 +44,17 @@ export function Home() {
       </main>
 
       {/* Floating Search Sheet - Uber Level 2 */}
-      <div className="absolute bottom-[100px] left-0 w-full px-gutter z-40">
+      <div className="absolute bottom-[80px] left-0 w-full px-3 z-40">
         <div className="bg-white rounded-xl shadow-uber-2 border border-outline/10 overflow-hidden">
           {/* Categories Selector */}
           <div className="flex items-center px-4 border-b border-outline/10" role="tablist" aria-label="服务类别">
-            <button role="tab" aria-selected="false" className="px-5 py-4 text-label-md font-bold text-on-surface-variant whitespace-nowrap">打车</button>
-            <button role="tab" aria-selected="false" className="px-5 py-4 text-label-md font-bold text-on-surface-variant whitespace-nowrap">外卖</button>
-            <button role="tab" aria-selected="true" className="px-5 py-4 text-label-md font-bold text-primary border-b-3 border-primary whitespace-nowrap">空行 UAM</button>
-            <button role="tab" aria-selected="false" className="px-5 py-4 text-label-md font-bold text-on-surface-variant whitespace-nowrap">两轮车</button>
+            <button role="tab" aria-selected="false" className="px-5 py-4 text-label-md font-bold text-on-surface-variant whitespace-nowrap">网约车</button>
+            <button role="tab" aria-selected="false" className="px-5 py-4 text-label-md font-bold text-on-surface-variant whitespace-nowrap">地铁</button>
+            <button role="tab" aria-selected="false" className="px-5 py-4 text-label-md font-bold text-on-surface-variant whitespace-nowrap">预约</button>
+            <button role="tab" aria-selected="true" className="px-5 py-4 text-label-md font-bold text-primary border-b-3 border-primary whitespace-nowrap">UAM</button>
           </div>
           
-          <div className="p-stack-md flex flex-col gap-stack-md">
+          <div className="p-4 flex flex-col gap-4">
             {/* Location Inputs */}
             <div className="flex relative bg-surface-variant rounded-lg p-4">
               {/* Connector Line */}
@@ -110,16 +111,17 @@ export function Home() {
             </div>
             
             {/* Main CTA */}
-            <button 
+            <Button 
+              size="full"
+              shape="pill"
               onClick={() => {
                 if (toAddress) navigate('/route-comparison');
               }}
               disabled={!toAddress}
               aria-label={`查看前往 ${toAddress} 的出行方案`}
-              className="w-full h-14 bg-primary text-on-primary rounded-pill flex items-center justify-center text-label-lg font-bold shadow-uber-3 active:scale-[0.98] transition-transform disabled:bg-outline/50 disabled:cursor-not-allowed"
             >
               查看方案
-            </button>
+            </Button>
           </div>
         </div>
       </div>
@@ -128,19 +130,19 @@ export function Home() {
       <nav className="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center pt-3 pb-safe px-4 bg-white border-t border-outline/10" aria-label="底部导航">
         <button aria-label="首页" className="flex flex-col items-center gap-1 w-16">
           <HomeIcon size={24} strokeWidth={2} className="text-primary" />
-          <span className="text-[10px] font-bold text-primary">首页</span>
+          <span className="text-label-sm font-bold text-primary">首页</span>
         </button>
         <button aria-label="行程列表" className="flex flex-col items-center gap-1 w-16 text-on-surface-variant opacity-60">
           <Plane size={24} strokeWidth={1.5} />
-          <span className="text-[10px] font-bold">行程</span>
+          <span className="text-label-sm font-bold">行程</span>
         </button>
         <button aria-label="发现新内容" className="flex flex-col items-center gap-1 w-16 text-on-surface-variant opacity-60">
           <Users size={24} strokeWidth={1.5} />
-          <span className="text-[10px] font-bold">发现</span>
+          <span className="text-label-sm font-bold">发现</span>
         </button>
         <button aria-label="个人资料" className="flex flex-col items-center gap-1 w-16 text-on-surface-variant opacity-60">
           <User size={24} strokeWidth={1.5} />
-          <span className="text-[10px] font-bold">我的</span>
+          <span className="text-label-sm font-bold">我的</span>
         </button>
       </nav>
     </div>

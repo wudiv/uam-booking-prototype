@@ -58,7 +58,7 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
 
     // Variant styles
     const variantClasses: Record<ButtonVariant, string> = {
-      primary: 'bg-primary text-on-primary shadow-uber-3 hover:bg-primary/90 disabled:bg-outline/50 disabled:text-on-surface-variant',
+      primary: 'bg-primary text-white shadow-uber-3 hover:bg-primary/90 disabled:bg-outline/50 disabled:text-on-surface-variant',
       secondary: 'bg-secondary text-on-secondary shadow-uber-2 hover:bg-secondary/90 disabled:bg-surface-variant disabled:text-on-surface-variant',
       tertiary: 'bg-surface-variant text-on-surface hover:bg-outline/20 disabled:bg-surface-variant disabled:text-on-surface-variant',
       ghost: 'text-primary hover:bg-surface-variant disabled:text-on-surface-variant',
@@ -70,9 +70,9 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
       xs: 'h-8 px-3 text-label-sm',
       sm: 'h-10 px-4 text-label-md',
       md: 'h-12 px-6 text-label-lg',
-      lg: 'h-14 px-8 text-body-md',
+      lg: 'h-11 px-6 text-body-md',
       xl: 'h-16 px-10 text-body-lg',
-      full: 'w-full h-14 px-4 text-label-lg',
+      full: 'w-full h-[52px] px-4 text-label-lg',
       icon: 'h-10 w-10 p-2',
       'icon-lg': 'h-12 w-12 p-2',
     };
@@ -85,10 +85,14 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
       circle: 'rounded-full',
     };
 
+    const colorStyle = variant === 'primary' ? { color: '#ffffff' } : 
+                       variant === 'secondary' ? { color: '#ffffff' } : undefined;
+
     return (
       <button
         ref={ref}
         disabled={isDisabled}
+        style={colorStyle}
         className={cn(
           'inline-flex items-center justify-center gap-2 font-body font-bold transition-all active:scale-[0.98] disabled:cursor-not-allowed focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary',
           variantClasses[variant],

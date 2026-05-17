@@ -4,12 +4,11 @@ import {
   CheckCircle2, 
   Plane, 
   MapPin, 
-  Badge, 
-  Ticket, 
   ChevronRight,
   Info
 } from 'lucide-react';
 import { useBookingStore } from '../store/useBookingStore';
+import { Button } from '../components/Button';
 import { StaggeredList } from '../components/animations/StaggeredList';
 
 export function BookingSuccess() {
@@ -21,7 +20,7 @@ export function BookingSuccess() {
   return (
     <div className="w-full h-full flex flex-col bg-background text-on-surface font-body">
       {/* Minimalist Header */}
-      <header className="flex-shrink-0 flex items-center justify-between px-gutter h-14 bg-white/90 backdrop-blur-md sticky top-0 z-10 border-b border-outline/5">
+      <header className="flex-shrink-0 flex items-center justify-between px-4 h-14 bg-white/90 backdrop-blur-md sticky top-0 z-10 border-b border-outline/5">
         <button 
           onClick={() => navigate('/')}
           className="p-2 -ml-2 text-primary hover:bg-surface-variant rounded-full transition-colors"
@@ -36,84 +35,138 @@ export function BookingSuccess() {
       </header>
 
       {/* Main Content */}
-      <main className="flex-1 overflow-y-auto px-gutter py-8 flex flex-col gap-stack-lg no-scrollbar">
-        <StaggeredList className="space-y-stack-lg" staggerDelay={0.1}>
-          {/* Uber-style Boarding Pass Card */}
+      <main className="flex-1 overflow-y-auto px-4 py-4 flex flex-col gap-4 no-scrollbar">
+        <StaggeredList className="space-y-4" staggerDelay={0.1}>
+          {/* Boarding Pass Card - Compact */}
           <div className="bg-white rounded-2xl shadow-uber-2 overflow-hidden flex flex-col border border-outline/10">
             {/* Pass Header */}
-            <div className="bg-primary px-6 py-6 text-on-primary relative overflow-hidden">
-              <div className="relative z-10">
-                <div className="text-[10px] font-bold opacity-60 uppercase tracking-widest mb-1">您的航班</div>
-                <div className="text-display-md font-bold">{selectedFlight.name}</div>
+            <div className="bg-primary px-4 py-4 text-on-primary relative overflow-hidden">
+              <div className="relative z-10 flex items-center justify-between">
+                <div>
+                  <div className="text-caption font-bold opacity-60 uppercase tracking-widest">您的航班</div>
+                  <div className="text-body-lg font-bold">{selectedFlight.name}</div>
+                </div>
+                <Plane size={32} className="opacity-20 rotate-45" strokeWidth={1} />
               </div>
-              <Plane 
-                size={120} 
-                className="absolute -right-8 -bottom-8 opacity-10 rotate-45" 
-                strokeWidth={1}
-              />
             </div>
 
-            {/* Pass Body with Cutout Effect */}
-            <div className="p-6 grid grid-cols-2 gap-y-8 relative bg-white">
+            {/* Pass Body */}
+            <div className="p-4 relative bg-white">
               {/* Decorative Cutouts */}
-              <div className="absolute -left-3 top-1/2 -translate-y-1/2 w-6 h-6 rounded-full bg-background border border-outline/10"></div>
-              <div className="absolute -right-3 top-1/2 -translate-y-1/2 w-6 h-6 rounded-full bg-background border border-outline/10"></div>
-              
-              <div className="col-span-2 border-b border-dashed border-outline/20 mb-2"></div>
+              <div className="absolute -left-3 top-1/2 -translate-y-1/2 w-5 h-5 rounded-full bg-background"></div>
+              <div className="absolute -right-3 top-1/2 -translate-y-1/2 w-5 h-5 rounded-full bg-background"></div>
 
-              <div>
-                <div className="text-[10px] font-bold text-on-surface-variant uppercase tracking-widest mb-1">选定座位</div>
-                <div className="text-display-lg font-bold">{selectedSeat || '1A'}</div>
-              </div>
-              <div className="text-right">
-                <div className="text-[10px] font-bold text-on-surface-variant uppercase tracking-widest mb-1">登机时间</div>
-                <div className="text-display-lg font-bold">{selectedFlight.departureTime}</div>
-              </div>
-
-              <div className="col-span-2 flex flex-col items-center py-4">
-                <div className="w-44 h-44 bg-surface-variant rounded-xl p-2 border border-outline/10 shadow-inner">
-                  <img 
-                    alt="QR Code" 
-                    className="w-full h-full object-contain grayscale mix-blend-multiply" 
-                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuCqwCSM3U2ij1Z4-493D0SfvG-QH2j6XR2SMert7UEBCCkV0eIr0OKSctghNVjUNe4sb7LNHTHEZHFIZL3rw8iZoMlv4Xt5Lb3_teVE5AGe1mEh8o50QYFkzij5Y8QsnrNICBo4SQ4rxpYoW-IAjqFaoqgce9lBUm2B2EK_5m3yO2T4WT16ceio4zp5KJC8qfxkI2FzsUWpDVvJ0c4zcIy8hpKQo49xih7fPnS4NUdy5lyb_IN803RQynu-0peJgIl2WMPAV56wBpc"
-                  />
+              {/* Seat + Time Row */}
+              <div className="flex justify-between items-center border-b border-dashed border-outline/20 pb-3 mb-3">
+                <div>
+                  <div className="text-caption font-bold text-on-surface-variant uppercase tracking-widest">座位</div>
+                  <div className="text-display-sm font-bold">{selectedSeat || '2A'}</div>
                 </div>
-                <div className="mt-4 flex items-center gap-2 text-on-surface-variant">
-                  <Info size={14} className="text-primary" />
-                  <span className="text-[11px] font-bold">请在起飞前 8 分钟到达起降点</span>
+                <div className="text-center">
+                  <div className="text-caption font-bold text-on-surface-variant uppercase tracking-widest">登机时间</div>
+                  <div className="text-display-sm font-bold">{selectedFlight.departureTime}</div>
+                </div>
+                <div className="text-right">
+                  <div className="text-caption font-bold text-on-surface-variant uppercase tracking-widest">起降点</div>
+                  <div className="text-label-sm font-bold">福田起降点</div>
+                </div>
+              </div>
+
+              {/* QR Code */}
+              <div className="flex items-center gap-4">
+                <div className="w-28 h-28 bg-white rounded-lg p-2 border border-outline/10 shrink-0 flex items-center justify-center">
+                  {/* SVG QR Code placeholder */}
+                  <svg viewBox="0 0 100 100" className="w-full h-full">
+                    <rect width="100" height="100" fill="white"/>
+                    {/* QR pattern simulation */}
+                    <rect x="5" y="5" width="25" height="25" fill="black"/>
+                    <rect x="10" y="10" width="15" height="15" fill="white"/>
+                    <rect x="13" y="13" width="9" height="9" fill="black"/>
+                    <rect x="70" y="5" width="25" height="25" fill="black"/>
+                    <rect x="75" y="10" width="15" height="15" fill="white"/>
+                    <rect x="78" y="13" width="9" height="9" fill="black"/>
+                    <rect x="5" y="70" width="25" height="25" fill="black"/>
+                    <rect x="10" y="75" width="15" height="15" fill="white"/>
+                    <rect x="13" y="78" width="9" height="9" fill="black"/>
+                    {/* Data modules */}
+                    <rect x="35" y="5" width="5" height="5" fill="black"/>
+                    <rect x="45" y="5" width="5" height="5" fill="black"/>
+                    <rect x="55" y="5" width="5" height="5" fill="black"/>
+                    <rect x="35" y="15" width="5" height="5" fill="black"/>
+                    <rect x="50" y="15" width="5" height="5" fill="black"/>
+                    <rect x="35" y="25" width="5" height="5" fill="black"/>
+                    <rect x="45" y="25" width="5" height="5" fill="black"/>
+                    <rect x="60" y="25" width="5" height="5" fill="black"/>
+                    <rect x="5" y="35" width="5" height="5" fill="black"/>
+                    <rect x="15" y="35" width="5" height="5" fill="black"/>
+                    <rect x="25" y="35" width="5" height="5" fill="black"/>
+                    <rect x="40" y="35" width="5" height="5" fill="black"/>
+                    <rect x="55" y="35" width="5" height="5" fill="black"/>
+                    <rect x="70" y="35" width="5" height="5" fill="black"/>
+                    <rect x="85" y="35" width="5" height="5" fill="black"/>
+                    <rect x="5" y="45" width="5" height="5" fill="black"/>
+                    <rect x="20" y="45" width="5" height="5" fill="black"/>
+                    <rect x="35" y="45" width="5" height="5" fill="black"/>
+                    <rect x="50" y="45" width="5" height="5" fill="black"/>
+                    <rect x="65" y="45" width="5" height="5" fill="black"/>
+                    <rect x="80" y="45" width="5" height="5" fill="black"/>
+                    <rect x="10" y="55" width="5" height="5" fill="black"/>
+                    <rect x="25" y="55" width="5" height="5" fill="black"/>
+                    <rect x="40" y="55" width="5" height="5" fill="black"/>
+                    <rect x="55" y="55" width="5" height="5" fill="black"/>
+                    <rect x="75" y="55" width="5" height="5" fill="black"/>
+                    <rect x="90" y="55" width="5" height="5" fill="black"/>
+                    <rect x="35" y="65" width="5" height="5" fill="black"/>
+                    <rect x="50" y="65" width="5" height="5" fill="black"/>
+                    <rect x="60" y="65" width="5" height="5" fill="black"/>
+                    <rect x="80" y="65" width="5" height="5" fill="black"/>
+                    <rect x="35" y="75" width="5" height="5" fill="black"/>
+                    <rect x="45" y="75" width="5" height="5" fill="black"/>
+                    <rect x="70" y="75" width="5" height="5" fill="black"/>
+                    <rect x="85" y="75" width="5" height="5" fill="black"/>
+                    <rect x="40" y="85" width="5" height="5" fill="black"/>
+                    <rect x="55" y="85" width="5" height="5" fill="black"/>
+                    <rect x="70" y="85" width="5" height="5" fill="black"/>
+                    <rect x="80" y="85" width="5" height="5" fill="black"/>
+                    <rect x="90" y="85" width="5" height="5" fill="black"/>
+                  </svg>
+                </div>
+                <div className="flex-1">
+                  <div className="flex items-center gap-1.5 text-on-surface-variant mb-1">
+                    <Info size={12} className="text-primary" />
+                    <span className="text-caption font-bold">请在起飞前 8 分钟到达起降点</span>
+                  </div>
+                  <p className="text-caption text-on-surface-variant">出示此二维码完成登机</p>
                 </div>
               </div>
             </div>
           </div>
 
-          {/* Journey Tracking Section */}
-          <section className="bg-white rounded-2xl p-6 shadow-uber-1 border border-outline/10">
-            <h2 className="text-label-lg font-bold mb-8 flex items-center gap-2">
-              <MapPin size={18} className="text-primary" />
+          {/* Journey Tracking Section - Compact */}
+          <section className="bg-white rounded-xl p-4 shadow-uber-1 border border-outline/10">
+            <h2 className="text-label-md font-bold mb-4 flex items-center gap-2">
+              <MapPin size={16} className="text-primary" />
               行程追踪
             </h2>
-            <div className="relative pl-8 space-y-10">
-              <div className="absolute left-[7px] top-1 bottom-1 w-[2px] bg-surface-variant"></div>
+            <div className="relative pl-7 space-y-4">
+              <div className="absolute left-[11px] top-1 bottom-1 w-[1.5px] bg-surface-variant"></div>
               
-              {/* Steps */}
               {[
-                { label: '接驳车到达', desc: '预计 4 分钟后到达', icon: <MapPin size={14} />, active: true },
-                { label: '到达起降点', desc: '完成初步核验', icon: <CheckCircle2 size={14} /> },
-                { label: '实名核验', desc: '进行安检与身份确认', icon: <Badge size={14} /> },
-                { label: '登机', desc: '准备进入 UAM 垂直起降器', icon: <Ticket size={14} /> },
-                { label: '航班起飞', desc: `预计 ${selectedFlight.departureTime} 起飞`, icon: <Plane size={14} /> }
+                { label: '接驳车到达', desc: '预计 4 分钟后到达', active: true },
+                { label: '到达起降点', desc: '完成登机准备' },
+                { label: '身份确认', desc: '出示证件完成登记' },
+                { label: '登机', desc: '进入 eVTOL 飞行器' },
+                { label: '航班起飞', desc: `预计 ${selectedFlight.departureTime} 起飞` }
               ].map((step, idx) => (
-                <div key={idx} className={`relative ${!step.active ? 'opacity-30' : ''}`}>
-                  <div className={`absolute -left-[31px] top-1 w-4 h-4 rounded-full flex items-center justify-center ring-4 ring-white
-                    ${step.active ? 'bg-primary shadow-uber-1' : 'bg-surface-variant'}
+                <div key={idx} className={`relative ${idx > 0 ? 'opacity-35' : ''}`}>
+                  <div className={`absolute -left-[19px] top-0.5 w-4 h-4 rounded-full flex items-center justify-center ring-2 ring-white
+                    ${idx === 0 ? 'bg-primary' : 'bg-surface-variant'}
                   `}>
-                    {step.active && <div className="w-1.5 h-1.5 bg-white rounded-full"></div>}
+                    {idx === 0 && <div className="w-1.5 h-1.5 bg-white rounded-full"></div>}
                   </div>
-                  <div className="flex justify-between items-start">
-                    <div>
-                      <h3 className="text-label-md font-bold">{step.label}</h3>
-                      <p className="text-[11px] font-medium">{step.desc}</p>
-                    </div>
+                  <div>
+                    <h3 className="text-label-sm font-bold">{step.label}</h3>
+                    <p className="text-caption text-on-surface-variant">{step.desc}</p>
                   </div>
                 </div>
               ))}
@@ -123,14 +176,15 @@ export function BookingSuccess() {
       </main>
 
       {/* Footer CTA */}
-      <footer className="flex-shrink-0 p-gutter pb-safe bg-white/90 backdrop-blur-md border-t border-outline/5 z-10">
-        <button 
+      <footer className="flex-shrink-0 p-4 pb-safe bg-white/90 backdrop-blur-md border-t border-outline/5 z-10">
+        <Button 
+          size="full"
+          shape="pill"
           onClick={() => navigate('/questionnaire')}
-          className="w-full h-14 bg-primary text-on-primary rounded-pill text-label-lg font-bold flex items-center justify-center gap-2 active:scale-[0.98] transition-transform shadow-uber-3"
+          rightIcon={<ChevronRight size={20} strokeWidth={2.5} />}
         >
           下一步：填写问卷
-          <ChevronRight size={20} strokeWidth={2.5} />
-        </button>
+        </Button>
       </footer>
     </div>
   );

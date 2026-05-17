@@ -13,7 +13,7 @@ import {
   CheckCircle2
 } from 'lucide-react';
 import { useBookingStore } from '../store/useBookingStore';
-import { StepIndicator } from '../components/StepIndicator';
+import { Button } from '../components/Button';
 
 export function OrderConfirmation() {
   const navigate = useNavigate();
@@ -85,7 +85,7 @@ export function OrderConfirmation() {
     <div className="w-full h-full flex flex-col bg-white text-on-surface font-body">
       {/* Header */}
       <header className="shrink-0 flex flex-col border-b border-outline/5 bg-white">
-        <div className="flex items-center justify-between px-gutter h-14">
+        <div className="flex items-center justify-between px-4 h-14">
           <button 
             onClick={() => navigate(-1)}
             aria-label="返回上一页"
@@ -94,73 +94,72 @@ export function OrderConfirmation() {
             <ArrowLeft size={24} strokeWidth={1.5} />
           </button>
           <h1 className="text-display-sm font-bold">确认订单</h1>
-          <div className="w-10 text-[10px] font-bold text-on-surface-variant opacity-20 flex justify-end">G{experimentalGroup + 1}</div>
+          <div className="w-10 text-label-sm font-bold text-on-surface-variant opacity-20 flex justify-end">G{experimentalGroup + 1}</div>
         </div>
-        <StepIndicator currentStep={3} />
       </header>
 
       {/* Content */}
-      <main className="flex-1 overflow-y-auto px-gutter py-6 flex flex-col gap-6 no-scrollbar">
+      <main className="flex-1 overflow-y-auto px-4 py-4 pb-24 flex flex-col gap-4 no-scrollbar">
         
-        {/* Route Summary */}
-        <section className="bg-white border border-outline/10 rounded-xl p-5 shadow-uber-1">
-          <div className="flex items-center gap-2 mb-6 text-primary">
-            <Plane size={20} strokeWidth={2} />
-            <span className="text-label-lg font-bold">{selectedFlight.name}</span>
+        {/* Route Summary - Compact */}
+        <section className="bg-white border border-outline/10 rounded-xl p-4 shadow-uber-1">
+          <div className="flex items-center gap-2 mb-3 text-primary">
+            <Plane size={16} strokeWidth={2} />
+            <span className="text-body-md font-bold">{selectedFlight.name}</span>
           </div>
           
-          <div className="flex items-center justify-between relative">
-            <div className="flex flex-col gap-1">
-              <span className="text-display-lg font-bold">{selectedFlight.departureTime}</span>
-              <span className="text-label-sm font-bold text-on-surface-variant">福田 CBD</span>
-              <span className="text-label-md font-medium">{fromPad}</span>
+          <div className="flex items-center justify-between">
+            <div className="flex flex-col">
+              <span className="text-display-sm font-bold">{selectedFlight.departureTime}</span>
+              <span className="text-caption text-on-surface-variant">福田 CBD</span>
+              <span className="text-label-sm font-medium">{fromPad}</span>
             </div>
             
-            <div className="flex-1 px-4 flex flex-col items-center">
+            <div className="flex-1 px-3 flex flex-col items-center">
               <div className="w-full border-t border-dashed border-outline/30"></div>
-              <span className="text-label-sm font-bold text-on-surface-variant mt-2">18分钟</span>
+              <span className="text-caption font-bold text-on-surface-variant mt-1">{selectedFlight.duration}</span>
             </div>
             
-            <div className="flex flex-col gap-1 text-right">
-              <span className="text-display-lg font-bold">{selectedFlight.arrivalTime}</span>
-              <span className="text-label-sm font-bold text-on-surface-variant">宝安机场 T3</span>
-              <span className="text-label-md font-medium">{toPad}</span>
+            <div className="flex flex-col text-right">
+              <span className="text-display-sm font-bold">{selectedFlight.arrivalTime}</span>
+              <span className="text-caption text-on-surface-variant">宝安机场 T3</span>
+              <span className="text-label-sm font-medium">{toPad}</span>
             </div>
           </div>
           
-          <div className="mt-8 pt-6 border-t border-outline/5 grid grid-cols-3 gap-4">
-            <div className="flex flex-col items-center gap-1.5">
-              <User size={18} className="text-on-surface-variant" strokeWidth={2} />
-              <span className="text-label-sm font-bold">{passengerCount}人</span>
+          <div className="mt-4 pt-3 border-t border-outline/5 grid grid-cols-3 gap-3">
+            <div className="flex flex-col items-center gap-1">
+              <User size={16} className="text-on-surface-variant" strokeWidth={2} />
+              <span className="text-caption font-bold">{passengerCount}人</span>
             </div>
-            <div className="flex flex-col items-center gap-1.5">
-              <Armchair size={18} className="text-on-surface-variant" strokeWidth={2} />
-              <span className="text-label-sm font-bold">座位 {selectedSeat}</span>
+            <div className="flex flex-col items-center gap-1">
+              <Armchair size={16} className="text-on-surface-variant" strokeWidth={2} />
+              <span className="text-caption font-bold">座位 {selectedSeat}</span>
             </div>
-            <div className="flex flex-col items-center gap-1.5">
-              <Briefcase size={18} className="text-on-surface-variant" strokeWidth={2} />
-              <span className="text-label-sm font-bold">7kg 行李</span>
+            <div className="flex flex-col items-center gap-1">
+              <Briefcase size={16} className="text-on-surface-variant" strokeWidth={2} />
+              <span className="text-caption font-bold">7kg 行李</span>
             </div>
           </div>
         </section>
 
         {/* 核心实验刺激：安全与服务信息 (AOI 1) */}
-        <section className="flex flex-col gap-3">
-          <h2 className="text-label-sm font-bold text-on-surface-variant uppercase tracking-widest px-1">安全与服务信息</h2>
-          <div className="space-y-3">
+        <section className="flex flex-col gap-2">
+          <h2 className="text-caption font-bold text-on-surface-variant uppercase tracking-widest px-1">安全与服务信息</h2>
+          <div className="space-y-2">
             {cuesData.map((cue) => (
               <div 
                 key={cue.id} 
-                className="bg-surface-variant rounded-xl p-4 flex items-start gap-4 border border-outline/5 min-h-[80px]"
+                className="bg-surface-variant rounded-lg p-3 flex items-center gap-3 border border-outline/5 min-h-[68px]"
               >
-                <div className="shrink-0 mt-1">
+                <div className="shrink-0 w-10 h-10 rounded-full bg-white flex items-center justify-center border border-outline/10">
                   {cue.show ? cue.icon : cue.neutral.icon}
                 </div>
-                <div>
+                <div className="flex-1 min-w-0">
                   <h3 className="text-label-sm font-bold leading-tight">
                     {cue.show ? cue.title : cue.neutral.title}
                   </h3>
-                  <p className="text-[11px] text-on-surface-variant mt-1.5 leading-relaxed font-medium">
+                  <p className="text-caption text-on-surface-variant mt-1 leading-relaxed font-medium line-clamp-2">
                     {cue.show ? cue.sub : cue.neutral.sub}
                   </p>
                 </div>
@@ -169,46 +168,47 @@ export function OrderConfirmation() {
           </div>
         </section>
 
-        {/* Price Summary */}
-        <section className="bg-white border border-outline/10 rounded-xl p-5 shadow-uber-1">
-          <div className="space-y-3">
+        {/* Price Summary - Compact */}
+        <section className="bg-white border border-outline/10 rounded-xl p-4 shadow-uber-1">
+          <div className="space-y-2">
             <div className="flex justify-between items-center text-on-surface-variant">
-              <span className="text-label-md font-medium">空中快线票价</span>
-              <span className="text-label-md font-bold">¥238</span>
+              <span className="text-label-sm font-medium">空中快线票价</span>
+              <span className="text-label-sm font-bold">¥{selectedFlight.price - 30}</span>
             </div>
             <div className="flex justify-between items-center text-on-surface-variant">
-              <span className="text-label-md font-medium">地面专属接驳</span>
-              <span className="text-label-md font-bold">¥30</span>
+              <span className="text-label-sm font-medium">地面接驳服务</span>
+              <span className="text-label-sm font-bold">¥30</span>
             </div>
-            <div className="pt-4 border-t border-outline/5 flex justify-between items-center">
-              <span className="text-display-sm font-bold">总计</span>
-              <span className="text-display-md font-bold text-primary">¥268</span>
+            <div className="pt-3 border-t border-outline/5 flex justify-between items-center">
+              <span className="text-body-md font-bold">总计</span>
+              <span className="text-body-lg font-bold text-primary">¥{selectedFlight.price}</span>
             </div>
           </div>
         </section>
         
         {/* Payment */}
-        <section className="bg-white border border-outline/10 rounded-xl p-4 flex justify-between items-center shadow-uber-1 mb-4">
+        <section className="bg-white border border-outline/10 rounded-xl p-3 flex justify-between items-center shadow-uber-1">
           <div className="flex items-center gap-3">
-            <div className="w-8 h-8 rounded bg-[#07C160] flex items-center justify-center">
-              <CheckCircle2 size={20} className="text-white" strokeWidth={2.5} />
+            <div className="w-7 h-7 rounded bg-[#07C160] flex items-center justify-center">
+              <CheckCircle2 size={16} className="text-white" strokeWidth={2.5} />
             </div>
-            <span className="text-label-lg font-bold">微信支付</span>
+            <span className="text-label-md font-bold">微信支付</span>
           </div>
-          <div className="w-6 h-6 rounded-full border-2 border-primary flex items-center justify-center p-1">
+          <div className="w-5 h-5 rounded-full border-2 border-primary flex items-center justify-center p-0.5">
             <div className="w-full h-full rounded-full bg-primary"></div>
           </div>
         </section>
       </main>
 
       {/* Footer */}
-      <footer className="shrink-0 bg-white p-gutter pb-safe border-t border-outline/10 z-10">
-        <button 
+      <footer className="shrink-0 bg-white p-4 pb-safe border-t border-outline/10 z-10">
+        <Button 
+          size="full"
+          shape="pill"
           onClick={() => navigate('/shuttle-info')}
-          className="w-full h-14 bg-primary text-on-primary rounded-pill text-label-lg font-bold flex items-center justify-center shadow-uber-3 active:scale-[0.98] transition-transform"
         >
-          立即支付 ¥268
-        </button>
+          立即支付 ¥{selectedFlight.price}
+        </Button>
       </footer>
     </div>
   );

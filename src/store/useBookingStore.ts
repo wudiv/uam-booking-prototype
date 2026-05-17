@@ -11,7 +11,6 @@ export interface Flight {
   duration: string;
   price: number;
   seats: number;
-  onTimeRate?: string;
   recommended?: boolean;
 }
 
@@ -123,8 +122,8 @@ export const useBookingStore = create<BookingState>((set) => ({
   // 默认值
   fromAddress: '福田 CBD · 卓越中心',
   fromPad: '福田起降点',
-  toAddress: '深圳宝安国际机场 T3',
-  toPad: '宝安机场起降点',
+  toAddress: '',
+  toPad: '',
   
   setDestination: (dest) => {
     let pad = '大中华起降点';
