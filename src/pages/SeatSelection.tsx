@@ -15,7 +15,7 @@ import { StaggeredList } from '../components/animations/StaggeredList';
 
 export function SeatSelection() {
   const navigate = useNavigate();
-  const { selectedSeat, setSelectedSeat } = useBookingStore();
+  const { selectedSeat, setSelectedSeat, passengerCount, setPassengerCount } = useBookingStore();
 
   const seats = [
     { id: '1A', type: 'window' }, { id: '1B', type: 'window' },
@@ -68,9 +68,40 @@ export function SeatSelection() {
               </div>
             </div>
 
-            <div className="mt-6 flex items-center gap-2 bg-surface-variant p-3 rounded-lg">
+            <div className="mt-4 flex items-center gap-2 bg-surface-variant p-3 rounded-lg">
               <CheckCircle2 size={16} className="text-on-surface" />
               <span className="text-caption font-bold text-on-surface">证件信息已填写</span>
+            </div>
+
+            {/* Add Passenger */}
+            <div className="mt-4 pt-4 border-t border-outline/10">
+              <div className="flex items-center justify-between">
+                <div>
+                  <h3 className="text-label-md font-bold">乘客人数</h3>
+                  <p className="text-caption text-on-surface-variant">最多 4 人</p>
+                </div>
+                <div className="flex items-center gap-3">
+                  <button 
+                    onClick={() => passengerCount > 1 && setPassengerCount(passengerCount - 1)}
+                    className={`w-8 h-8 rounded-full border flex items-center justify-center text-label-md font-bold transition-colors ${
+                      passengerCount <= 1 ? 'border-outline/20 text-outline' : 'border-primary text-primary active:bg-surface-variant'
+                    }`}
+                    disabled={passengerCount <= 1}
+                  >
+                    −
+                  </button>
+                  <span className="text-body-md font-bold w-4 text-center">{passengerCount}</span>
+                  <button 
+                    onClick={() => passengerCount < 4 && setPassengerCount(passengerCount + 1)}
+                    className={`w-8 h-8 rounded-full border flex items-center justify-center text-label-md font-bold transition-colors ${
+                      passengerCount >= 4 ? 'border-outline/20 text-outline' : 'border-primary text-primary active:bg-surface-variant'
+                    }`}
+                    disabled={passengerCount >= 4}
+                  >
+                    +
+                  </button>
+                </div>
+              </div>
             </div>
           </section>
 
@@ -83,22 +114,18 @@ export function SeatSelection() {
               <div className="grid grid-cols-2 gap-2 flex-1">
                 {seats.map((seat) => {
                   const isSelected = selectedSeat === seat.id;
-                  const isOccupied = seat.id === '1A' || seat.id === '1B';
                   return (
                     <button
                       key={seat.id}
-                      onClick={() => !isOccupied && setSelectedSeat(seat.id)}
-                      disabled={isOccupied}
+                      onClick={() => setSelectedSeat(seat.id)}
                       className={`
                         h-9 rounded-md flex items-center justify-center text-label-sm font-bold transition-all
-                        ${isOccupied
-                          ? 'bg-outline/30 text-on-surface-variant/50 cursor-not-allowed'
-                          : isSelected 
-                            ? 'bg-primary text-on-primary shadow-uber-2' 
-                            : 'bg-white text-on-surface border border-outline/20 active:scale-95'}
+                        ${isSelected 
+                          ? 'bg-primary text-on-primary shadow-uber-2' 
+                          : 'bg-white text-on-surface border border-outline/20 active:scale-95'}
                       `}
                     >
-                      {isOccupied ? '已售' : seat.id}
+                      {seat.id}
                     </button>
                   );
                 })}

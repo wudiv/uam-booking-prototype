@@ -23,6 +23,7 @@ export function BookingSuccess() {
       <header className="flex-shrink-0 flex items-center justify-between px-4 h-14 bg-white/90 backdrop-blur-md sticky top-0 z-10 border-b border-outline/5">
         <button 
           onClick={() => navigate('/')}
+          aria-label="关闭"
           className="p-2 -ml-2 text-primary hover:bg-surface-variant rounded-full transition-colors"
         >
           <X size={24} strokeWidth={1.5} />
@@ -73,7 +74,7 @@ export function BookingSuccess() {
               </div>
 
               {/* QR Code */}
-              <div className="flex items-center gap-4">
+              <div className="flex items-start gap-4">
                 <div className="w-28 h-28 bg-white rounded-lg p-2 border border-outline/10 shrink-0 flex items-center justify-center">
                   {/* SVG QR Code placeholder */}
                   <svg viewBox="0 0 100 100" className="w-full h-full">
@@ -131,12 +132,12 @@ export function BookingSuccess() {
                     <rect x="90" y="85" width="5" height="5" fill="black"/>
                   </svg>
                 </div>
-                <div className="flex-1">
-                  <div className="flex items-center gap-1.5 text-on-surface-variant mb-1">
-                    <Info size={12} className="text-primary" />
-                    <span className="text-caption font-bold">请在起飞前 8 分钟到达起降点</span>
+                <div className="flex-1 pt-2">
+                  <div className="flex items-start gap-1.5 text-on-surface-variant mb-1">
+                    <Info size={12} className="text-primary shrink-0 mt-[2px]" />
+                    <span className="text-caption font-bold leading-tight">请在起飞前 8 分钟到达起降点</span>
                   </div>
-                  <p className="text-caption text-on-surface-variant">出示此二维码完成登机</p>
+                  <p className="text-caption text-on-surface-variant pl-[18px]">出示此二维码完成登机</p>
                 </div>
               </div>
             </div>
@@ -145,28 +146,28 @@ export function BookingSuccess() {
           {/* Journey Tracking Section - Compact */}
           <section className="bg-white rounded-xl p-4 shadow-uber-1 border border-outline/10">
             <h2 className="text-label-md font-bold mb-4 flex items-center gap-2">
-              <MapPin size={16} className="text-primary" />
-              行程追踪
+              <MapPin size={16} className="text-primary shrink-0" />
+              <span>行程追踪</span>
             </h2>
             <div className="relative pl-7 space-y-4">
-              <div className="absolute left-[11px] top-1 bottom-1 w-[1.5px] bg-surface-variant"></div>
+              <div className="absolute left-[7px] top-[18px] bottom-[18px] w-[1.5px] bg-surface-variant"></div>
               
               {[
                 { label: '接驳车到达', desc: '预计 4 分钟后到达', active: true },
                 { label: '到达起降点', desc: '完成登机准备' },
-                { label: '身份确认', desc: '出示证件完成登记' },
+                { label: '出示证件', desc: '完成登记' },
                 { label: '登机', desc: '进入 eVTOL 飞行器' },
                 { label: '航班起飞', desc: `预计 ${selectedFlight.departureTime} 起飞` }
               ].map((step, idx) => (
                 <div key={idx} className={`relative ${idx > 0 ? 'opacity-35' : ''}`}>
-                  <div className={`absolute -left-[19px] top-0.5 w-4 h-4 rounded-full flex items-center justify-center ring-2 ring-white
+                  <div className={`absolute -left-7 top-[2px] w-4 h-4 rounded-full flex items-center justify-center ring-[2px] ring-white
                     ${idx === 0 ? 'bg-primary' : 'bg-surface-variant'}
                   `}>
                     {idx === 0 && <div className="w-1.5 h-1.5 bg-white rounded-full"></div>}
                   </div>
                   <div>
-                    <h3 className="text-label-sm font-bold">{step.label}</h3>
-                    <p className="text-caption text-on-surface-variant">{step.desc}</p>
+                    <h3 className="text-label-sm font-bold leading-tight">{step.label}</h3>
+                    <p className="text-caption text-on-surface-variant mt-0.5">{step.desc}</p>
                   </div>
                 </div>
               ))}

@@ -44,7 +44,7 @@ export function ShuttleInfo() {
       {/* Main Content Area */}
       <main className="flex-1 overflow-y-auto no-scrollbar pb-24">
         {/* Map Background Container */}
-        <div className="h-[200px] w-full relative">
+        <div className="h-[260px] w-full relative">
           <MapBackground mode="shuttle" />
           <div className="absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-white to-transparent"></div>
         </div>
@@ -60,7 +60,7 @@ export function ShuttleInfo() {
                 </div>
                 <div>
                   <div className="text-caption font-medium opacity-80">专车接驳中</div>
-                  <div className="text-body-md font-bold">前往{fromPad}</div>
+                  <div className="text-body-md font-bold">正在前往您的位置</div>
                 </div>
               </div>
               <div className="text-right">
@@ -69,21 +69,20 @@ export function ShuttleInfo() {
               </div>
             </div>
             <div className="flex items-center justify-between text-caption opacity-80 border-t border-white/20 pt-2">
-              <span>{fromAddress}</span>
-              <span>→</span>
-              <span>{fromPad}</span>
+              <span>粤B·A8821</span>
+              <span>黑色 · 比亚迪汉</span>
             </div>
           </div>
           {/* Timeline */}
           <section className="pb-4">
             <h2 className="text-caption font-bold text-on-surface-variant uppercase tracking-widest mb-4 px-1">后续行程</h2>
             <div className="relative pl-8 space-y-5">
-              {/* Vertical Progress Line */}
-              <div className="absolute left-[15px] top-2 bottom-2 w-[1.5px] bg-surface-variant"></div>
+              {/* Vertical Progress Line - centered at left 9.5px (center of 20px dot at left 0) */}
+              <div className="absolute left-[9px] top-[22px] bottom-[22px] w-[1.5px] bg-surface-variant"></div>
               
               {/* Step 1: Active */}
               <div className="relative">
-                <div className="absolute -left-[21px] top-1 w-5 h-5 bg-primary rounded-full flex items-center justify-center ring-3 ring-white">
+                <div className="absolute -left-8 top-[1px] w-5 h-5 bg-primary rounded-full flex items-center justify-center ring-[3px] ring-white">
                   <div className="w-1.5 h-1.5 bg-white rounded-full"></div>
                 </div>
                 <div className="flex justify-between items-start">
@@ -97,7 +96,7 @@ export function ShuttleInfo() {
 
               {/* Step 2 */}
               <div className="relative opacity-40">
-                <div className="absolute -left-[21px] top-1 w-5 h-5 bg-white border-2 border-outline rounded-full ring-3 ring-white"></div>
+                <div className="absolute -left-8 top-[1px] w-5 h-5 bg-white border-2 border-outline rounded-full ring-[3px] ring-white"></div>
                 <div className="flex justify-between items-start">
                   <div>
                     <h3 className="text-label-md font-bold">到达起降点</h3>
@@ -109,7 +108,7 @@ export function ShuttleInfo() {
 
               {/* Step 3 */}
               <div className="relative opacity-40">
-                <div className="absolute -left-[21px] top-1 w-5 h-5 bg-white border-2 border-outline rounded-full ring-3 ring-white"></div>
+                <div className="absolute -left-8 top-[1px] w-5 h-5 bg-white border-2 border-outline rounded-full ring-[3px] ring-white"></div>
                 <div className="flex justify-between items-start">
                   <div>
                     <h3 className="text-label-md font-bold">UAM 航班起飞</h3>

@@ -67,7 +67,7 @@ export function FlightSelection() {
           {/* Title below image */}
           <div className="px-5 pt-20">
             <h1 className="text-[28px] font-bold leading-[1.2] tracking-tight">
-              {totalMin}分钟<br/>飞达{toPad.replace('起降点', '')}
+              约{totalMin}分钟<br/>到达{toPad.replace('起降点', '')}
             </h1>
             <p className="text-body-sm text-on-surface-variant mt-2">
               预计 <span className="font-bold text-on-surface">{arrivalTime}</span> 抵达{toAddress || '目的地'}

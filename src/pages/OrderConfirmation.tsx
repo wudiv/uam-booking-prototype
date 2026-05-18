@@ -48,11 +48,11 @@ export function OrderConfirmation() {
       show: hasSA,
       title: '飞行安全保障',
       sub: '本次行程包含平台责任险、应急返航流程与起降点安全核验。',
-      icon: <ShieldCheck size={20} className="text-primary" />,
+      icon: <ShieldCheck size={22} className="text-primary" />,
       neutral: {
         title: '登机时间提醒',
         sub: '请在起飞前 8 分钟到达起降点，并完成登机确认。',
-        icon: <Clock size={20} className="text-primary" />
+        icon: <Clock size={22} className="text-primary" />
       }
     },
     {
@@ -60,11 +60,11 @@ export function OrderConfirmation() {
       show: hasTPE,
       title: '认证运营方',
       sub: '服务由完成低空出行运营备案的承运方提供，并接受平台审核。',
-      icon: <Award size={20} className="text-primary" />,
+      icon: <Award size={22} className="text-primary" />,
       neutral: {
         title: '接驳信息',
         sub: '订单包含从机场低空起降点前往 T3 航站楼的接驳服务。',
-        icon: <Bus size={20} className="text-primary" />
+        icon: <Bus size={22} className="text-primary" />
       }
     },
     {
@@ -72,11 +72,11 @@ export function OrderConfirmation() {
       show: hasPT,
       title: '实时飞行透明',
       sub: '天气、航线状态、飞行器准备情况与预计延误将实时更新。',
-      icon: <Activity size={20} className="text-primary" />,
+      icon: <Activity size={22} className="text-primary" />,
       neutral: {
         title: '行李提示',
         sub: '本次行程可携带 1 件不超过 7kg 的随身行李。',
-        icon: <Briefcase size={20} className="text-primary" />
+        icon: <Briefcase size={22} className="text-primary" />
       }
     }
   ];
@@ -143,23 +143,23 @@ export function OrderConfirmation() {
           </div>
         </section>
 
-        {/* 核心实验刺激：安全与服务信息 (AOI 1) */}
-        <section className="flex flex-col gap-2">
-          <h2 className="text-caption font-bold text-on-surface-variant uppercase tracking-widest px-1">安全与服务信息</h2>
-          <div className="space-y-2">
+        {/* 核心实验刺激：出行服务信息 (AOI 1) */}
+        <section className="bg-[#F6F8FA] rounded-xl p-4 border border-[#E2E8F0]">
+          <h2 className="text-[16px] font-bold text-on-surface mb-3">出行服务信息</h2>
+          <div className="space-y-2.5">
             {cuesData.map((cue) => (
               <div 
                 key={cue.id} 
-                className="bg-surface-variant rounded-lg p-3 flex items-center gap-3 border border-outline/5 min-h-[68px]"
+                className="bg-white rounded-lg px-4 py-3.5 flex items-center gap-3.5 border border-[#E2E8F0] min-h-[88px]"
               >
-                <div className="shrink-0 w-10 h-10 rounded-full bg-white flex items-center justify-center border border-outline/10">
+                <div className="shrink-0 w-11 h-11 rounded-full bg-[#F6F8FA] flex items-center justify-center border border-[#E2E8F0]">
                   {cue.show ? cue.icon : cue.neutral.icon}
                 </div>
                 <div className="flex-1 min-w-0">
-                  <h3 className="text-label-sm font-bold leading-tight">
+                  <h3 className="text-[15px] font-bold leading-tight">
                     {cue.show ? cue.title : cue.neutral.title}
                   </h3>
-                  <p className="text-caption text-on-surface-variant mt-1 leading-relaxed font-medium line-clamp-2">
+                  <p className="text-[13px] text-[#4B5563] mt-1 leading-[1.45] font-medium line-clamp-2">
                     {cue.show ? cue.sub : cue.neutral.sub}
                   </p>
                 </div>

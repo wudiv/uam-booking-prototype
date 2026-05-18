@@ -119,30 +119,18 @@ export function MapBackground({ mode = 'home', destinationId = 'airport' }: MapB
               zIndex: 49
             });
           } else if (mode === 'shuttle') {
-            const path = [COORDS.shuttle, futianPos];
-            
-            // 地面接驳线：普通折线
-            new window.AMap.Polyline({
-              path: path,
-              strokeColor: "#0066FF",
-              strokeWeight: 4,
-              strokeOpacity: 0.8,
-              lineJoin: 'round',
-              lineCap: 'round',
-              strokeStyle: "dashed",
-              strokeDasharray: [10, 10],
-              map: map,
-              zIndex: 50
-            });
-
-            new window.AMap.Polyline({
-              path: path,
-              strokeColor: "#0066FF",
-              strokeWeight: 8,
-              strokeOpacity: 0.1,
-              lineJoin: 'round',
-              map: map,
-              zIndex: 49
+            // 使用高德驾车路径规划绘制真实道路路径
+            window.AMap.plugin('AMap.Driving', function() {
+              const driving = new window.AMap.Driving({
+                map: map,
+                hideMarkers: true,
+                showTraffic: false,
+                autoFitView: false
+              });
+              driving.search(
+                new window.AMap.LngLat(COORDS.shuttle[0], COORDS.shuttle[1]),
+                new window.AMap.LngLat(COORDS.userLocation[0], COORDS.userLocation[1])
+              );
             });
           }
 
@@ -175,18 +163,20 @@ export function MapBackground({ mode = 'home', destinationId = 'airport' }: MapB
             // 首页只显示福田
             if (mode === 'home' && station.id !== 'futian') return;
 
+            // 福田标签向上偏移，目的地标签向右偏移避免被左边缘裁剪
+            const isFutian = station.id === 'futian';
+            const transform = isFutian 
+              ? 'translate(-50%,-120%)' 
+              : 'translate(-10%,-100%)';
+
             const stationContent = `
-              <div style="display:flex;flex-direction:column;align-items:center;pointer-events:none;transform:translate(-50%,-100%);">
-                <div style="background:white;padding:8px 14px;border-radius:12px;box-shadow:0 8px 24px rgba(0,0,0,0.12);border:1px solid rgba(0,0,0,0.06);margin-bottom:6px;display:flex;align-items:center;gap:10px;backdrop-filter:blur(10px);">
-                  <div style="display:flex;align-items:center;gap:6px;">
-                    <div style="width:6px;height:6px;background:black;border-radius:50%;"></div>
-                    <span style="font-size:12px;font-weight:700;color:black;white-space:nowrap;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;">${station.name}</span>
-                  </div>
-                  <div style="display:flex;align-items:center;justify-content:center;width:16px;height:16px;background:#F3F3F3;border-radius:50%;">
-                    <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="black" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
-                  </div>
+              <div style="display:flex;flex-direction:column;align-items:center;pointer-events:none;transform:${transform};">
+                <div style="background:white;padding:5px 10px;border-radius:10px;box-shadow:0 4px 12px rgba(0,0,0,0.12);border:1px solid rgba(0,0,0,0.06);margin-bottom:4px;display:flex;align-items:center;gap:6px;">
+                  <div style="width:5px;height:5px;background:black;border-radius:50%;"></div>
+                  <span style="font-size:11px;font-weight:700;color:black;white-space:nowrap;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;">${station.name}</span>
+                  <svg width="8" height="8" viewBox="0 0 24 24" fill="none" stroke="black" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
                 </div>
-                <div style="width:8px;height:8px;background:black;border:2px solid white;border-radius:2px;box-shadow:0 2px 6px rgba(0,0,0,0.15);"></div>
+                <div style="width:6px;height:6px;background:black;border:2px solid white;border-radius:2px;"></div>
               </div>
             `;
 
@@ -219,12 +209,10 @@ export function MapBackground({ mode = 'home', destinationId = 'airport' }: MapB
           // ========== 接驳模式额外逻辑 ==========
           if (mode === 'shuttle') {
             const carContent = `
-              <div style="display:flex;flex-direction:column;align-items:center;pointer-events:none;transform:translate(-50%,-100%);">
-                <div style="background:black;padding:5px 12px;border-radius:14px;box-shadow:0 6px 16px rgba(0,0,0,0.2);margin-bottom:6px;display:flex;align-items:center;gap:5px;">
-                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M19 17h2c.6 0 1-.4 1-1v-3c0-.9-.7-1.7-1.5-1.9C18.7 10.6 16 10 16 10s-1.3-1.4-2.2-2.3c-.5-.4-1.1-.7-1.8-.7H5c-.6 0-1.1.4-1.4.9l-1.4 2.9A3.7 3.7 0 0 0 2 12v4c0 .6.4 1 1 1h2"/><circle cx="7" cy="17" r="2"/><path d="M9 17h6"/><circle cx="17" cy="17" r="2"/></svg>
-                  <span style="font-size:11px;font-weight:700;color:white;white-space:nowrap;">接驳车已出发</span>
+              <div style="pointer-events:none;transform:translate(-50%,-50%);">
+                <div style="width:32px;height:32px;background:black;border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 12px rgba(0,0,0,0.3);border:2px solid white;">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 16H9m10 0h3v-3.15a1 1 0 0 0-.84-.99L16 11l-2.7-3.6a1 1 0 0 0-.8-.4H5.24a2 2 0 0 0-1.8 1.1l-.8 1.63A6 6 0 0 0 2 12.42V16h2"/><circle cx="6.5" cy="16.5" r="2.5"/><circle cx="16.5" cy="16.5" r="2.5"/></svg>
                 </div>
-                <div style="width:8px;height:8px;background:black;border-radius:50%;border:2px solid white;"></div>
               </div>
             `;
 
