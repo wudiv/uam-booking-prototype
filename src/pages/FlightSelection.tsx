@@ -22,6 +22,7 @@ export function FlightSelection() {
   const route = getRouteParams();
   const totalMin = route.pickupMin + route.flightMin + route.dropoffMin;
   const arrivalTime = addMinutesToDate(bookingDate, totalMin);
+  const pickupStartTime = addMinutesToDate(bookingDate, 2);
 
   useEffect(() => {
     if (!selectedFlight) {
@@ -86,7 +87,7 @@ export function FlightSelection() {
               <div className="w-9 h-9 rounded-full bg-surface-variant flex items-center justify-center">
                 <Car size={18} strokeWidth={2} />
               </div>
-              <span className="text-caption font-bold text-on-surface-variant mt-1">2分钟后</span>
+              <span className="text-caption font-bold text-on-surface-variant mt-1">{pickupStartTime}</span>
             </div>
             <div className="border border-outline/10 rounded-xl px-4 py-3">
               <p className="text-caption text-on-surface-variant">专车接驳 · {route.pickupMin}分钟</p>

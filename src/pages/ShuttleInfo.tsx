@@ -114,7 +114,7 @@ export function ShuttleInfo() {
                 <div className="absolute -left-8 top-[1px] w-5 h-5 bg-white border-2 border-outline rounded-full ring-[3px] ring-white"></div>
                 <div className="flex justify-between items-start">
                   <div>
-                    <h3 className="text-label-md font-bold">UAM 航班起飞</h3>
+                    <h3 className="text-label-md font-bold">UAM 起飞</h3>
                     <p className="text-caption">{selectedFlight?.name || 'UAM-X 204'} 准时起飞</p>
                   </div>
                   <span className="text-label-sm font-bold">{timeFlight}</span>
