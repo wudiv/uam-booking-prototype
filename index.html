@@ -49,6 +49,26 @@
             link.rel = 'manifest';
             link.href = url;
             document.head.appendChild(link);
+
+            // Fullscreen API：首次用户交互时请求全屏（Android Chrome 支持）
+            var isStandalone = window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone;
+            if (!isStandalone) {
+                var requestFullscreen = function() {
+                    var el = document.documentElement;
+                    var rfs = el.requestFullscreen || el.webkitRequestFullscreen || el.mozRequestFullScreen || el.msRequestFullscreen;
+                    if (rfs) {
+                        rfs.call(el).catch(function() {});
+                    }
+                    document.removeEventListener('click', requestFullscreen);
+                    document.removeEventListener('touchstart', requestFullscreen);
+                };
+                document.addEventListener('click', requestFullscreen, {
+                    once: true
+                });
+                document.addEventListener('touchstart', requestFullscreen, {
+                    once: true
+                });
+            }
         })();
     </script>
     <script type="text/javascript">
