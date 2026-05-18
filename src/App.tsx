@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Navigate, useParams } from 'react-router-dom';
 import { useEffect } from 'react';
 import { Home } from './pages/Home';
 import { RouteComparison } from './pages/RouteComparison';
@@ -8,6 +8,23 @@ import { OrderConfirmation } from './pages/OrderConfirmation';
 import { ShuttleInfo } from './pages/ShuttleInfo';
 import { Questionnaire } from './pages/Questionnaire';
 import { useBookingStore, type ExperimentGroup } from './store/useBookingStore';
+
+/** 实验组入口页：通过路径 /g/1 ~ /g/8 设置组别并跳转首页 */
+function GroupEntry() {
+  const { groupId } = useParams();
+  const setExperimentalGroup = useBookingStore(state => state.setExperimentalGroup);
+
+  useEffect(() => {
+    if (groupId) {
+      const num = parseInt(groupId, 10) - 1; // URL用1-8，内部用0-7
+      if (!isNaN(num) && num >= 0 && num <= 7) {
+        setExperimentalGroup(num as ExperimentGroup);
+      }
+    }
+  }, [groupId, setExperimentalGroup]);
+
+  return <Navigate to="/" replace />;
+}
 
 function AppContent() {
   const setExperimentalGroup = useBookingStore(state => state.setExperimentalGroup);
@@ -48,6 +65,8 @@ function AppContent() {
         bg-background overflow-hidden
       ">
         <Routes>
+          {/* 实验组入口 - 通过路径设置组别 */}
+          <Route path="/g/:groupId" element={<GroupEntry />} />
           {/* 7页主流程 */}
           <Route path="/" element={<Home />} />
           <Route path="/route-comparison" element={<RouteComparison />} />
