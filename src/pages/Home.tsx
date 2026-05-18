@@ -44,7 +44,7 @@ export function Home() {
       </main>
 
       {/* Floating Search Sheet - Uber Level 2 */}
-      <div className="absolute bottom-[80px] left-0 w-full px-3 z-40">
+      <div className="absolute bottom-[88px] left-0 w-full px-3 z-40 pb-safe">
         <div className="bg-white rounded-xl shadow-uber-2 border border-outline/10 overflow-hidden">
           {/* Categories Selector */}
           <div className="flex items-center px-4 border-b border-outline/10" role="tablist" aria-label="服务类别">
