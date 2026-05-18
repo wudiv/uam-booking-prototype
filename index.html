@@ -1,6 +1,7 @@
 <!doctype html>
 <html lang="zh-CN">
-  <head>
+
+<head>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -11,16 +12,19 @@
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="default" />
     <meta name="theme-color" content="#FCF9F8" />
+    <link rel="manifest" href="/manifest.json" />
     <title>UAM 预订原型</title>
     <script type="text/javascript">
-      window._AMapSecurityConfig = {
-        securityJsCode: "e90d4ca05da60ad205182180f82c2cdc",
-      }
+        window._AMapSecurityConfig = {
+            securityJsCode: "e90d4ca05da60ad205182180f82c2cdc",
+        }
     </script>
     <script type="text/javascript" src="https://webapi.amap.com/maps?v=2.0&key=2cd8626ad2802116de44b2ec0a4e6f4f"></script>
-  </head>
-  <body>
+</head>
+
+<body>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
-  </body>
+</body>
+
 </html>
