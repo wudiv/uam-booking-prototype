@@ -15,14 +15,26 @@ function AppContent() {
   const setExperimentalGroup = useBookingStore(state => state.setExperimentalGroup);
 
   useEffect(() => {
+    // 优先从 URL 参数读取
     const params = new URLSearchParams(location.search);
     const group = params.get('group');
     if (group !== null) {
       const groupNum = parseInt(group, 10);
       if (!isNaN(groupNum) && groupNum >= 0 && groupNum <= 7) {
         setExperimentalGroup(groupNum as ExperimentGroup);
+        return;
       }
     }
+    // fallback: 从 localStorage 读取（PWA 从主屏幕打开时）
+    try {
+      const saved = localStorage.getItem('uam-experiment-group');
+      if (saved !== null) {
+        const num = parseInt(saved, 10);
+        if (!isNaN(num) && num >= 0 && num <= 7) {
+          setExperimentalGroup(num as ExperimentGroup);
+        }
+      }
+    } catch {}
   }, [location.search, setExperimentalGroup]);
 
   return (
