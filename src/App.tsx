@@ -9,7 +9,7 @@ import { ShuttleInfo } from './pages/ShuttleInfo';
 import { Questionnaire } from './pages/Questionnaire';
 import { useBookingStore, type ExperimentGroup } from './store/useBookingStore';
 
-/** 实验组入口页：通过路径 /g/1 ~ /g/8 设置组别并跳转首页 */
+/** 实验组入口页：通过路径 /g/1 ~ /g/8 设置组别，直接渲染首页 */
 function GroupEntry() {
   const { groupId } = useParams();
   const setExperimentalGroup = useBookingStore(state => state.setExperimentalGroup);
@@ -23,7 +23,7 @@ function GroupEntry() {
     }
   }, [groupId, setExperimentalGroup]);
 
-  return <Navigate to="/" replace />;
+  return <Home />;
 }
 
 function AppContent() {
