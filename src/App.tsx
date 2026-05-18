@@ -7,7 +7,6 @@ import { SeatSelection } from './pages/SeatSelection';
 import { OrderConfirmation } from './pages/OrderConfirmation';
 import { ShuttleInfo } from './pages/ShuttleInfo';
 import { Questionnaire } from './pages/Questionnaire';
-import { Questionnaire } from './pages/Questionnaire';
 import { useBookingStore, type ExperimentGroup } from './store/useBookingStore';
 
 function AppContent() {
