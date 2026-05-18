@@ -154,8 +154,20 @@ export const useBookingStore = create<BookingState>((set) => ({
   selectedSeat: '2A',
   setSelectedSeat: (seat) => set({ selectedSeat: seat }),
 
-  experimentalGroup: 0,
-  setExperimentalGroup: (group) => set({ experimentalGroup: group }),
+  experimentalGroup: ((): ExperimentGroup => {
+    try {
+      const saved = localStorage.getItem('uam-experiment-group');
+      if (saved !== null) {
+        const num = parseInt(saved, 10);
+        if (num >= 0 && num <= 7) return num as ExperimentGroup;
+      }
+    } catch {}
+    return 0;
+  })(),
+  setExperimentalGroup: (group) => {
+    try { localStorage.setItem('uam-experiment-group', String(group)); } catch {}
+    set({ experimentalGroup: group });
+  },
   
   resetBooking: () => set((state) => ({
     toAddress: '深圳宝安国际机场 T3',
