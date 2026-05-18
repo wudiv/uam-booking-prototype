@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Routes, Route, Navigate, useLocation } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import { useEffect } from 'react';
 import { Home } from './pages/Home';
 import { RouteComparison } from './pages/RouteComparison';
@@ -11,12 +11,11 @@ import { BookingSuccess } from './pages/BookingSuccess';
 import { useBookingStore, type ExperimentGroup } from './store/useBookingStore';
 
 function AppContent() {
-  const location = useLocation();
   const setExperimentalGroup = useBookingStore(state => state.setExperimentalGroup);
 
   useEffect(() => {
     // 优先从 URL 参数读取
-    const params = new URLSearchParams(location.search);
+    const params = new URLSearchParams(window.location.search);
     const group = params.get('group');
     if (group !== null) {
       const groupNum = parseInt(group, 10);
@@ -35,7 +34,8 @@ function AppContent() {
         }
       }
     } catch {}
-  }, [location.search, setExperimentalGroup]);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <div className="

@@ -1,10 +1,12 @@
 {
     "name": "UAM 预订原型",
     "short_name": "UAM",
-    "start_url": "/",
+    "start_url": "./",
+    "scope": "/",
     "display": "standalone",
-    "background_color": "#FCF9F8",
-    "theme_color": "#FCF9F8",
+    "orientation": "portrait",
+    "background_color": "#ffffff",
+    "theme_color": "#ffffff",
     "icons": [{
         "src": "/favicon.svg",
         "sizes": "any",
