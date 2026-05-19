@@ -50,7 +50,7 @@ export function RouteComparison() {
   };
 
   const route = routeData[destinationId] || routeData.airport;
-  const totalUamMin = route.pickupMin + route.flightMin + route.dropoffMin;
+  const totalUamMin = route.pickupMin + 2 + route.flightMin + route.dropoffMin; // 接驳+登机+飞行+接驳
 
   // 计算网约车预计接客时间（正确处理分钟进位）
   const carPickupDate = new Date(bookingDate);

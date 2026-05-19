@@ -20,14 +20,14 @@ export function FlightSelection() {
     return { flightMin: 11, pickupMin: 6, dropoffMin: 4, basePrice: 268 };
   };
   const route = getRouteParams();
-  const totalMin = route.pickupMin + route.flightMin + route.dropoffMin;
+  const totalMin = route.pickupMin + 2 + route.flightMin + route.dropoffMin; // 接驳+登机+飞行+接驳
   const arrivalTime = addMinutesToDate(bookingDate, totalMin);
-  const pickupStartTime = addMinutesToDate(bookingDate, 2);
+  const pickupStartTime = addMinutesToDate(bookingDate, 2); // 2分钟后接驳车到达
 
   useEffect(() => {
     if (!selectedFlight) {
-      const flightDepartTime = addMinutesToDate(bookingDate, route.pickupMin);
-      const flightArriveTime = addMinutesToDate(bookingDate, route.pickupMin + route.flightMin);
+      const flightDepartTime = addMinutesToDate(bookingDate, route.pickupMin + 2); // 接驳到达后2分钟完成登机
+      const flightArriveTime = addMinutesToDate(bookingDate, route.pickupMin + 2 + route.flightMin);
       setSelectedFlight({
         id: '1',
         name: 'UAM-X 204',
@@ -40,8 +40,8 @@ export function FlightSelection() {
     }
   }, [selectedFlight, setSelectedFlight, bookingDate, route]);
 
-  const flightStartTime = addMinutesToDate(bookingDate, route.pickupMin);
-  const flightEndTime = addMinutesToDate(bookingDate, route.pickupMin + route.flightMin);
+  const flightStartTime = addMinutesToDate(bookingDate, route.pickupMin + 2);
+  const flightEndTime = addMinutesToDate(bookingDate, route.pickupMin + 2 + route.flightMin);
 
   return (
     <div className="bg-white text-on-surface font-body w-full h-full flex flex-col relative">

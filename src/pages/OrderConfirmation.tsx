@@ -51,7 +51,7 @@ export function OrderConfirmation() {
       icon: <ShieldCheck size={22} className="text-primary" />,
       neutral: {
         title: '登机时间提醒',
-        sub: '请在起飞前 8 分钟到达起降点，并完成登机确认。',
+        sub: '专车将送您直达起降点，到达后完成登机确认即可。',
         icon: <Clock size={22} className="text-primary" />
       }
     },

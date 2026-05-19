@@ -10,10 +10,10 @@ import { MapBackground } from '../components/MapBackground';
 import { Button } from '../components/Button';
 import { useBookingStore } from '../store/useBookingStore';
 
-function subtractMinutes(timeStr: string, minsToSubtract: number) {
+function addMinutes(timeStr: string, minsToAdd: number) {
   const [hours, mins] = timeStr.split(':').map(Number);
-  let totalMins = hours * 60 + mins - minsToSubtract;
-  if (totalMins < 0) totalMins += 24 * 60;
+  let totalMins = hours * 60 + mins + minsToAdd;
+  if (totalMins >= 24 * 60) totalMins -= 24 * 60;
   const h = Math.floor(totalMins / 60);
   const m = totalMins % 60;
   return `${h.toString().padStart(2, '0')}:${m.toString().padStart(2, '0')}`;
@@ -21,12 +21,13 @@ function subtractMinutes(timeStr: string, minsToSubtract: number) {
 
 export function ShuttleInfo() {
   const navigate = useNavigate();
-  const { selectedFlight, selectedSeat, fromPad, fromAddress } = useBookingStore();
+  const { selectedFlight, selectedSeat, fromPad, fromAddress, bookingDate } = useBookingStore();
 
-  const departure = selectedFlight?.departureTime || '14:45';
-  const timeStart = subtractMinutes(departure, 15);
-  const timeArrival = subtractMinutes(departure, 7);
-  const timeFlight = departure;
+  // 固定时间线：基于 bookingDate (08:15)
+  const baseTime = `${bookingDate.getHours().toString().padStart(2, '0')}:${bookingDate.getMinutes().toString().padStart(2, '0')}`;
+  const timePickup = addMinutes(baseTime, 2);    // 08:17 接驳车到达
+  const timeArrivePad = addMinutes(baseTime, 8); // 08:23 到达起降点
+  const timeFlight = selectedFlight?.departureTime || addMinutes(baseTime, 10); // 08:25 起飞
 
   return (
     <div className="w-full h-full flex flex-col bg-white text-on-surface font-body">
@@ -93,7 +94,7 @@ export function ShuttleInfo() {
                     <h3 className="text-label-md font-bold">专车接驳上车</h3>
                     <p className="text-caption text-on-surface-variant">请在{fromAddress}等候</p>
                   </div>
-                  <span className="text-label-sm font-bold">{timeStart}</span>
+                  <span className="text-label-sm font-bold">{timePickup}</span>
                 </div>
               </div>
 
@@ -105,7 +106,7 @@ export function ShuttleInfo() {
                     <h3 className="text-label-md font-bold">到达起降点</h3>
                     <p className="text-caption">到达{fromPad}，完成登机准备</p>
                   </div>
-                  <span className="text-label-sm font-bold">{timeArrival}</span>
+                  <span className="text-label-sm font-bold">{timeArrivePad}</span>
                 </div>
               </div>
 
@@ -149,8 +150,8 @@ export function ShuttleInfo() {
                   <div className="text-display-sm font-bold">{selectedSeat || '2A'}</div>
                 </div>
                 <div className="text-center">
-                  <div className="text-caption font-bold text-on-surface-variant uppercase tracking-widest">登机时间</div>
-                  <div className="text-display-sm font-bold">{departure}</div>
+                  <div className="text-caption font-bold text-on-surface-variant uppercase tracking-widest">起飞时间</div>
+                  <div className="text-display-sm font-bold">{timeFlight}</div>
                 </div>
                 <div className="text-right">
                   <div className="text-caption font-bold text-on-surface-variant uppercase tracking-widest">起降点</div>
@@ -217,9 +218,9 @@ export function ShuttleInfo() {
                 <div className="flex-1 pt-1">
                   <div className="flex items-start gap-1.5 text-on-surface-variant mb-1">
                     <Info size={12} className="text-primary shrink-0 mt-[2px]" />
-                    <span className="text-caption font-bold leading-tight">请在起飞前 8 分钟到达起降点</span>
+                    <span className="text-caption font-bold leading-tight">到达起降点后出示二维码完成登机</span>
                   </div>
-                  <p className="text-caption text-on-surface-variant pl-[18px]">出示此二维码完成登机</p>
+                  <p className="text-caption text-on-surface-variant pl-[18px]">专车将送您直达登机口</p>
                 </div>
               </div>
             </div>
