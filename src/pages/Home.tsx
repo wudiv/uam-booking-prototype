@@ -58,12 +58,12 @@ export function Home() {
             {/* Location Inputs */}
             <div className="flex relative bg-surface-variant rounded-lg p-4">
               {/* Connector Line */}
-              <div className="absolute left-[31px] top-10 bottom-10 w-0.5 bg-primary/20"></div>
+              <div className="absolute left-[21px] top-10 bottom-10 w-0.5 bg-primary/20"></div>
               
               <div className="flex flex-col gap-5 w-full">
                 {/* Start Location */}
-                <div className="flex items-center gap-4">
-                  <div className="flex-shrink-0 flex items-center justify-center">
+                <div className="flex items-center gap-3">
+                  <div className="flex-shrink-0 w-[10px] flex items-center justify-center">
                     <Circle size={10} fill="black" strokeWidth={0} />
                   </div>
                   <div className="flex-1 pb-3 border-b border-outline/30">
@@ -72,8 +72,8 @@ export function Home() {
                 </div>
                 
                 {/* Destination */}
-                <div className="flex items-center gap-4">
-                  <div className="flex-shrink-0 flex items-center justify-center">
+                <div className="flex items-center gap-3">
+                  <div className="flex-shrink-0 w-[10px] flex items-center justify-center">
                     <Square size={10} strokeWidth={2.5} className="text-primary" />
                   </div>
                   <div className="flex-1">
