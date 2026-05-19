@@ -47,7 +47,7 @@ export function OrderConfirmation() {
       id: 'SA',
       show: hasSA,
       title: '飞行安全保障',
-      sub: '本次行程包含平台责任险、应急返航流程与起降点安全核验。',
+      sub: '本次行程包含平台责任险、应急返航流程及起降点核验。',
       icon: <ShieldCheck size={22} className="text-primary" />,
       neutral: {
         title: '登机时间提醒',
@@ -59,7 +59,7 @@ export function OrderConfirmation() {
       id: 'TPE',
       show: hasTPE,
       title: '认证运营方',
-      sub: '服务由完成低空出行运营备案的承运方提供，并接受平台审核。',
+      sub: '服务由通过低空出行运营资质审核的承运方提供，并接受平台审核。',
       icon: <Award size={22} className="text-primary" />,
       neutral: {
         title: '接驳信息',
@@ -71,7 +71,7 @@ export function OrderConfirmation() {
       id: 'PT',
       show: hasPT,
       title: '实时飞行透明',
-      sub: '天气、航线状态、飞行器准备情况与预计延误将实时更新。',
+      sub: '天气适航、航线状态、飞行器准备情况与预计延误将实时更新。',
       icon: <Activity size={22} className="text-primary" />,
       neutral: {
         title: '行李提示',
