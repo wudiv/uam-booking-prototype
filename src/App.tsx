@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Routes, Route, Navigate, useParams } from 'react-router-dom';
+import { HashRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import { useEffect } from 'react';
 import { Home } from './pages/Home';
 import { RouteComparison } from './pages/RouteComparison';
@@ -9,38 +9,11 @@ import { ShuttleInfo } from './pages/ShuttleInfo';
 import { Questionnaire } from './pages/Questionnaire';
 import { useBookingStore, type ExperimentGroup } from './store/useBookingStore';
 
-/** 实验组入口页：通过路径 /g/1 ~ /g/8 设置组别，直接渲染首页 */
-function GroupEntry() {
-  const { groupId } = useParams();
-  const setExperimentalGroup = useBookingStore(state => state.setExperimentalGroup);
-
-  useEffect(() => {
-    if (groupId) {
-      const num = parseInt(groupId, 10) - 1; // URL用1-8，内部用0-7
-      if (!isNaN(num) && num >= 0 && num <= 7) {
-        setExperimentalGroup(num as ExperimentGroup);
-      }
-    }
-  }, [groupId, setExperimentalGroup]);
-
-  return <Home />;
-}
-
 function AppContent() {
   const setExperimentalGroup = useBookingStore(state => state.setExperimentalGroup);
 
   useEffect(() => {
-    // 优先从 URL 参数读取
-    const params = new URLSearchParams(window.location.search);
-    const group = params.get('group');
-    if (group !== null) {
-      const groupNum = parseInt(group, 10);
-      if (!isNaN(groupNum) && groupNum >= 0 && groupNum <= 7) {
-        setExperimentalGroup(groupNum as ExperimentGroup);
-        return;
-      }
-    }
-    // fallback: 从 localStorage 读取（PWA 从主屏幕打开时）
+    // 从 localStorage 读取（由 index.html inline script 在页面加载时写入）
     try {
       const saved = localStorage.getItem('uam-experiment-group');
       if (saved !== null) {
@@ -65,8 +38,6 @@ function AppContent() {
         bg-background overflow-hidden
       ">
         <Routes>
-          {/* 实验组入口 - 通过路径设置组别 */}
-          <Route path="/g/:groupId" element={<GroupEntry />} />
           {/* 7页主流程 */}
           <Route path="/" element={<Home />} />
           <Route path="/route-comparison" element={<RouteComparison />} />
@@ -74,7 +45,6 @@ function AppContent() {
           <Route path="/seat-selection" element={<SeatSelection />} />
           <Route path="/order-confirmation" element={<OrderConfirmation />} />
           <Route path="/shuttle-info" element={<ShuttleInfo />} />
-          <Route path="/booking-success" element={<Navigate to="/shuttle-info" replace />} />
           <Route path="/questionnaire" element={<Questionnaire />} />
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
