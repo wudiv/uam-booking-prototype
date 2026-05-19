@@ -57,8 +57,8 @@ export function Home() {
           <div className="p-4 flex flex-col gap-4">
             {/* Location Inputs */}
             <div className="flex relative bg-surface-variant rounded-lg p-4">
-              {/* Connector Line */}
-              <div className="absolute left-[21px] top-10 bottom-10 w-0.5 bg-primary/20"></div>
+              {/* Connector Line - centered at icon center: p-4(16px) + icon-width/2(5px) = 21px, line-width 2px so left = 21-1 = 20px */}
+              <div className="absolute left-[20px] top-10 bottom-10 w-[2px] bg-primary/20 rounded-full"></div>
               
               <div className="flex flex-col gap-5 w-full">
                 {/* Start Location */}
