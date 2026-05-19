@@ -143,7 +143,7 @@ export const useBookingStore = create<BookingState>((set) => ({
   passengerCount: 1,
   setPassengerCount: (count) => set({ passengerCount: count }),
   
-  bookingDate: new Date(),
+  bookingDate: (() => { const d = new Date(); d.setHours(21, 15, 0, 0); return d; })(),
   
   pickupService: { type: 'pickup', mode: 'none' },
   setPickupService: (service) => set({ pickupService: service }),
@@ -176,7 +176,7 @@ export const useBookingStore = create<BookingState>((set) => ({
     pickupService: { type: 'pickup', mode: 'none' },
     dropoffService: { type: 'dropoff', mode: 'none' },
     passengerCount: 1,
-    bookingDate: new Date(),
+    bookingDate: (() => { const d = new Date(); d.setHours(21, 15, 0, 0); return d; })(),
     selectedSeat: '2A',
     // 实验组在重置时保持不变，除非重新从 URL 加载
     experimentalGroup: state.experimentalGroup
