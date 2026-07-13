@@ -3,11 +3,9 @@ import {
   ArrowLeft, 
   Bus, 
   Plane,
-  Info,
-  ChevronRight 
+  Info
 } from 'lucide-react';
 import { MapBackground } from '../components/MapBackground';
-import { Button } from '../components/Button';
 import { useBookingStore } from '../store/useBookingStore';
 
 function addMinutes(timeStr: string, minsToAdd: number) {
@@ -46,7 +44,7 @@ export function ShuttleInfo() {
       </header>
 
       {/* Main Content Area */}
-      <main className="flex-1 overflow-y-auto no-scrollbar pb-24">
+      <main className="flex-1 overflow-y-auto no-scrollbar pb-6">
         {/* Map Background Container */}
         <div className="h-[220px] w-full relative">
           <MapBackground mode="shuttle" />
@@ -228,17 +226,6 @@ export function ShuttleInfo() {
         </div>
       </main>
 
-      {/* Sticky Action Button */}
-      <footer className="fixed bottom-0 left-0 right-0 p-4 pb-safe bg-white border-t border-outline/10 z-30">
-        <Button 
-          size="full"
-          shape="pill"
-          onClick={() => navigate('/questionnaire')}
-          rightIcon={<ChevronRight size={20} strokeWidth={2.5} />}
-        >
-          下一步：填写问卷
-        </Button>
-      </footer>
     </div>
   );
 }
