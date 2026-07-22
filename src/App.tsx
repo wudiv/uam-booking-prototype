@@ -6,6 +6,7 @@ import { FlightSelection } from './pages/FlightSelection';
 import { SeatSelection } from './pages/SeatSelection';
 import { OrderConfirmation } from './pages/OrderConfirmation';
 import { ShuttleInfo } from './pages/ShuttleInfo';
+import { Questionnaire } from './pages/Questionnaire';
 import { useBookingStore, type ExperimentGroup } from './store/useBookingStore';
 
 function AppContent() {
@@ -37,13 +38,14 @@ function AppContent() {
         bg-background overflow-hidden
       ">
         <Routes>
-          {/* 6页主流程 */}
+          {/* 7页主流程 */}
           <Route path="/" element={<Home />} />
           <Route path="/route-comparison" element={<RouteComparison />} />
           <Route path="/flight-selection" element={<FlightSelection />} />
           <Route path="/seat-selection" element={<SeatSelection />} />
           <Route path="/order-confirmation" element={<OrderConfirmation />} />
           <Route path="/shuttle-info" element={<ShuttleInfo />} />
+          <Route path="/questionnaire" element={<Questionnaire />} />
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
       </div>
